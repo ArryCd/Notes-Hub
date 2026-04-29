@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuclear & Particle Physics — Prof. ARD Class Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+<style>
+:root {
+  --bg:        #080c14;
+  --bg2:       #0d1220;
+  --bg3:       #121829;
+  --bg4:       #1a2238;
+  --border:    #1e2d4a;
+  --border2:   #2a3f60;
+  --gold:      #c9974a;
+  --gold2:     #e8b96a;
+  --gold3:     #f7d98a;
+  --cyan:      #4ecdc4;
+  --cyan2:     #7ee8e2;
+  --violet:    #9b7fe8;
+  --violet2:   #c3a8ff;
+  --red:       #e05a5a;
+  --green:     #56c98a;
+  --text:      #d0d8e8;
+  --text2:     #8fa0bc;
+  --text3:     #5a6d8a;
+  --highlight: #1c2d4a;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+  --body:      'Source Serif 4', 'Georgia', serif;
+  --mono:      'JetBrains Mono', 'Courier New', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16.5px;
+  line-height: 1.85;
+  min-height: 100vh;
+}
+
+/* ─── SIDEBAR ─── */
+#sidebar {
+  position: fixed;
+  left: 0; top: 0;
+  width: 240px;
+  height: 100vh;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 28px 0 40px;
+  transition: transform 0.3s;
+}
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+.nav-title {
+  font-family: var(--serif);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+}
+.nav-item {
+  display: block;
+  padding: 7px 20px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 12.5px;
+  font-family: var(--mono);
+  border-left: 2px solid transparent;
+  transition: all 0.2s;
+  line-height: 1.4;
+}
+.nav-item:hover, .nav-item.active {
+  color: var(--gold2);
+  border-left-color: var(--gold);
+  background: rgba(201,151,74,0.07);
+}
+.nav-lnum { font-size: 10px; color: var(--text3); display: block; margin-bottom: 1px; }
+.nav-sep { height: 1px; background: var(--border); margin: 8px 16px; }
+
+/* ─── MAIN ─── */
+#main { margin-left: 240px; padding: 0 60px 100px; max-width: 1080px; }
+
+/* ─── HERO ─── */
+#hero {
+  padding: 70px 0 50px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '⚛';
+  position: absolute;
+  right: -10px;
+  top: 0px;
+  font-size: 220px;
+  color: rgba(201,151,74,0.04);
+  pointer-events: none;
+  line-height: 1;
+}
+.hero-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+#hero h1 {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 700;
+  color: #eef2ff;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+#hero h1 span { color: var(--gold2); font-style: italic; }
+.hero-sub {
+  color: var(--text2);
+  font-size: 15px;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+.hero-meta { display: flex; gap: 28px; flex-wrap: wrap; }
+.meta-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 2px;
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+.meta-chip span { color: var(--gold2); }
+
+/* ─── LECTURE SECTIONS ─── */
+.lecture { margin-bottom: 80px; scroll-margin-top: 28px; }
+.lecture-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.lec-num {
+  font-family: var(--serif);
+  font-size: 72px;
+  font-weight: 700;
+  color: rgba(201,151,74,0.15);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.lec-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.lecture-header h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 600;
+  color: #e8eeff;
+  line-height: 1.15;
+}
+
+/* ─── SUBSECTIONS ─── */
+.section { margin-bottom: 44px; }
+h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--gold2);
+  margin-bottom: 14px;
+  padding-left: 14px;
+  border-left: 3px solid var(--gold);
+  line-height: 1.3;
+}
+h4 {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--cyan);
+  margin: 22px 0 10px;
+  padding-left: 10px;
+  border-left: 2px solid var(--cyan);
+}
+p { margin-bottom: 14px; }
+
+/* ─── EQUATIONS ─── */
+.eq-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 24px;
+  margin: 20px 0;
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--gold3);
+  overflow-x: auto;
+}
+.eq-block .eq-label {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--body);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.eq-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.eq-row:last-child { margin-bottom: 0; }
+.eq { font-family: var(--mono); font-size: 14.5px; color: var(--gold3); background: var(--bg3); padding: 2px 8px; border-radius: 3px; }
+.eq-inline {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--violet2);
+  background: rgba(155,127,232,0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.eq-note { font-size: 13px; color: var(--text2); font-style: italic; }
+.eq-derive {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.eq-derive .step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14.5px;
+}
+.eq-derive .step:last-child { border-bottom: none; }
+.step-num { font-family: var(--mono); font-size: 11px; color: var(--text3); flex-shrink: 0; padding-top: 3px; min-width: 28px; }
+.step-body { flex: 1; }
+.step-body .step-math { font-family: var(--mono); font-size: 14px; color: var(--gold2); margin-bottom: 4px; }
+.step-body .step-reason { font-size: 13px; color: var(--text2); font-style: italic; }
+
+/* ─── CALLOUTS ─── */
+.callout {
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.callout-title { font-family: var(--mono); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.callout.info { background: rgba(78,205,196,0.07); border: 1px solid rgba(78,205,196,0.25); }
+.callout.info .callout-title { color: var(--cyan); }
+.callout.warning { background: rgba(201,151,74,0.08); border: 1px solid rgba(201,151,74,0.25); }
+.callout.warning .callout-title { color: var(--gold2); }
+.callout.concept { background: rgba(155,127,232,0.07); border: 1px solid rgba(155,127,232,0.22); }
+.callout.concept .callout-title { color: var(--violet2); }
+.callout.result { background: rgba(86,201,138,0.07); border: 1px solid rgba(86,201,138,0.22); }
+.callout.result .callout-title { color: var(--green); }
+.callout.danger { background: rgba(224,90,90,0.07); border: 1px solid rgba(224,90,90,0.22); }
+.callout.danger .callout-title { color: var(--red); }
+
+/* ─── DIAGRAMS ─── */
+.diagram-wrap {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.diagram-wrap svg { max-width: 100%; height: auto; }
+.diagram-caption { font-size: 12.5px; color: var(--text3); font-style: italic; margin-top: 12px; text-align: center; }
+
+/* ─── Q&A ─── */
+.qa-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 28px 0;
+}
+.qa-header {
+  background: var(--bg4);
+  padding: 12px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.qa-item { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.qa-item:last-child { border-bottom: none; }
+.qa-q { color: var(--cyan2); font-size: 14.5px; margin-bottom: 8px; }
+.qa-q::before { content: 'Q: '; font-family: var(--mono); font-size: 11px; color: var(--cyan); }
+.qa-a { color: var(--text); font-size: 14px; line-height: 1.7; padding-left: 20px; }
+.qa-a::before { content: 'A: '; font-family: var(--mono); font-size: 11px; color: var(--green); }
+
+/* ─── TABLE ─── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  font-family: var(--mono);
+}
+.data-table th {
+  background: var(--bg4);
+  color: var(--gold2);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--border2);
+}
+.data-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+}
+.data-table tr:hover td { background: rgba(201,151,74,0.04); }
+.data-table td.hl { color: var(--gold3); }
+
+/* ─── TWO COL ─── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+@media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ─── QUOTE ─── */
+.block-quote {
+  border-left: 3px solid var(--violet);
+  padding: 14px 20px;
+  margin: 20px 0;
+  background: rgba(155,127,232,0.05);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+  color: var(--text2);
+  font-size: 15px;
+}
+.block-quote cite { display: block; margin-top: 8px; font-size: 12px; color: var(--text3); font-style: normal; font-family: var(--mono); }
+
+/* ─── TIMELINE ─── */
+.timeline { padding: 10px 0; margin: 20px 0; }
+.t-item { display: flex; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.t-item:last-child { border-bottom: none; }
+.t-year { font-family: var(--mono); font-size: 12px; color: var(--gold); min-width: 52px; padding-top: 2px; flex-shrink: 0; }
+.t-text { font-size: 14px; color: var(--text2); line-height: 1.6; }
+
+/* ─── PROPERTY GRID ─── */
+.prop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin: 18px 0; }
+.prop-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.prop-card .prop-label { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; color: var(--text3); text-transform: uppercase; margin-bottom: 6px; }
+.prop-card .prop-val { font-size: 20px; font-family: var(--serif); font-weight: 600; color: var(--gold2); }
+.prop-card .prop-note { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+/* ─── NUCLEAR FORCE CARD ─── */
+.force-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+@media (max-width: 700px) { .force-grid { grid-template-columns: 1fr; } }
+.force-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px;
+}
+.force-card .fc-num { font-family: var(--mono); font-size: 10px; color: var(--red); letter-spacing: 2px; margin-bottom: 6px; }
+.force-card h4 { border: none; padding: 0; margin: 0 0 8px; font-size: 15px; color: var(--cyan2); }
+.force-card p { font-size: 13.5px; color: var(--text2); margin: 0; }
+
+/* ─── DECAY BOX ─── */
+.decay-box {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 18px 0;
+  text-align: center;
+  font-size: 18px;
+  font-family: var(--mono);
+  color: var(--gold3);
+  letter-spacing: 1px;
+}
+.decay-box .decay-label { font-size: 10px; color: var(--text3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; font-family: var(--body); }
+.decay-box .decay-note { font-size: 12px; color: var(--text2); margin-top: 8px; font-style: italic; font-family: var(--body); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 900px) {
+  #sidebar { transform: translateX(-100%); }
+  #main { margin-left: 0; padding: 0 24px 60px; }
+  #hero h1 { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDEBAR ═══ -->
+<nav id="sidebar">
+  <div class="nav-title">Nuclear &amp; Particle Physics</div>
+  <span class="nav-lnum" style="padding:0 20px;font-family:var(--mono);font-size:10px;color:var(--text3);">Prof. ARD Notes</span>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="#intro"><span class="nav-lnum">§1</span>Introduction</a>
+  <a class="nav-item" href="#rutherford"><span class="nav-lnum">§1.1</span>Rutherford's Experiment</a>
+  <a class="nav-item" href="#scales"><span class="nav-lnum">§1.2</span>Scales of the Nucleus</a>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="#properties"><span class="nav-lnum">§2</span>Nuclear Properties</a>
+  <a class="nav-item" href="#size"><span class="nav-lnum">§2.1</span>Nuclear Size &amp; Density</a>
+  <a class="nav-item" href="#binding"><span class="nav-lnum">§2.2</span>Binding Energy</a>
+  <a class="nav-item" href="#be-curve"><span class="nav-lnum">§2.3</span>Binding Energy Curve</a>
+  <a class="nav-item" href="#spin"><span class="nav-lnum">§2.4</span>Nuclear Spin</a>
+  <a class="nav-item" href="#magnetic"><span class="nav-lnum">§2.5</span>Magnetic Moment</a>
+  <a class="nav-item" href="#parity"><span class="nav-lnum">§2.6</span>Parity</a>
+  <a class="nav-item" href="#force"><span class="nav-lnum">§2.7</span>Nuclear Force</a>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="#alpha"><span class="nav-lnum">§3</span>Alpha Radioactivity</a>
+  <a class="nav-item" href="#alpha-id"><span class="nav-lnum">§3.1</span>Identification of Alpha</a>
+  <a class="nav-item" href="#alpha-q"><span class="nav-lnum">§3.2</span>Q-Value &amp; Energetics</a>
+  <a class="nav-item" href="#alpha-spec"><span class="nav-lnum">§3.3</span>Alpha Spectrum</a>
+  <a class="nav-item" href="#alpha-range"><span class="nav-lnum">§3.4</span>Range of Alpha</a>
+  <a class="nav-item" href="#gn-law"><span class="nav-lnum">§3.5</span>Geiger-Nuttal Law</a>
+  <a class="nav-item" href="#gamow"><span class="nav-lnum">§3.6</span>Gamow's Theory</a>
+  <a class="nav-item" href="#tunneling"><span class="nav-lnum">§3.7</span>Barrier Penetration</a>
+  <a class="nav-item" href="#lambda"><span class="nav-lnum">§3.8</span>Disintegration Constant</a>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="#beta"><span class="nav-lnum">§4</span>Beta Decay</a>
+  <a class="nav-item" href="#beta-types"><span class="nav-lnum">§4.1</span>Types &amp; Energetics</a>
+  <a class="nav-item" href="#beta-spectrum"><span class="nav-lnum">§4.2</span>Continuous Spectrum</a>
+  <a class="nav-item" href="#neutrino"><span class="nav-lnum">§4.3</span>Pauli's Neutrino</a>
+  <a class="nav-item" href="#fermi"><span class="nav-lnum">§4.4</span>Fermi's Theory</a>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="#gamma"><span class="nav-lnum">§5</span>Gamma Decay</a>
+  <div class="nav-sep"></div>
+  <a class="nav-item" href="#questions"><span class="nav-lnum">★</span>Practice Questions</a>
+</nav>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<div id="main">
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-label">Class Notes · Prof. ARD · Part I</div>
+  <h1>Nuclear &amp; <span>Particle Physics</span></h1>
+  <div class="hero-sub">A many-body system where the interacting force is not fully known — yet remarkably well described.</div>
+  <div class="hero-meta">
+    <div class="meta-chip">Prof. <span>ARD</span></div>
+    <div class="meta-chip">Topics: <span>Nuclear Properties · Radioactivity</span></div>
+    <div class="meta-chip">Level: <span>Advanced UG / PG</span></div>
+    <div class="meta-chip">Units: <span>MeV, fm, u</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- §1  INTRODUCTION                            -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="lecture" id="intro">
+  <div class="lecture-header">
+    <div class="lec-num">01</div>
+    <div class="lec-info">
+      <div class="lec-tag">Chapter 1</div>
+      <h2>Introduction to Nuclear Physics</h2>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Why "Nuclear Physics = Unclear Physics"?</h3>
+    <p>Nuclear physics, as Prof. ARD quips, might as well be called <em>unclear physics</em> — for two fundamental reasons:</p>
+    <div class="two-col">
+      <div class="callout concept">
+        <div class="callout-title">Many-Body System</div>
+        A nucleus contains $Z$ protons and $N$ neutrons, all interacting simultaneously via the nuclear force. Unlike the hydrogen atom (an exact two-body problem), the nuclear many-body problem has no closed-form solution for $A \geq 3$.
+      </div>
+      <div class="callout concept">
+        <div class="callout-title">Force Not Fully Known</div>
+        The nucleon–nucleon interaction is an <em>effective residual force</em> from the underlying quark–gluon dynamics of QCD. Unlike gravity or electromagnetism, it has no simple analytic form, and even today its detailed structure is an area of active research.
+      </div>
+    </div>
+
+    <h3>Starting of Nuclear Physics</h3>
+    <p>Interestingly, nuclear physics began even <em>before</em> the nucleus was discovered. In <strong>1896</strong>, Henri Becquerel discovered <strong>radioactivity</strong> while experimenting with uranium. He observed that uranium spontaneously emitted three types of radiation:</p>
+    <div class="prop-grid">
+      <div class="prop-card">
+        <div class="prop-label">Alpha (α)</div>
+        <div class="prop-val">$^4_2$He</div>
+        <div class="prop-note">Helium-4 nucleus, charge +2e</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-label">Beta (β)</div>
+        <div class="prop-val">e⁻ or e⁺</div>
+        <div class="prop-note">Electron or positron from weak decay</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-label">Gamma (γ)</div>
+        <div class="prop-val">Photon</div>
+        <div class="prop-note">High-energy electromagnetic wave</div>
+      </div>
+    </div>
+    <p>The need to understand where these energetic projectiles originated led directly to scattering experiments — and the discovery of the nucleus itself.</p>
+  </div>
+
+  <!-- RUTHERFORD -->
+  <div class="section" id="rutherford">
+    <h3>Rutherford's Gold Foil Experiment (1911)</h3>
+    <p>The prevailing model before 1911 was <strong>Thomson's Plum-Pudding Model</strong>: positive charge is uniformly distributed over a sphere of radius equal to the atomic radius ($\sim 10^{-10}$ m), with electrons embedded like plums in a pudding. From this model, only <em>very small angular deviations</em> of α-particles were expected.</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" width="560">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#c9974a"/>
+          </marker>
+          <marker id="arr-g" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#56c98a"/>
+          </marker>
+          <marker id="arr-r" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#e05a5a"/>
+          </marker>
+        </defs>
+        <!-- Source box -->
+        <rect x="30" y="110" width="70" height="60" rx="4" fill="#1a2238" stroke="#2a3f60" stroke-width="1.5"/>
+        <text x="65" y="136" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#8fa0bc">α</text>
+        <text x="65" y="152" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#8fa0bc">source</text>
+        <!-- Gold foil -->
+        <rect x="230" y="60" width="8" height="160" fill="#1a2238" stroke="#c9974a" stroke-width="1.5"/>
+        <text x="234" y="50" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#c9974a">Foil</text>
+        <!-- Most go through -->
+        <line x1="100" y1="140" x2="400" y2="140" stroke="#56c98a" stroke-width="1.5" stroke-dasharray="none" marker-end="url(#arr-g)"/>
+        <!-- Slightly deflected -->
+        <line x1="100" y1="135" x2="234" y2="130" stroke="#c9974a" stroke-width="1.5"/>
+        <line x1="234" y1="130" x2="380" y2="90" stroke="#c9974a" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Large angle -->
+        <line x1="100" y1="145" x2="234" y2="150" stroke="#e8b96a" stroke-width="1.5"/>
+        <line x1="234" y1="150" x2="380" y2="200" stroke="#e8b96a" stroke-width="1.5" marker-end="url(#arr)"/>
+        <!-- Back-scatter -->
+        <line x1="100" y1="142" x2="234" y2="142" stroke="#e05a5a" stroke-width="2"/>
+        <line x1="234" y1="142" x2="110" y2="170" stroke="#e05a5a" stroke-width="2" marker-end="url(#arr-r)"/>
+        <!-- Labels -->
+        <text x="410" y="143" font-family="'Source Serif 4'" font-size="12" fill="#56c98a">Most particles undeviated</text>
+        <text x="385" y="88" font-family="'Source Serif 4'" font-size="12" fill="#c9974a">Small angle deflection</text>
+        <text x="385" y="204" font-family="'Source Serif 4'" font-size="12" fill="#e8b96a">Large angle deflection</text>
+        <text x="75" y="185" font-family="'Source Serif 4'" font-size="12" fill="#e05a5a">Back-scatter!</text>
+        <!-- Screen -->
+        <ellipse cx="560" cy="140" rx="12" ry="90" fill="none" stroke="#2a3f60" stroke-width="1"/>
+        <text x="560" y="240" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">Screen</text>
+      </svg>
+      <div class="diagram-caption">Fig 1.1 — Geiger and Marsden's experimental setup. The α-source fires particles at a thin gold foil; the scattered particles hit a circular fluorescent screen.</div>
+    </div>
+
+    <h4>Outcome of the Experiment</h4>
+    <p>The results were shocking:</p>
+    <div class="callout warning">
+      <div class="callout-title">Rutherford's Astonishment</div>
+      "It was quite the most incredible event that ever happened to me in my life. It was as incredible as if you had fired a 15-inch shell at a piece of tissue paper and it came back and hit you."
+      <br><br>
+      The key observations were: (1) Most α-particles passed through undeviated. (2) A few were deflected through large angles. (3) A very small number actually <em>rebounded back</em>.
+    </div>
+
+    <h4>Conclusion: The Nuclear Atom</h4>
+    <p>Rutherford's interpretation: Most of the atom is empty space. All the positive charge and essentially all the mass is concentrated in an extremely tiny, dense region — the <strong>nucleus</strong> — of radius $\sim 10^{-15}$ m = 1 fm. Electrons orbit around this central nucleus.</p>
+  </div>
+
+  <!-- SCALES -->
+  <div class="section" id="scales">
+    <h3>Scales of the Atomic Nucleus</h3>
+    <table class="data-table">
+      <tr><th>Object</th><th>Length Scale</th><th>Energy Scale</th><th>Unit</th></tr>
+      <tr><td>Atom</td><td class="hl">$\sim 10^{-10}$ m</td><td>eV</td><td>Å (Angstrom)</td></tr>
+      <tr><td>Nucleus</td><td class="hl">$\sim 10^{-15}$ m</td><td>MeV</td><td>fm (femtometer)</td></tr>
+    </table>
+    <div class="callout info">
+      <div class="callout-title">Why MeV at the nuclear scale?</div>
+      The Heisenberg uncertainty principle gives $\Delta x \cdot \Delta p \geq \hbar$. Confining a nucleon to $\Delta x \sim 1$ fm gives $\Delta p \sim \hbar/\text{fm}$, which corresponds to a kinetic energy $\sim p^2/2m \sim 20$ MeV. This is why nuclear physics uses MeV as its natural energy unit — a factor of $10^6$ larger than atomic physics.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- §2  NUCLEAR PROPERTIES                      -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="lecture" id="properties">
+  <div class="lecture-header">
+    <div class="lec-num">02</div>
+    <div class="lec-info">
+      <div class="lec-tag">Chapter 2</div>
+      <h2>Nuclear Properties</h2>
+    </div>
+  </div>
+
+  <!-- SIZE & DENSITY -->
+  <div class="section" id="size">
+    <h3>Nuclear Size</h3>
+    <p>A variety of scattering experiments using different projectiles have been used to determine nuclear dimensions. <strong>Fast electrons</strong> (which interact only via the electromagnetic force) are ideal for measuring the charge distribution, while <strong>neutrons</strong> (interacting only via the nuclear force) probe the matter distribution. In every case, experiments show that <em>the volume of a nucleus is directly proportional to $A$</em> — the number of nucleons.</p>
+
+    <p>We model the nucleus as a sphere of radius $R$ that scales with mass number as:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Nuclear Radius Formula</div>
+      <div class="eq-row">
+        <span>$$R = R_0 \, A^{1/3}$$</span>
+      </div>
+      <div class="eq-row">
+        <span class="eq-note">where $R_0 \approx 1.2$ fm (range: 1.1–1.5 fm) is experimentally determined</span>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">Physical Meaning of R = R₀A^(1/3)</div>
+      Since $R \propto A^{1/3}$, we get $R^3 \propto A$, so the <em>volume</em> $V = \frac{4}{3}\pi R^3 \propto A$. This means <strong>each nucleon occupies roughly the same volume</strong> regardless of which nucleus it's in — a profound statement about the nuclear force (saturation property).
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-title">Nuclei do NOT have sharp boundaries</div>
+      The radius $R$ represents only an <em>effective nuclear size</em>. The nuclear density $\rho(r)$ has a diffuse surface that falls off over a distance of about 2–3 fm (the "skin thickness"). Charge density and mass density follow each other closely though not exactly.
+    </div>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 440 220" width="420">
+        <!-- Axes -->
+        <line x1="50" y1="30" x2="50" y2="180" stroke="#2a3f60" stroke-width="1.5"/>
+        <line x1="50" y1="180" x2="390" y2="180" stroke="#2a3f60" stroke-width="1.5"/>
+        <!-- Density curve — flat top, smooth falloff -->
+        <path d="M50,60 L200,60 Q220,60 235,90 Q250,140 270,170 L390,170" fill="none" stroke="#c9974a" stroke-width="2.5"/>
+        <!-- R marker -->
+        <line x1="215" y1="60" x2="215" y2="180" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="215" y="196" text-anchor="middle" font-family="'JetBrains Mono'" font-size="11" fill="#4ecdc4">R</text>
+        <!-- Arrow indicating R from 0 -->
+        <line x1="50" y1="170" x2="210" y2="170" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="3,3"/>
+        <!-- Labels -->
+        <text x="42" y="34" text-anchor="end" font-family="'JetBrains Mono'" font-size="11" fill="#8fa0bc">ρ(r)</text>
+        <text x="392" y="183" font-family="'JetBrains Mono'" font-size="11" fill="#8fa0bc">r (fm)</text>
+        <text x="390" y="196" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">5</text>
+        <text x="130" y="48" font-family="'Source Serif 4'" font-size="12" fill="#c9974a" font-style="italic">uniform interior</text>
+        <text x="290" y="120" font-family="'Source Serif 4'" font-size="12" fill="#e8b96a" font-style="italic">diffuse surface</text>
+      </svg>
+      <div class="diagram-caption">Fig 2.1 — Nuclear charge/mass density profile. The density is approximately constant inside and falls smoothly to zero over ~2 fm at the surface.</div>
+    </div>
+
+    <h3>Nuclear Density</h3>
+    <p>Treating the nucleus as a uniform sphere, we can derive the nuclear density explicitly:</p>
+
+    <div class="eq-derive">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-math">$V = \tfrac{4}{3}\pi R^3 = \tfrac{4}{3}\pi R_0^3 A$</div>
+          <div class="step-reason">Volume of sphere, substituting $R = R_0 A^{1/3}$</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-math">$M \approx A \cdot u$ where $u = 1.66 \times 10^{-27}$ kg</div>
+          <div class="step-reason">Total nuclear mass in atomic mass units (mass of p ≈ mass of n ≈ u)</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-math">$\rho_\text{nuc} = \dfrac{M}{V} \approx \dfrac{A \cdot u}{\frac{4}{3}\pi R_0^3 A} = \dfrac{3u}{4\pi R_0^3}$</div>
+          <div class="step-reason">The factors of A cancel — density is <em>independent</em> of which nucleus!</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-math">$\rho_\text{nuc} \approx 0.138 \; \text{u/fm}^3 \approx 2.3 \times 10^{17} \; \text{kg/m}^3$</div>
+          <div class="step-reason">Numerical result using $R_0 = 1.2$ fm</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout result">
+      <div class="callout-title">Astonishing Fact</div>
+      $\rho_\text{nuc} \approx 10^{14} \times \rho_\text{water}$. Nuclear matter is <strong>100 trillion times denser than water</strong>. This is comparable to the density of a neutron star — essentially a nucleus the size of a city! A teaspoon of nuclear matter would weigh ~1 billion tonnes.
+    </div>
+  </div>
+
+  <!-- BINDING ENERGY -->
+  <div class="section" id="binding">
+    <h3>Nuclear Binding Energy</h3>
+    <p>The <strong>binding energy $E_B$</strong> of a nucleus is the energy that must be supplied to completely separate all nucleons from each other. Equivalently, it is the magnitude of the energy by which the nucleons are bound together within the nucleus.</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Definition</div>
+      $$E_B = E_0 - E_N$$
+      <div class="eq-row">
+        <span class="eq-note">$E_0$ = total rest energy of the separated nucleons &nbsp;|&nbsp; $E_N$ = rest energy of the bound nucleus</span>
+      </div>
+    </div>
+
+    <h4>Derivation Using Atomic Masses</h4>
+    <p>For a nucleus $^A_Z X$ with $N = A - Z$ neutrons:</p>
+
+    <div class="eq-derive">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-math">$E_0 = (Z \cdot m_p + N \cdot m_n)c^2$</div>
+          <div class="step-reason">Rest energy of $Z$ free protons and $N$ free neutrons</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-math">$E_N = m_N c^2$ &nbsp; (where $m_N$ = nuclear mass)</div>
+          <div class="step-reason">Rest energy of the actual bound nucleus</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-math">$E_B = (Zm_p + Nm_n - m_N)c^2 = \Delta m \cdot c^2$</div>
+          <div class="step-reason">$\Delta m$ is the <strong>mass defect</strong> — nucleus weighs less than its constituents!</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-math">$= (Zm_p + Zm_e + Nm_n)c^2 - (m_N + Zm_e)c^2$</div>
+          <div class="step-reason">Add and subtract $Zm_e$ (electron masses)</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <div class="step-math">$$\boxed{E_B = \bigl(Z M_H + N m_n - {}^A_Z M\bigr)c^2}$$</div>
+          <div class="step-reason">Final result in terms of atomic masses ($M_H$ = atomic mass of $^1$H, $^A_Z M$ = atomic mass of nucleus $X$). This is the tabulated form used in practice.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout concept">
+      <div class="callout-title">Why Atomic Masses?</div>
+      Nuclear masses $m_N$ are hard to measure directly. What's tabulated are <em>atomic masses</em> $M(A,Z)$ which include the electron masses. When we write $E_B$ in terms of $M_H$ and $M(A,Z)$, the electron binding energies partially cancel (we neglect their small contribution), leaving the clean formula above.
+    </div>
+  </div>
+
+  <!-- BINDING ENERGY CURVE -->
+  <div class="section" id="be-curve">
+    <h3>The Binding Energy Curve — $E_B/A$ vs. $A$</h3>
+    <p>The most important graph in all of nuclear physics. It plots the average binding energy per nucleon $E_B/A$ against mass number $A$.</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 600 320" width="560">
+        <!-- Grid -->
+        <line x1="60" y1="20" x2="60" y2="260" stroke="#1e2d4a" stroke-width="1.5"/>
+        <line x1="60" y1="260" x2="570" y2="260" stroke="#1e2d4a" stroke-width="1.5"/>
+        <!-- Y-axis ticks -->
+        <text x="52" y="264" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">0</text>
+        <text x="52" y="224" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">2</text>
+        <text x="52" y="184" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">4</text>
+        <text x="52" y="144" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">6</text>
+        <text x="52" y="104" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">8</text>
+        <text x="52" y="64" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">10</text>
+        <!-- X-axis labels -->
+        <text x="60" y="278" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">0</text>
+        <text x="160" y="278" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">50</text>
+        <text x="260" y="278" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">100</text>
+        <text x="360" y="278" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">150</text>
+        <text x="460" y="278" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">200</text>
+        <text x="560" y="278" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">240</text>
+        <!-- Axis labels -->
+        <text x="20" y="145" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#8fa0bc" transform="rotate(-90,20,145)">E_B/A (MeV)</text>
+        <text x="315" y="298" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#8fa0bc">Mass Number A</text>
+        <!-- BE curve: rises steeply, plateaus ~8 MeV, slight peak at Fe/Ni, gradual decline -->
+        <path d="M62,260 L70,180 L80,130 L90,108 L100,98 L120,93 L140,90 L160,88 L180,87 L200,86.5 L220,87 L240,88 L260,89 L280,90 L300,92 L320,94 L340,96 L360,98 L380,100 L400,103 L420,107 L440,112 L460,118 L480,125 L500,133 L520,142 L540,152 L560,165"
+              fill="none" stroke="#c9974a" stroke-width="2.5"/>
+        <!-- Peak region box -->
+        <rect x="152" y="83" width="80" height="90" fill="rgba(78,205,196,0.06)" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="192" y="76" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#4ecdc4">Peak stability</text>
+        <text x="192" y="178" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#4ecdc4">A = 50–80</text>
+        <!-- Key nuclides -->
+        <circle cx="80" cy="130" r="3" fill="#e05a5a"/>
+        <text x="82" y="128" font-family="'JetBrains Mono'" font-size="9" fill="#e05a5a">⁴He</text>
+        <circle cx="192" cy="86.5" r="4" fill="#56c98a"/>
+        <text x="196" y="84" font-family="'JetBrains Mono'" font-size="9" fill="#56c98a">⁶²Ni</text>
+        <text x="196" y="94" font-family="'JetBrains Mono'" font-size="9" fill="#56c98a">⁵⁶Fe</text>
+        <circle cx="555" cy="168" r="3" fill="#9b7fe8"/>
+        <text x="532" y="165" font-family="'JetBrains Mono'" font-size="9" fill="#9b7fe8">²³⁸U</text>
+        <!-- Region labels -->
+        <text x="90" y="250" font-family="'Source Serif 4'" font-size="12" fill="#4ecdc4" font-style="italic">← Fusion</text>
+        <text x="390" y="250" font-family="'Source Serif 4'" font-size="12" fill="#e8b96a" font-style="italic">Fission →</text>
+      </svg>
+      <div class="diagram-caption">Fig 2.2 — Binding energy per nucleon vs. mass number. The peak near A ≈ 60 defines the most stable nuclei. Fusion releases energy for A &lt; 60; fission releases energy for A &gt; 60.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="callout result">
+        <div class="callout-title">Key Features</div>
+        • $E_B/A$ rises sharply for light nuclei (up to He-4)<br>
+        • Approximately constant at <strong>~7–9 MeV</strong> for most nuclei<br>
+        • Maximum at $^{62}$Ni (8.795 MeV/nucleon) — most tightly bound<br>
+        • Gradual decrease for heavy nuclei (A > 100)
+      </div>
+      <div class="callout info">
+        <div class="callout-title">Fusion &amp; Fission</div>
+        <strong>Fusion</strong>: Light nuclei (A &lt; 60) combine → product has higher $E_B/A$ → energy released<br><br>
+        <strong>Fission</strong>: Heavy nucleus (A &gt; 200) splits → fragments have higher $E_B/A$ → energy released<br><br>
+        Both processes move toward the stability peak.
+      </div>
+    </div>
+  </div>
+
+  <!-- SPIN -->
+  <div class="section" id="spin">
+    <h3>Nuclear Spin</h3>
+    <p>Like the electron, protons and neutrons are spin-$\frac{1}{2}$ fermions. Each nucleon has both intrinsic spin angular momentum and orbital angular momentum. The total angular momentum of the nucleus $\vec{I}$ is the vector sum:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Nuclear Spin (Total Angular Momentum)</div>
+      $$\vec{I} = \vec{L} + \vec{S}$$
+      <div class="eq-row">
+        <span class="eq-note">$\vec{L} = \sum_i \vec{\ell}_i$ (sum of orbital angular momenta of all nucleons) &nbsp;|&nbsp; $\vec{S} = \sum_i \vec{s}_i$ (sum of spins)</span>
+      </div>
+      <div class="eq-row">
+        <span class="eq-note">$s_i = \frac{1}{2}$ for each nucleon &nbsp;|&nbsp; $\ell_i = 0, 1, 2, \ldots$ for each nucleon</span>
+      </div>
+    </div>
+
+    <p>The magnitude of $\vec{I}$ is $\sqrt{I(I+1)}\,\hbar$ where $I$ is the nuclear spin quantum number — the maximum projection along any chosen axis.</p>
+
+    <h4>Empirical Rules for Nuclear Spin</h4>
+    <div class="two-col">
+      <div class="callout concept">
+        <div class="callout-title">Odd A nucleus (Fermion)</div>
+        Obeys Fermi-Dirac statistics. Spin is <strong>half-integer</strong>:<br>
+        $I = \frac{1}{2}, \frac{3}{2}, \frac{5}{2}, \ldots$ (max $\approx \frac{9}{2}$)
+      </div>
+      <div class="callout concept">
+        <div class="callout-title">Even A nucleus (Boson)</div>
+        Obeys Bose-Einstein statistics. Spin is <strong>integer</strong>:<br>
+        $I = 0, 1, 2, \ldots$
+      </div>
+    </div>
+    <div class="callout result">
+      <div class="callout-title">Even-Even Nucleus: I = 0</div>
+      For all even-$Z$, even-$N$ nuclei in the <em>ground state</em>, $I = 0$ without exception. This shows that nucleons pair up with equal and oppositely directed angular momenta inside the nucleus. Nucleons form a core of paired protons and paired neutrons (each pair contributing zero total angular momentum). The few <em>unpaired</em> nucleons outside the core determine the nuclear spin.
+    </div>
+  </div>
+
+  <!-- MAGNETIC MOMENT -->
+  <div class="section" id="magnetic">
+    <h3>Nuclear Magnetic Moment</h3>
+    <p>An electron in a circular orbit has a magnetic (dipole) moment of 1 Bohr magneton:</p>
+    <div class="eq-block">
+      <div class="eq-label">Bohr Magneton vs. Nuclear Magneton</div>
+      $$\mu_B = \frac{e\hbar}{2m_e} \approx 9.27 \times 10^{-24} \text{ J/T}$$
+      $$\mu_N = \frac{e\hbar}{2m_p} \approx 5.05 \times 10^{-27} \text{ J/T}$$
+      <div class="eq-row">
+        <span class="eq-note">$\mu_B/\mu_N \approx 1836$ — nuclear effects are ~1800× smaller than atomic magnetic effects</span>
+      </div>
+    </div>
+    <p>The net magnetic moment of a nucleus depends on its spin $I$:</p>
+    <div class="eq-block">
+      $$\vec{\mu} = g\,\mu_N \vec{I}$$
+      <div class="eq-row"><span class="eq-note">$g$ = gyromagnetic ratio (different for each nucleus)</span></div>
+    </div>
+
+    <div class="callout danger">
+      <div class="callout-title">Strange Anomaly!</div>
+      If the proton were a simple point charge, its magnetic moment should be exactly $1\,\mu_N$. But experiments give:<br>
+      • <strong>Proton</strong>: $\mu_p = +2.79\,\mu_N$ (not $1\,\mu_N$!) — much larger than expected<br>
+      • <strong>Neutron</strong>: $\mu_n = -1.91\,\mu_N$ (not $0$!) — has a magnetic moment despite being electrically neutral!<br><br>
+      These anomalies are explained by the <strong>internal charge structure</strong> of nucleons — they are made of quarks (up and down quarks with fractional charges), not elementary point particles.
+    </div>
+
+    <table class="data-table">
+      <tr><th>Nucleus</th><th>Spin $I$</th><th>Magnetic Moment ($\mu_N$)</th><th>Note</th></tr>
+      <tr><td>$^1_1$H</td><td>1/2</td><td class="hl">+2.79</td><td>Single proton</td></tr>
+      <tr><td>$^2_1$H (Deuteron)</td><td>1</td><td class="hl">+0.86</td><td>p + n, orbital contribution</td></tr>
+      <tr><td>$^3_2$He</td><td>1/2</td><td class="hl">-2.13</td><td>2p + n</td></tr>
+      <tr><td>$^4_2$He</td><td>0</td><td class="hl">~0</td><td>Even-even, $I=0$</td></tr>
+    </table>
+  </div>
+
+  <!-- PARITY -->
+  <div class="section" id="parity">
+    <h3>Parity of the Nucleus</h3>
+    <p>Parity is a purely quantum mechanical concept with <em>no classical analogue</em>. It describes a kind of spatial symmetry — what happens to the wavefunction under a reflection through the origin (parity transformation: $\mathbf{r} \to -\mathbf{r}$).</p>
+
+    <p>If $\psi(\mathbf{r})$ is the spatial part of the nuclear wavefunction:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Parity Eigenstates</div>
+      <div class="eq-row">
+        <span>$\psi(-x,-y,-z) = +\psi(x,y,z)$</span><span class="eq-note"> → even (+) parity, $\pi = +1$</span>
+      </div>
+      <div class="eq-row">
+        <span>$\psi(-x,-y,-z) = -\psi(x,y,z)$</span><span class="eq-note"> → odd (−) parity, $\pi = -1$</span>
+      </div>
+    </div>
+
+    <p>For a single nucleon with orbital quantum number $\ell$, the parity of the spherical harmonic $Y_\ell^m$ under $\mathbf{r} \to -\mathbf{r}$ gives $(-1)^\ell$. For the whole nucleus:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Nuclear Parity</div>
+      $$\pi = (-1)^L \quad \text{where } L = \sum_i \ell_i$$
+      <div class="eq-row">
+        <span class="eq-note">Even $L$ → even parity ($+$) &nbsp;|&nbsp; Odd $L$ → odd parity ($-$)</span>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-title">Spin-Parity Notation</div>
+      The spin and parity of a nuclear state are combined into the notation $I^\pi$, e.g., $0^+$, $\frac{1}{2}^-$, $3^+$, etc. For all even-even nuclei in the ground state: $I^\pi = 0^+$. This is one of the most robustly verified facts in nuclear physics.
+    </div>
+  </div>
+
+  <!-- NUCLEAR FORCE -->
+  <div class="section" id="force">
+    <h3>The Nuclear Force</h3>
+    <p>The attractive force that binds protons and neutrons together inside the nucleus — despite the strong Coulomb repulsion between protons — is known as the <strong>nuclear force</strong> (or residual strong force). It was historically considered the strongest force in nature; today we understand it as a residual effect of the quark–gluon interaction (the <em>colour force</em> or strong force) described by QCD.</p>
+
+    <div class="force-grid">
+      <div class="force-card">
+        <div class="fc-num">PROPERTY 1</div>
+        <h4>Charge Independent</h4>
+        <p>The nuclear force acts equally between n–n, p–p, and n–p pairs. It does not distinguish between protons and neutrons (isospin symmetry: proton and neutron are two states of the same particle).</p>
+      </div>
+      <div class="force-card">
+        <div class="fc-num">PROPERTY 2</div>
+        <h4>Short Range</h4>
+        <p>Strongly attractive at distances ~1 fm. Negligible beyond 2–3 fm. At very short distances (&lt;0.7 fm), it becomes <em>strongly repulsive</em> — this "hard core" gives nuclei their finite size and prevents gravitational collapse. The exact form is still not fully known.</p>
+      </div>
+      <div class="force-card">
+        <div class="fc-num">PROPERTY 3</div>
+        <h4>Saturates</h4>
+        <p>A nucleon interacts only with its few nearest neighbours, not with all other nucleons in the nucleus. This is why $E_B/A$ is approximately constant for large nuclei. (Coulomb and gravitational forces do NOT show saturation.)</p>
+      </div>
+      <div class="force-card">
+        <div class="fc-num">PROPERTY 4</div>
+        <h4>Spin Dependent</h4>
+        <p>The nuclear force favours binding of pairs with <em>opposite</em> spins (↑↓) over parallel spins (↑↑). This is why spin-singlet pairs are more tightly bound — the deuteron exists only in a spin-triplet state (no bound spin-singlet n-p state).</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 500 260" width="460">
+        <!-- Axes -->
+        <line x1="60" y1="120" x2="460" y2="120" stroke="#2a3f60" stroke-width="1.5"/>
+        <line x1="60" y1="20" x2="60" y2="240" stroke="#2a3f60" stroke-width="1.5"/>
+        <!-- Axis labels -->
+        <text x="462" y="124" font-family="'JetBrains Mono'" font-size="11" fill="#8fa0bc">r (fm)</text>
+        <text x="35" y="16" font-family="'JetBrains Mono'" font-size="11" fill="#8fa0bc">F</text>
+        <text x="35" y="28" font-family="'JetBrains Mono'" font-size="9" fill="#5a6d8a">(×10⁴N)</text>
+        <!-- r-axis ticks -->
+        <text x="120" y="136" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">0.5</text>
+        <text x="180" y="136" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">1.0</text>
+        <text x="280" y="136" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">1.5</text>
+        <text x="380" y="136" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">2.0</text>
+        <!-- Nuclear force curve -->
+        <!-- Repulsive core region (< 0.7 fm) -->
+        <path d="M65,240 Q90,238 110,220 Q125,200 140,150 Q150,120 155,80 Q160,40 165,25 Q170,15 175,10"
+              fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+        <!-- Attractive well -->
+        <path d="M175,10 Q180,10 185,15 Q190,30 195,80 Q200,120 210,130 Q220,120 230,115"
+              fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+        <!-- Attractive tail -->
+        <path d="M230,115 Q260,108 300,113 Q350,117 400,119 Q440,120 460,120"
+              fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+        <!-- Zero crossings -->
+        <line x1="155" y1="115" x2="155" y2="125" stroke="#4ecdc4" stroke-width="1"/>
+        <text x="155" y="110" text-anchor="middle" font-family="'JetBrains Mono'" font-size="9" fill="#4ecdc4">0.7</text>
+        <!-- Labels -->
+        <text x="80" y="200" font-family="'Source Serif 4'" font-size="11" fill="#e05a5a" font-style="italic">repulsive</text>
+        <text x="80" y="214" font-family="'Source Serif 4'" font-size="11" fill="#e05a5a" font-style="italic">core</text>
+        <text x="260" y="108" font-family="'Source Serif 4'" font-size="11" fill="#56c98a" font-style="italic">attractive</text>
+        <!-- Depth annotation -->
+        <line x1="200" y1="120" x2="200" y2="161" stroke="#c9974a" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="210" y="152" font-family="'JetBrains Mono'" font-size="9" fill="#c9974a">~2.5×10⁴N</text>
+        <text x="210" y="163" font-family="'JetBrains Mono'" font-size="9" fill="#c9974a">at min</text>
+        <!-- F=0 line label -->
+        <text x="38" y="124" text-anchor="end" font-family="'JetBrains Mono'" font-size="10" fill="#5a6d8a">0</text>
+      </svg>
+      <div class="diagram-caption">Fig 2.3 — Nuclear force vs. separation. Repulsive core below ~0.7 fm; strong attraction near 1 fm; negligible beyond ~2.5 fm. The exact form of this curve is still not known from first principles.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- §3  ALPHA RADIOACTIVITY                     -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="lecture" id="alpha">
+  <div class="lecture-header">
+    <div class="lec-num">03</div>
+    <div class="lec-info">
+      <div class="lec-tag">Chapter 3</div>
+      <h2>Alpha Radioactivity</h2>
+    </div>
+  </div>
+
+  <div class="section">
+    <p>Radioactivity raises deep questions: What is the <em>lifetime</em> of a particular radio-nucleus? How do we distinguish between different radio-nuclides? The key insight is that different nuclides have different decay constants $\lambda$ — and hence different half-lives $t_{1/2} = \ln 2 / \lambda$.</p>
+
+    <div class="callout info">
+      <div class="callout-title">Radioactive Decay Law</div>
+      $N(t) = N_0 e^{-\lambda t}$ where $\lambda$ is the <strong>disintegration constant</strong>. Different $\lambda$ values give different half-lives — this is how we fingerprint each radioactive species. The half-life $t_{1/2} = \ln 2/\lambda$ ranges from microseconds ($^{212}$Po) to billions of years ($^{238}$U).
+    </div>
+  </div>
+
+  <!-- IDENTIFICATION -->
+  <div class="section" id="alpha-id">
+    <h3>What is Alpha? — Rutherford &amp; Royds Experiment</h3>
+    <p>Alpha particles were identified as $^4_2$He nuclei by Rutherford and Royds (1909) through a beautiful spectroscopic experiment:</p>
+
+    <div class="eq-derive">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-math">Setup</div><div class="step-reason">A thin-walled glass bulb $\alpha$ contains $^{222}$Rn. Surrounded by a thick-walled tube $T$ with a mercury reservoir $D$. Electrodes $P$ and $Q$ in capillary tube $E$. Region between $\alpha$ and $E$ is evacuated.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-math">Waiting Period</div><div class="step-reason">After a few days, α-particles from Rn decay pass through the thin wall of bulb $\alpha$ and collect as gas in the evacuated space. Mercury is raised to compress this gas into $E$.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-math">Spectroscopic Analysis</div><div class="step-reason">An electrical discharge is struck between $P$ and $Q$. Light emitted by the discharge is analysed spectroscopically → gives the <strong>line spectrum of helium</strong>.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-math">Control Experiment</div><div class="step-reason">A blank experiment with He gas in $\alpha$ — no He spectrum is observed, confirming the He came from the decay product, not contamination.</div></div></div>
+    </div>
+    <div class="callout result"><div class="callout-title">Conclusion</div>Alpha particles are <strong>helium-4 nuclei</strong> ($^4_2$He, charge +2e).</div>
+  </div>
+
+  <!-- Q-VALUE -->
+  <div class="section" id="alpha-q">
+    <h3>Q-Value &amp; Energetics of Alpha Decay</h3>
+    <h4>Why Specifically ⁴He?</h4>
+    <p>Alpha emission arises from Coulomb repulsion. As $Z$ increases, repulsion grows as $Z^2$, but nuclear binding only grows as $A$ (due to saturation). So for heavy nuclei, emission of a charged fragment becomes energetically favourable.</p>
+    <p>But why $^4$He and not $^1$H, $^2$H, or $^3$He? The answer lies in the disintegration energy $Q$:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Disintegration Energy</div>
+      $$Q = (m_X - m_Y - m_y)c^2$$
+      <div class="eq-row"><span class="eq-note">For spontaneous decay, $Q$ must be positive</span></div>
+    </div>
+
+    <p>For $^{232}$U as parent nucleus:</p>
+    <table class="data-table">
+      <tr><th>Particle Emitted</th><th>Q (MeV)</th><th>Possible?</th></tr>
+      <tr><td>Neutron n</td><td>−7.15</td><td>No</td></tr>
+      <tr><td>Proton $^1$H</td><td>−6.05</td><td>No</td></tr>
+      <tr><td>$^3$He</td><td>−9.6</td><td>No</td></tr>
+      <tr><td class="hl">$^4$He (α)</td><td class="hl">+5.38</td><td class="hl">✓ Yes!</td></tr>
+      <tr><td>$^7$Li</td><td>−1.83</td><td>No</td></tr>
+    </table>
+    <div class="callout concept"><div class="callout-title">Why only α?</div>The exceptionally high binding energy of $^4$He ($E_B/A \approx 7.07$ MeV, much higher than $^3$He or triton) makes it uniquely stable. The 2p+2n system is a "magic" closed-shell configuration with enhanced stability.</div>
+
+    <div class="callout warning"><div class="callout-title">Not just energetics</div>For nuclei with A &gt; 190, α-decay is energetically possible, but only about <em>half</em> actually show observable α-activity. The reason: the half-life must be physically observable ($t_{1/2} > 10^{-6}$ y). This requires the theory of quantum tunneling.</div>
+
+    <h4>Theoretical Derivation of Alpha Particle Energy</h4>
+    <div class="decay-box">
+      <div class="decay-label">Alpha Decay Reaction</div>
+      $^A_Z X \rightarrow ^{A-4}_{Z-2} Y + \alpha$
+    </div>
+
+    <div class="eq-derive">
+      <div class="step"><div class="step-num">1</div><div class="step-body">
+        <div class="step-math">$Q = (M_x - M_y - M_\alpha)c^2$</div>
+        <div class="step-reason">Q-value in terms of atomic masses</div>
+      </div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">
+        <div class="step-math">Momentum conservation (X at rest): $\quad 0 = M_\alpha v_\alpha - M_Y v_Y \quad \Rightarrow \quad v_Y = \frac{M_\alpha}{M_Y} v_\alpha$</div>
+        <div class="step-reason">Linear momentum conservation in CM frame</div>
+      </div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">
+        <div class="step-math">$Q = \tfrac{1}{2}M_Y v_Y^2 + \tfrac{1}{2}M_\alpha v_\alpha^2 = T_\alpha\!\left(1 + \tfrac{M_\alpha}{M_Y}\right)$</div>
+        <div class="step-reason">Substituting $v_Y$ and collecting terms</div>
+      </div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body">
+        <div class="step-math">$$\boxed{T_\alpha = \frac{M_Y}{M_Y + M_\alpha}\,Q \qquad T_Y = \frac{M_\alpha}{M_Y + M_\alpha}\,Q}$$</div>
+        <div class="step-reason">Since $M_Y \gg M_\alpha$, almost all of Q goes to the α-particle. Also $T_Y/T_\alpha = M_\alpha/M_Y \ll 1$.</div>
+      </div></div>
+    </div>
+    <div class="callout result"><div class="callout-title">Key Result</div>$T_\alpha$ is fixed for a particular decay — so α-particles are <strong>strictly monoenergetic</strong>. This is a distinguishing feature of α-decay vs. β-decay.</div>
+  </div>
+
+  <!-- SPECTRUM -->
+  <div class="section" id="alpha-spec">
+    <h3>Energy or Velocity of Alpha Particles</h3>
+    <p>The velocity of α-particles is measured using a magnetic deflection apparatus: an evacuated box in a transverse magnetic field $B$. Particles travel semicircular paths of radius $\rho$:</p>
+    <div class="eq-block">
+      <div class="eq-label">Magnetic Deflection</div>
+      $$\frac{mv^2}{\rho} = Bqv \quad \Rightarrow \quad v = \frac{Bq\rho}{m}$$
+      <div class="eq-row"><span class="eq-note">For natural radionuclei: $v \approx 10^7$ m/s, corresponding to K.E. of 4–10 MeV</span></div>
+    </div>
+
+    <h4>Alpha Energy Spectrum</h4>
+    <p>Many elements emit only a <em>single line</em> (one value of $\rho$) → strictly monoenergetic α-particles. Some emit <strong>two or more closely spaced lines</strong> → discrete multiline spectrum. This fine structure arises from the existence of discrete nuclear energy levels in the daughter nucleus.</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 420 200" width="380">
+        <!-- Axes -->
+        <line x1="50" y1="20" x2="50" y2="160" stroke="#2a3f60" stroke-width="1.5"/>
+        <line x1="50" y1="160" x2="390" y2="160" stroke="#2a3f60" stroke-width="1.5"/>
+        <text x="30" y="90" text-anchor="middle" font-family="'Source Serif 4'" font-size="11" fill="#8fa0bc" transform="rotate(-90,30,90)">Intensity</text>
+        <text x="220" y="180" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#8fa0bc">Energy (MeV)</text>
+        <!-- Monoenergetic line -->
+        <line x1="230" y1="160" x2="230" y2="40" stroke="#c9974a" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+        <!-- Fine structure -->
+        <line x1="260" y1="160" x2="260" y2="70" stroke="#4ecdc4" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+        <line x1="280" y1="160" x2="280" y2="100" stroke="#4ecdc4" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+        <!-- Labels -->
+        <text x="230" y="30" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#c9974a">main</text>
+        <text x="270" y="60" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#4ecdc4">fine</text>
+        <text x="270" y="72" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#4ecdc4">structure</text>
+        <!-- Energy level diagram inset -->
+        <line x1="80" y1="55" x2="170" y2="55" stroke="#e8b96a" stroke-width="1.5"/>
+        <text x="172" y="58" font-family="'JetBrains Mono'" font-size="9" fill="#e8b96a">g.s. of X</text>
+        <line x1="80" y1="90" x2="170" y2="90" stroke="#56c98a" stroke-width="1.5"/>
+        <text x="172" y="93" font-family="'JetBrains Mono'" font-size="9" fill="#56c98a">0.47 MeV</text>
+        <line x1="80" y1="130" x2="170" y2="130" stroke="#56c98a" stroke-width="1"/>
+        <text x="172" y="133" font-family="'JetBrains Mono'" font-size="9" fill="#56c98a">g.s. of Y</text>
+        <!-- Decay arrows -->
+        <line x1="120" y1="55" x2="120" y2="130" stroke="#c9974a" stroke-width="1.5" marker-end="url(#arr)"/>
+        <line x1="135" y1="55" x2="135" y2="90" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arr-g)"/>
+        <text x="125" y="96" font-family="'JetBrains Mono'" font-size="9" fill="#c9974a">6.20</text>
+        <text x="138" y="75" font-family="'JetBrains Mono'" font-size="9" fill="#4ecdc4">5.73</text>
+      </svg>
+      <div class="diagram-caption">Fig 3.1 — Alpha energy spectrum showing main peak and fine structure. Multiple lines arise from decays to different energy levels of the daughter nucleus Y.</div>
+    </div>
+  </div>
+
+  <!-- RANGE -->
+  <div class="section" id="alpha-range">
+    <h3>Range of Alpha Particles</h3>
+    <p>The <strong>range</strong> of an α-particle is the ionisation path-length — the total distance it travels in a medium before losing all its kinetic energy. It depends on: (i) initial K.E., (ii) chance of collision, (iii) ionisation potential of the medium; and for a gas, also on temperature and pressure.</p>
+
+    <div class="prop-grid">
+      <div class="prop-card">
+        <div class="prop-label">In gas (air)</div>
+        <div class="prop-val">~cm</div>
+        <div class="prop-note">A few centimetres for natural α-emitters</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-label">In solid/liquid</div>
+        <div class="prop-val">~10⁻³ mm</div>
+        <div class="prop-note">Due to high density, much shorter path</div>
+      </div>
+      <div class="prop-card">
+        <div class="prop-label">Geiger's Law</div>
+        <div class="prop-val">$R = bE^{3/2}$</div>
+        <div class="prop-note">$b = 0.315$, R in cm, E in MeV</div>
+      </div>
+    </div>
+
+    <p>Geiger showed empirically for monoenergetic α-particles of velocity $v$: $R \propto v^3 \propto E^{3/2}$. Since range is expressed as mass per unit area (kg/m²) for comparing different materials, the range is of the same order of magnitude in different materials.</p>
+
+    <h4>Straggling of Range</h4>
+    <p>α-particles with the same initial energy do not have <em>exactly</em> the same range — there is a small spread around the mean value $\bar{R}$. This is called <strong>straggling</strong>. At $\bar{R}$, the intensity falls to half its initial value; 30% of particles have range &gt; $\bar{R}$ and 50% have range &lt; $\bar{R}$. Causes: (i) statistical fluctuation in number of collisions, (ii) statistical fluctuation in energy loss per collision.</p>
+  </div>
+
+  <!-- GEIGER-NUTTAL -->
+  <div class="section" id="gn-law">
+    <h3>Geiger-Nuttal Law (1911)</h3>
+    <p>Geiger and Nuttal discovered an empirical relationship between the range $R$ of α-particles and the disintegration constant $\lambda$ of the naturally α-active substances:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Geiger-Nuttal Law</div>
+      $$\ln \lambda = A + B\ln R \qquad \Leftrightarrow \qquad \ln t_{1/2} = C - D\ln E$$
+      <div class="eq-row"><span class="eq-note">$A$, $B$, $C$, $D$ are constants. $B$ is the same for all three natural radioactive series; $A$ differs between series.</span></div>
+    </div>
+
+    <div class="callout concept">
+      <div class="callout-title">Physical Implication</div>
+      α-particles with <em>larger range</em> (higher energy) have <em>smaller half-life</em> (larger $\lambda$). This is a remarkable finding: a small change in energy leads to an enormous change in half-life — spanning 20 orders of magnitude! For example, $^{212}$Po ($E_\alpha = 8.78$ MeV) has $t_{1/2} = 3 \times 10^{-7}$ s, while $^{238}$U ($E_\alpha = 4.27$ MeV) has $t_{1/2} = 4.5 \times 10^9$ years. This extreme sensitivity is explained by Gamow's tunnelling theory.
+    </div>
+  </div>
+
+  <!-- GAMOW -->
+  <div class="section" id="gamow">
+    <h3>Theory of Alpha Decay — Gamow's Theory (1928)</h3>
+    <p>Classically, α-decay is completely inexplicable. α-particles emitted from natural radionuclei have energies of <strong>4–10 MeV</strong> — far below the height of the Coulomb barrier, which is ~35 MeV for $^{238}$U. The problem was solved in 1928 by <strong>Gamow</strong>, <strong>Condon</strong>, and <strong>Gurney</strong> using the newly developed Schrödinger wave equation: the α-particle escapes by <strong>quantum tunnelling</strong>.</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 520 280" width="480">
+        <!-- Axes -->
+        <line x1="60" y1="230" x2="480" y2="230" stroke="#2a3f60" stroke-width="1.5"/>
+        <line x1="60" y1="30" x2="60" y2="240" stroke="#2a3f60" stroke-width="1.5"/>
+        <text x="482" y="234" font-family="'JetBrains Mono'" font-size="11" fill="#8fa0bc">r</text>
+        <text x="42" y="28" font-family="'JetBrains Mono'" font-size="11" fill="#8fa0bc">V(r)</text>
+        <!-- Nuclear potential well (inside r0) -->
+        <line x1="60" y1="180" x2="130" y2="180" stroke="#4ecdc4" stroke-width="2"/>
+        <line x1="130" y1="180" x2="130" y2="50" stroke="#4ecdc4" stroke-width="2"/>
+        <!-- Coulomb barrier (outside r0) -->
+        <path d="M130,50 Q150,45 170,60 Q210,90 250,130 Q290,160 330,190 Q370,210 410,222 Q450,228 475,230"
+              fill="none" stroke="#e05a5a" stroke-width="2.5"/>
+        <!-- Alpha energy level -->
+        <line x1="60" y1="190" x2="340" y2="190" stroke="#c9974a" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="345" y="193" font-family="'JetBrains Mono'" font-size="10" fill="#c9974a">E_α (4–10 MeV)</text>
+        <!-- Barrier height label -->
+        <line x1="130" y1="50" x2="160" y2="50" stroke="#e05a5a" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="163" y="53" font-family="'JetBrains Mono'" font-size="10" fill="#e05a5a">V_barrier (~35 MeV)</text>
+        <!-- r0 label -->
+        <line x1="130" y1="230" x2="130" y2="240" stroke="#4ecdc4" stroke-width="1"/>
+        <text x="130" y="252" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#4ecdc4">r₀</text>
+        <!-- Well bottom label -->
+        <text x="90" y="200" text-anchor="middle" font-family="'JetBrains Mono'" font-size="10" fill="#4ecdc4">−V₀</text>
+        <!-- Tunnelling arrow -->
+        <path d="M130,190 Q200,195 340,190" fill="none" stroke="#56c98a" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arr-g)"/>
+        <text x="230" y="183" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#56c98a" font-style="italic">tunnels through!</text>
+        <!-- Region labels -->
+        <text x="90" y="165" text-anchor="middle" font-family="'JetBrains Mono'" font-size="9" fill="#8fa0bc">nuclear</text>
+        <text x="90" y="177" text-anchor="middle" font-family="'JetBrains Mono'" font-size="9" fill="#8fa0bc">well</text>
+        <text x="240" y="100" text-anchor="middle" font-family="'JetBrains Mono'" font-size="9" fill="#e05a5a">Coulomb barrier</text>
+        <text x="440" y="215" font-family="'JetBrains Mono'" font-size="9" fill="#8fa0bc">free</text>
+      </svg>
+      <div class="diagram-caption">Fig 3.2 — Gamow's potential for α-decay. The α-particle is trapped in the nuclear well by the Coulomb barrier. Classically, escape is impossible since $E_\alpha \ll V_\text{barrier}$. Quantum mechanics allows tunnelling.</div>
+    </div>
+
+    <p>The barrier height at the nuclear surface $r_0$ is:</p>
+    <div class="eq-block">
+      $$V_\text{barrier} = \frac{2(Z-2)e^2}{r_0} \approx \begin{cases} 35.6 \text{ MeV} & \text{for } ^{238}\text{U} \\ 34 \text{ MeV} & \text{for } ^{222}\text{Rn} \end{cases}$$
+    </div>
+    <p>Since $E_\alpha \approx 4\text{–}10$ MeV $\ll V_\text{barrier} \approx 34\text{–}36$ MeV, classically the α-particle can never escape. But quantum mechanically it can <em>tunnel through</em>!</p>
+
+    <div class="callout info">
+      <div class="callout-title">Optical Analogy for Tunnelling</div>
+      Consider total internal reflection at a glass–air interface. If a second glass surface is brought within a few wavelengths of the first, light <em>leaks through</em> the air gap (frustrated total internal reflection). Similarly, the quantum mechanical α-particle wave leaks through the Coulomb barrier if the barrier is not too thick.
+    </div>
+  </div>
+
+  <!-- TUNNELING -->
+  <div class="section" id="tunneling">
+    <h3>Barrier Penetration — Quantum Mechanical Treatment</h3>
+    <p>Consider a simplified rectangular barrier: height $V_0$, width $a$. An α-particle with energy $E &lt; V_0$ approaches along the $x$-axis. We divide space into three regions:</p>
+
+    <div class="eq-block">
+      <div class="eq-label">Regions</div>
+      <div class="eq-row"><span>Region I: &nbsp; $x &lt; 0$, &nbsp; $V = 0$</span></div>
+      <div class="eq-row"><span>Region II: &nbsp; $0 \leq x \leq a$, &nbsp; $V = V_0$</span></div>
+      <div class="eq-row"><span>Region III: &nbsp; $x &gt; a$, &nbsp; $V = 0$</span></div>
+    </div>
+
+    <h4>Schrödinger Equations</h4>
+    <div class="eq-block">
+      <div class="eq-label">Time-independent Schrödinger Equation in each region</div>
+      $$\text{I}: \quad -\frac{\hbar^2}{2m}\frac{d^2\psi_1}{dx^2} = E\psi_1 \quad \Rightarrow \quad \psi_1'' + \alpha^2\psi_1 = 0$$
+      $$\text{II}: \quad -\frac{\hbar^2}{2m}\frac{d^2\psi_2}{dx^2} + V_0\psi_2 = E\psi_2 \quad \Rightarrow \quad \psi_2'' - \beta^2\psi_2 = 0$$
+      $$\text{III}: \quad -\frac{\hbar^2}{2m}\frac{d^2\psi_3}{dx^2} = E\psi_3 \quad \Rightarrow \quad \psi_3'' + \alpha^2\psi_3 = 0$$
+      <div class="eq-row">
+        <span class="eq-note">where $\alpha^2 = \dfrac{2mE}{\hbar^2}$ and $\beta^2 = \dfrac{2m(V_0 - E)}{\hbar^2}$</span>
+      </div>
+    </div>
+
+    <h4>Solutions</h4>
+    <div class="eq-block">
+      $$\psi_1 = Ae^{i\alpha x} + Be^{-i\alpha x} \quad \psi_2 = De^{-\beta x} + Fe^{\beta x} \quad \psi_3 = Ce^{i\alpha x}$$
+      <div class="eq-row">
+        <span class="eq-note">$\psi_\text{in} = Ae^{i\alpha x}$ (incident), $\psi_\text{ref} = Be^{-i\alpha x}$ (reflected), $\psi_\text{tr} = Ce^{i\alpha x}$ (transmitted)</span>
+      </div>
+    </div>
+
+    <h4>Transmission Coefficient</h4>
+    <p>Applying boundary conditions ($\psi$ and $\psi'$ continuous at $x=0$ and $x=a$) gives 4 equations. The transmission coefficient is:</p>
+
+    <div class="eq-derive">
+      <div class="step"><div class="step-num">1</div><div class="step-body">
+        <div class="step-math">$T = \dfrac{j_\text{tr}}{j_\text{in}} = \dfrac{|C|^2}{|A|^2} = \dfrac{4\beta^2\alpha^2}{(\beta^2 - \alpha^2)^2\sinh^2\!\beta a + 4\beta^2\alpha^2\cosh^2\!\beta a}$</div>
+        <div class="step-reason">Exact result from solving the 4 boundary condition equations</div>
+      </div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">
+        <div class="step-math">$T = \dfrac{1}{1 + \dfrac{V_0^2}{4E(V_0-E)}\sinh^2\!\beta a}$</div>
+        <div class="step-reason">Simplified form after substituting $\alpha$ and $\beta$</div>
+      </div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">
+        <div class="step-math">For $\beta a \gg 1$: &nbsp; $\sinh\beta a \approx e^{\beta a}/2$, &nbsp; so:</div>
+        <div class="step-reason">Limit of thick/high barrier (realistic nuclear case)</div>
+      </div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body">
+        <div class="step-math">$$\boxed{T \approx \frac{16E(V_0-E)}{V_0^2}\,e^{-2\beta a}}$$</div>
+        <div class="step-reason">Even with $E \ll V_0$, $T \neq 0$! The exponential factor $e^{-2\beta a}$ quantifies the tunnelling probability.</div>
+      </div></div>
+    </div>
+
+    <div class="callout concept">
+      <div class="callout-title">Key Insight</div>
+      Both $a$ (barrier width) and $E$ (particle energy) appear in the <em>exponent</em> of $T$. The transmission probability is therefore <strong>exquisitely sensitive</strong> to these parameters — a 20% increase in barrier width can change $T$ by a factor of $10^7$! This explains the enormous range of α half-lives ($10^{-7}$ s to $10^{10}$ y) for a small variation in energy (~5–9 MeV).
+    </div>
+  </div>
+
+  <!-- DISINTEGRATION CONSTANT -->
+  <div class="section" id="lambda">
+    <h3>Disintegration Constant from Gamow Theory</h3>
+    <p>The α-particle bounces back and forth inside the nucleus with velocity $v_\text{in}$. Each time it hits the barrier, it has a probability $T$ of tunnelling through.</p>
+
+    <div class="eq-derive">
+      <div class="step"><div class="step-num">1</div><div class="step-body">
+        <div class="step-math">$n = \dfrac{v_\text{in}}{2r_0}$ &nbsp; collisions per second</div>
+        <div class="step-reason">Number of times the α-particle hits the barrier per unit time</div>
+      </div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body">
+        <div class="step-math">$\lambda = n \cdot T = \dfrac{v_\text{in}}{2r_0} \cdot \dfrac{16E(V_0-E)}{V_0^2}\,e^{-2\beta a}$</div>
+        <div class="step-reason">Disintegration constant = collision frequency × transmission coefficient</div>
+      </div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body">
+        <div class="step-math">Mean lifetime: $\quad \tau_m = \dfrac{1}{\lambda} = \dfrac{1}{nT}$</div>
+        <div class="step-reason">Inverse of the decay constant</div>
+      </div></div>
+    </div>
+
+    <div class="callout result">
+      <div class="callout-title">Numerical Illustration</div>
+      For typical parameters: $a = 2\times10^{-14}$ m, $V_0 = 15$ MeV, $E = 5$ MeV, $m = 4 \times 1.66 \times 10^{-27}$ kg:<br>
+      $\beta = 1.388 \times 10^{15}$ m$^{-1}$, &nbsp; $T \approx 2.55 \times 10^{-24}$<br>
+      $n = 1.7\times10^7 / (2\times10^{-14}) \approx 8.5\times10^{20}$ s$^{-1}$<br>
+      $\lambda = nT \approx 2.17\times10^{-3}$ s$^{-1}$ &nbsp; → &nbsp; $\tau_m \approx 461$ s<br>
+      <strong>If barrier width increases by 20%: $\tau_m \approx 3\times10^7$ s $\approx 0.37$ yr</strong> — an increase of $6.6\times10^4$ times!
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- §4  BETA DECAY                              -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="lecture" id="beta">
+  <div class="lecture-header">
+    <div class="lec-num">04</div>
+    <div class="lec-info">
+      <div class="lec-tag">Chapter 4</div>
+      <h2>Beta Decay</h2>
+    </div>
+  </div>
+
+  <div class="section">
+    <p>Beta decay was initially observed by Madame Curie, who showed that β-particles are negatively charged. Becquerel measured $e/m$ and confirmed they are <strong>electrons</strong> ($\beta^-$). Later, <strong>positrons</strong> ($\beta^+$) were also found to be emitted. All beta decay processes occur due to the <strong>weak nuclear force</strong>.</p>
+  </div>
+
+  <!-- TYPES -->
+  <div class="section" id="beta-types">
+    <h3>Types of Beta Decay &amp; Energetics</h3>
+
+    <h4>① β⁻ Decay (Negatron Emission)</h4>
+    <div class="decay-box">
+      <div class="decay-label">Beta-Minus Decay</div>
+      $^A_Z X \rightarrow ^A_{Z+1} Y + \beta^- + \bar\nu_e$ &nbsp; [n → p + e⁻]
+      <div class="decay-note">Nucleus gains a proton, loses a neutron. Daughter has $Z+1$.</div>
+    </div>
+    <div class="eq-block">
+      <div class="eq-label">Q-value for β⁻ (in atomic masses)</div>
+      $$Q_{\beta^-} = [M(A,Z) - M(A,Z+1)]c^2$$
+      <div class="eq-row"><span class="eq-note">Spontaneous if $M(A,Z) > M(A,Z+1)$</span></div>
+    </div>
+
+    <h4>② β⁺ Decay (Positron Emission)</h4>
+    <div class="decay-box">
+      <div class="decay-label">Beta-Plus Decay</div>
+      $^A_Z X \rightarrow ^A_{Z-1} Y + \beta^+ + \nu_e$ &nbsp; [p → n + e⁺]
+    </div>
+    <div class="eq-block">
+      <div class="eq-label">Q-value for β⁺ (in atomic masses)</div>
+      $$Q_{\beta^+} = [M(A,Z) - M(A,Z-1) - 2m_e]c^2$$
+      <div class="eq-row"><span class="eq-note">Spontaneous if $M(A,Z) > M(A,Z-1) + 2m_e$. The threshold is $2m_e c^2 = 1.022$ MeV higher than β⁻.</span></div>
+    </div>
+
+    <h4>③ Electron Capture (EC)</h4>
+    <div class="decay-box">
+      <div class="decay-label">Electron Capture</div>
+      $^A_Z X + e^- \rightarrow ^A_{Z-1} Y + \nu_e$ &nbsp; [p + e⁻ → n]
+      <div class="decay-note">Nucleus absorbs one of its own orbital electrons (usually K-shell). Competes with β⁺.</div>
+    </div>
+    <div class="eq-block">
+      $$Q_\text{EC} = [M(A,Z) - M(A,Z-1)]c^2 - B_e$$
+      <div class="eq-row"><span class="eq-note">$B_e$ = binding energy of captured electron. For light atoms, $B_e$ is very small and can be neglected.</span></div>
+    </div>
+    <div class="callout info"><div class="callout-title">Note</div>Both β⁺ emission and EC lead to the same daughter nucleus. If $M(A,Z) > M(A,Z-1) + 2m_e$, both are possible; if $M(A,Z-1) + 2m_e > M(A,Z) > M(A,Z-1)$, only EC can occur.</div>
+  </div>
+
+  <!-- SPECTRUM -->
+  <div class="section" id="beta-spectrum">
+    <h3>The Continuous Beta Spectrum</h3>
+    <p>In contrast to α-decay (discrete, monoenergetic), the kinetic energy distribution of β-particles is <strong>continuous</strong>, ranging from 0 to a maximum endpoint $E_\text{max} \approx Q$. This continuous distribution is called the <strong>beta spectrum</strong>.</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 420 200" width="380">
+        <line x1="50" y1="20" x2="50" y2="160" stroke="#2a3f60" stroke-width="1.5"/>
+        <line x1="50" y1="160" x2="390" y2="160" stroke="#2a3f60" stroke-width="1.5"/>
+        <!-- Continuous beta spectrum curve -->
+        <path d="M50,160 Q80,158 100,100 Q120,60 140,45 Q160,38 180,42 Q200,50 220,65 Q250,90 280,120 Q310,145 340,158 Q360,160 380,160"
+              fill="rgba(78,205,196,0.15)" stroke="#4ecdc4" stroke-width="2.5"/>
+        <!-- E_max line -->
+        <line x1="345" y1="158" x2="345" y2="30" stroke="#c9974a" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="347" y="28" font-family="'JetBrains Mono'" font-size="10" fill="#c9974a">E_max</text>
+        <!-- Labels -->
+        <text x="30" y="90" text-anchor="middle" font-family="'Source Serif 4'" font-size="11" fill="#8fa0bc" transform="rotate(-90,30,90)">N(E_k)</text>
+        <text x="220" y="178" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#8fa0bc">Kinetic Energy E_k</text>
+      </svg>
+      <div class="diagram-caption">Fig 4.1 — Continuous beta spectrum. The distribution peaks at intermediate energies and ends at E_max ≈ Q.</div>
+    </div>
+
+    <div class="callout danger">
+      <div class="callout-title">Crisis: Three Conservation Violations!</div>
+      If β-decay were simply $n \to p + e^-$ (two-body decay), then by momentum conservation, $E_e$ should be <em>fixed</em> — giving a discrete line spectrum. The continuous spectrum implies the electron does NOT carry all the energy Q. This leads to apparent violations of:
+      <br><br>
+      ① <strong>Energy conservation</strong>: $(E_K)_\text{max} \approx Q$ but generally $E_K \ll Q$. Where does the missing energy go?<br>
+      ② <strong>Angular momentum (spin)</strong>: $n \to p + e^-$ is $\frac{1}{2} \to \frac{1}{2} + \frac{1}{2}$ — spin angular momentum is NOT conserved (half-integer cannot equal two half-integers added).<br>
+      ③ <strong>Linear momentum</strong>: The emitted electron does not always travel opposite to the recoiling nucleus — required by two-body conservation, but not observed.
+    </div>
+  </div>
+
+  <!-- NEUTRINO -->
+  <div class="section" id="neutrino">
+    <h3>Pauli's Neutrino Hypothesis (1927)</h3>
+    <p>To resolve these crises, Wolfgang Pauli proposed in 1927 one of the most daring postulates in physics — the <strong>neutrino hypothesis</strong>. He conjectured that in β-decay, a second new light particle (called the <em>neutrino</em>, named by Fermi) is simultaneously emitted with the electron.</p>
+
+    <h4>Properties of the Neutrino</h4>
+    <div class="prop-grid">
+      <div class="prop-card"><div class="prop-label">Charge</div><div class="prop-val">0</div><div class="prop-note">Chargeless — does not interact electromagnetically</div></div>
+      <div class="prop-card"><div class="prop-label">Mass</div><div class="prop-val">≈ 0</div><div class="prop-note">Massless or extremely small mass (confirmed tiny mass by oscillations)</div></div>
+      <div class="prop-card"><div class="prop-label">Spin</div><div class="prop-val">1/2</div><div class="prop-note">Fermion — essential for spin conservation in β-decay</div></div>
+      <div class="prop-card"><div class="prop-label">Interaction</div><div class="prop-val">Weak only</div><div class="prop-note">Interacts only via weak force — almost impossible to detect!</div></div>
+    </div>
+
+    <h4>How the Neutrino Resolves All Three Crises</h4>
+    <div class="eq-block">
+      <div class="eq-label">Correct Beta Decay Equations</div>
+      $$n \to p + e^- + \bar\nu_e \quad \text{(β⁻ decay)}$$
+      $$p \to n + e^+ + \nu_e \quad \text{(β⁺ decay)}$$
+      <div class="eq-row"><span class="eq-note">The antineutrino $\bar\nu_e$ in β⁻ and neutrino $\nu_e$ in β⁺ are required by lepton number conservation.</span></div>
+    </div>
+    <div class="two-col">
+      <div class="callout result">
+        <div class="callout-title">Energy Conservation ✓</div>
+        Q is shared continuously between the electron and neutrino: $Q \approx E_K + E_\nu$. Since $E_\nu$ varies, $E_K$ has a continuous distribution up to $E_\text{max} \approx Q$. Missing energy is carried away by the (undetected) neutrino!
+      </div>
+      <div class="callout result">
+        <div class="callout-title">Spin &amp; Momentum ✓</div>
+        With three particles: $\frac{1}{2} \to \frac{1}{2} + \frac{1}{2} + \frac{1}{2}$ — spin is conserved (three spin-½ particles can sum to ½). Linear momentum: three-body kinematics means $e^-$ and nucleus need not be exactly back-to-back.
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-title">The Most Elusive Particle</div>
+      The neutrino's last property — extreme weakness of interaction — makes it notoriously difficult to detect. Reines and Cowan ultimately detected it in <strong>1956</strong>, 29 years after Pauli proposed it, using inverse beta decay: $p + \bar\nu_e \to n + e^+$ near a nuclear reactor.
+    </div>
+
+    <h4>Lepton Number Conservation</h4>
+    <p>There are three lepton families: electron ($e$), muon ($\mu$), tau ($\tau$), each with its associated neutrino. Lepton number for each family must be conserved separately:</p>
+    <div class="eq-block">
+      $$n \to p + e^- + \bar\nu_e \quad [L_e: \;0 = 0 + (+1) + (-1) \;\checkmark]$$
+      $$p \to n + e^+ + \nu_e \quad [L_e: \;0 = 0 + (-1) + (+1) \;\checkmark]$$
+    </div>
+  </div>
+
+  <!-- FERMI -->
+  <div class="section" id="fermi">
+    <h3>Fermi's Theory of Beta Decay (1934)</h3>
+    <p>In 1934, Enrico Fermi developed a successful quantitative theory of β-decay based on Pauli's neutrino hypothesis. The theory is based on five key assumptions:</p>
+    <div class="eq-derive">
+      <div class="step"><div class="step-num">①</div><div class="step-body"><div class="step-math">Creation Hypothesis</div><div class="step-reason">The electron and neutrino are <em>created</em> at the moment of decay by transformation of a neutron into a proton in the nucleus. They are not pre-existing.</div></div></div>
+      <div class="step"><div class="step-num">②</div><div class="step-body"><div class="step-math">Energy Sharing</div><div class="step-reason">Available energy $Q$ is continuously shared between the electron and neutrino, giving the continuous spectrum.</div></div></div>
+      <div class="step"><div class="step-num">③</div><div class="step-body"><div class="step-math">Electromagnetic Analogy</div><div class="step-reason">The β-decay process is analogous to photon emission by an excited atom, with the electron-neutrino field playing the role of the electromagnetic field.</div></div></div>
+      <div class="step"><div class="step-num">④</div><div class="step-body"><div class="step-math">Weak Interaction</div><div class="step-reason">The electron-neutrino field is <em>weak</em> — this makes time-dependent perturbation theory an excellent approximation.</div></div></div>
+      <div class="step"><div class="step-num">⑤</div><div class="step-body"><div class="step-math">Fermi Coupling Constant $g$</div><div class="step-reason">The interaction strength is parameterised by the Fermi coupling constant $g$ (analogous to the electric charge $e$ in electrodynamics).</div></div></div>
+    </div>
+
+    <h4>Fermi Distribution for β-Particles</h4>
+    <p>Using Fermi's Golden Rule (time-dependent perturbation theory), the probability of emitting a β-particle with momentum in the range $p_e$ to $p_e + dp_e$ per unit time is:</p>
+    <div class="eq-block">
+      <div class="eq-label">Fermi's Distribution (Allowed β-Decay)</div>
+      $$P(p_e)\,dp_e = \frac{g^2}{2\pi^3 c^3 \hbar^7}|M_{if}|^2 \cdot F(Z,E_e) \cdot (E_m - E_e)^2 \cdot p_e^2\,dp_e$$
+      <div class="eq-row">
+        <span class="eq-note">$g$ = Fermi coupling constant &nbsp;|&nbsp; $M_{if}$ = nuclear matrix element &nbsp;|&nbsp; $E_m$ = endpoint energy</span>
+      </div>
+      <div class="eq-row">
+        <span class="eq-note">$F(Z, E_e)$ = Fermi function (Coulomb correction); for low $Z$ and high $v$: $F \approx 1$</span>
+      </div>
+    </div>
+
+    <div class="callout concept">
+      <div class="callout-title">The Kurie Plot</div>
+      A useful way to test Fermi's theory and extract $E_\text{max}$ is the <strong>Kurie plot</strong>: plot $\sqrt{P(p_e)/(F \cdot p_e^2)}$ vs. $E_e$. Fermi's theory predicts this to be a straight line, going to zero at $E_e = E_m$. Any deviation from linearity indicates a massive neutrino (which shifts the endpoint).
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- §5  GAMMA DECAY                             -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="lecture" id="gamma">
+  <div class="lecture-header">
+    <div class="lec-num">05</div>
+    <div class="lec-info">
+      <div class="lec-tag">Chapter 5</div>
+      <h2>Gamma Decay</h2>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Gamma Decay — Nuclear De-excitation</h3>
+    <p>Gamma decay is a nuclear <strong>de-excitation process</strong> in which an excited nucleus emits a high-energy electromagnetic photon (gamma ray). Unlike α and β decay, the nuclear composition does not change — the same nucleus simply moves to a lower energy state.</p>
+
+    <div class="decay-box">
+      <div class="decay-label">Gamma Decay Reaction</div>
+      $^A_Z X^* \longrightarrow ^A_Z X + \gamma$
+      <div class="decay-note">$^*$ denotes excited nuclear state &nbsp;|&nbsp; $\Delta E = E^* - E = h\nu$ &nbsp;|&nbsp; $E_\gamma$ up to several MeV</div>
+    </div>
+
+    <p>Mean lifetimes range from $\sim 10^{-17}$ s (typical) to a few hours for <strong>isomers</strong> (long-lived excited states).</p>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 440 200" width="400">
+        <!-- Single transition -->
+        <line x1="80" y1="50" x2="200" y2="50" stroke="#c9974a" stroke-width="2"/>
+        <text x="210" y="53" font-family="'JetBrains Mono'" font-size="11" fill="#c9974a">E*</text>
+        <line x1="80" y1="150" x2="200" y2="150" stroke="#c9974a" stroke-width="2"/>
+        <text x="210" y="153" font-family="'JetBrains Mono'" font-size="11" fill="#c9974a">E (g.s.)</text>
+        <line x1="140" y1="50" x2="140" y2="150" stroke="#56c98a" stroke-width="2" marker-end="url(#arr-g)"/>
+        <text x="148" y="105" font-family="'JetBrains Mono'" font-size="11" fill="#56c98a">γ</text>
+        <text x="80" y="185" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#8fa0bc" font-style="italic">Single transition</text>
+
+        <!-- Cascade -->
+        <line x1="290" y1="40" x2="400" y2="40" stroke="#c9974a" stroke-width="2"/>
+        <text x="404" y="43" font-family="'JetBrains Mono'" font-size="11" fill="#c9974a">E*</text>
+        <line x1="290" y1="90" x2="400" y2="90" stroke="#e8b96a" stroke-width="1.5"/>
+        <text x="404" y="93" font-family="'JetBrains Mono'" font-size="11" fill="#e8b96a">E₂</text>
+        <line x1="290" y1="150" x2="400" y2="150" stroke="#c9974a" stroke-width="2"/>
+        <text x="404" y="153" font-family="'JetBrains Mono'" font-size="11" fill="#c9974a">E (g.s.)</text>
+        <line x1="340" y1="40" x2="340" y2="90" stroke="#56c98a" stroke-width="1.5" marker-end="url(#arr-g)"/>
+        <text x="347" y="68" font-family="'JetBrains Mono'" font-size="11" fill="#56c98a">γ₁</text>
+        <line x1="355" y1="90" x2="355" y2="150" stroke="#4ecdc4" stroke-width="1.5" marker-end="url(#arr-g)"/>
+        <text x="362" y="124" font-family="'JetBrains Mono'" font-size="11" fill="#4ecdc4">γ₂</text>
+        <text x="345" y="185" text-anchor="middle" font-family="'Source Serif 4'" font-size="12" fill="#8fa0bc" font-style="italic">Cascade transitions</text>
+      </svg>
+      <div class="diagram-caption">Fig 5.1 — Gamma decay modes. Left: single transition from excited to ground state. Right: cascade through intermediate levels, emitting two photons sequentially.</div>
+    </div>
+
+    <h4>Key Features of Gamma Decay</h4>
+    <div class="two-col">
+      <div class="callout info">
+        <div class="callout-title">Selection Rules</div>
+        The multipolarity (dipole, quadrupole, etc.) of the gamma transition is determined by the angular momentum difference $\Delta I$ between nuclear levels and the parity change. <strong>Electric dipole (E1)</strong> transitions are fastest; higher multipolarities are successively slower.
+      </div>
+      <div class="callout info">
+        <div class="callout-title">Internal Conversion</div>
+        Competing with gamma emission: the nucleus can transfer its excitation energy directly to an orbital electron (usually K-shell), which is then ejected with kinetic energy $E_e = \Delta E - B_e$. These produce sharp peaks ("internal conversion lines") superimposed on the continuous β-spectrum.
+      </div>
+    </div>
+
+    <div class="callout concept">
+      <div class="callout-title">Connection to Alpha and Beta Decay</div>
+      Often, after α or β decay, the daughter nucleus is left in an <em>excited state</em>. It then de-excites via γ emission. So in practice, γ-rays almost always accompany α- and β-decay. The γ-ray energies map out the nuclear energy level structure of the daughter nucleus.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PRACTICE QUESTIONS                          -->
+<!-- ═══════════════════════════════════════════ -->
+<section class="lecture" id="questions">
+  <div class="lecture-header">
+    <div class="lec-num">★</div>
+    <div class="lec-info">
+      <div class="lec-tag">Practice</div>
+      <h2>Practice Questions</h2>
+    </div>
+  </div>
+
+  <div class="qa-section">
+    <div class="qa-header">Nuclear Properties</div>
+    <div class="qa-item">
+      <div class="qa-q">Derive an expression for nuclear density and show it is independent of mass number A.</div>
+      <div class="qa-a">Using $R = R_0 A^{1/3}$, volume $V = \frac{4}{3}\pi R_0^3 A$. Total mass $M = Au$. So $\rho = M/V = 3u/(4\pi R_0^3)$ — the A cancels, giving a universal constant $\approx 2.3 \times 10^{17}$ kg/m³.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">What is the mass defect? Write the expression for binding energy in terms of atomic masses.</div>
+      <div class="qa-a">Mass defect $\Delta m = ZM_H + Nm_n - {}^A_Z M$. Binding energy $E_B = \Delta m \cdot c^2 = (ZM_H + Nm_n - {}^A_ZM)c^2$. The nucleus weighs less than its constituents; this mass difference has been converted to binding energy.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Why do even-even nuclei always have spin $I = 0$ in the ground state?</div>
+      <div class="qa-a">Inside a nucleus, nucleons pair up with equal and oppositely directed angular momenta. For even-Z, even-N nuclei, all protons pair up (cancelling total $\vec{I}$) and all neutrons pair up similarly. The remaining spin is determined by unpaired nucleons outside the core — and in even-even nuclei, there are none.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Why does the neutron have a magnetic moment despite being electrically neutral?</div>
+      <div class="qa-a">The neutron has an internal charge structure — it is composed of quarks (one up quark, charge +2/3, and two down quarks, charge −1/3 each). Although the net charge is zero, the quark charges are distributed asymmetrically, giving a non-zero magnetic moment of $-1.91\mu_N$. This is direct evidence that nucleons are not elementary particles.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">List and explain the four properties of the nuclear force.</div>
+      <div class="qa-a">(1) Charge independent: equal between n-n, p-p, n-p. (2) Short range: attractive at ~1 fm, repulsive below ~0.7 fm, negligible beyond ~2.5 fm. (3) Saturates: acts only on nearest neighbours, hence $E_B/A \approx$ const. (4) Spin dependent: favours opposite-spin pairs, hence triplet n-p (deuteron) is bound but singlet n-p is not.</div>
+    </div>
+  </div>
+
+  <div class="qa-section">
+    <div class="qa-header">Alpha Radioactivity</div>
+    <div class="qa-item">
+      <div class="qa-q">Why is alpha emission specifically $^4$He and not $^1$H or $^3$He?</div>
+      <div class="qa-a">The Q-value for emitting $^4$He from $^{232}$U is +5.38 MeV (positive — spontaneous), while for $^1$H it is −6.05 MeV and for $^3$He it is −9.6 MeV (both negative — energetically forbidden). The $^4$He nucleus is exceptionally tightly bound (closed sub-shells of 2p + 2n), making it the energetically preferred fragment.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Derive the kinetic energy of the alpha particle in terms of Q-value and masses.</div>
+      <div class="qa-a">From momentum conservation with parent at rest: $M_\alpha v_\alpha = M_Y v_Y$. From energy conservation: $Q = \frac{1}{2}M_Y v_Y^2 + T_\alpha$. Substituting $v_Y$: $Q = T_\alpha(1 + M_\alpha/M_Y)$, so $T_\alpha = QM_Y/(M_Y + M_\alpha)$. Since $M_Y \gg M_\alpha$, almost all of Q goes to the α-particle.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Explain the fine structure of the alpha energy spectrum. What does it tell us?</div>
+      <div class="qa-a">Fine structure (multiple closely-spaced lines) arises when the daughter nucleus can be left in different excited states. Each transition to a different daughter energy level gives a different Q-value, hence a different (fixed) $T_\alpha$. The fine structure thus maps out the discrete nuclear energy levels of the daughter nucleus.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Write down the Schrödinger equations for barrier penetration in three regions and state the solutions.</div>
+      <div class="qa-a">Region I ($V=0$): $\psi_1'' + \alpha^2\psi_1 = 0$, solution $Ae^{i\alpha x} + Be^{-i\alpha x}$. Region II ($V=V_0$): $\psi_2'' - \beta^2\psi_2 = 0$, solution $De^{-\beta x} + Fe^{\beta x}$. Region III ($V=0$): $\psi_3'' + \alpha^2\psi_3 = 0$, solution $Ce^{i\alpha x}$. Here $\alpha^2 = 2mE/\hbar^2$ and $\beta^2 = 2m(V_0-E)/\hbar^2$.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">What is the Geiger-Nuttal law and what does it imply physically?</div>
+      <div class="qa-a">$\ln\lambda = A + B\ln R$ (or equivalently $\ln t_{1/2} = C - D\ln E$). It implies α-emitters with higher energy (larger range) have shorter half-lives. The exponential sensitivity ($T \propto e^{-2\beta a}$) means a small change in energy gives an enormous change in half-life — spanning 20 orders of magnitude from $\sim 10^{-7}$ s to $10^{10}$ yr.</div>
+    </div>
+  </div>
+
+  <div class="qa-section">
+    <div class="qa-header">Beta Decay</div>
+    <div class="qa-item">
+      <div class="qa-q">State three experimental difficulties with beta decay before the neutrino hypothesis.</div>
+      <div class="qa-a">(1) Energy: β-spectrum is continuous but Q is fixed — apparent violation of energy conservation. (2) Spin: $n \to p + e^-$ has $\frac{1}{2} \to \frac{1}{2} + \frac{1}{2}$ — angular momentum cannot balance. (3) Momentum: emitted electron doesn't travel exactly opposite to recoiling nucleus — violating two-body momentum conservation.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Why is Q for β⁺ decay 1.022 MeV larger than for β⁻ decay from the same parent?</div>
+      <div class="qa-a">In β⁺ decay, a positron (mass $m_e$) must be created. When converting nuclear masses to atomic masses, the daughter acquires $(Z-1)$ electrons. So one electron mass must be subtracted from the Q expression for the daughter's atomic mass, AND the positron mass adds another $m_e$. Total extra cost: $2m_ec^2 = 1.022$ MeV over β⁻.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Why is it impossible for electrons to be pre-existing constituents of the nucleus?</div>
+      <div class="qa-a">If electrons existed inside a nucleus of radius $r \sim 5\times10^{-15}$ m, by the uncertainty principle $\Delta p \geq \hbar/\Delta x \Rightarrow p \sim \hbar/r$, giving $E = pc \approx 20$ MeV. But β-electrons have energies of only 1–3 MeV — far less than required. Therefore electrons cannot be confined inside nuclei; they are <em>created</em> at the moment of decay.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-q">Write the five assumptions of Fermi's theory of beta decay.</div>
+      <div class="qa-a">(1) Electron and neutrino are created at the moment of decay. (2) Available energy is shared continuously between them. (3) Process is analogous to photon emission, with electron-neutrino field replacing the EM field. (4) The interaction is weak — perturbation theory is valid. (5) The coupling strength is parameterised by the Fermi constant $g$.</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- end #main -->
+
+<script>
+// Active nav on scroll
+const sections = document.querySelectorAll('.lecture, .section[id]');
+const navItems = document.querySelectorAll('.nav-item');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navItems.forEach(n => {
+    n.classList.remove('active');
+    if (n.getAttribute('href') === '#' + current) n.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

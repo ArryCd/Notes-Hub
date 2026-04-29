@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atomic Physics — SMB Sir Class Notes (QM Approach)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #080810;
+  --bg-card:   #0f0f1c;
+  --bg-lift:   #14142a;
+  --bg-deep:   #1a1a32;
+  --border:    #2a2a4a;
+  --border-hi: #3d3d6a;
+
+  --text:      #dcdcf0;
+  --text-dim:  #8888b0;
+  --text-mute: #55557a;
+
+  --gold:      #f0b347;
+  --gold-dim:  #7a5c20;
+  --teal:      #3dd6c4;
+  --teal-dim:  #1a5c56;
+  --rose:      #f05c7a;
+  --rose-dim:  #6a1a28;
+  --indigo:    #7a8cff;
+  --indigo-dim:#2a2e6a;
+  --sage:      #7adf90;
+  --sage-dim:  #1a4a26;
+
+  --radius:    8px;
+  --font-body: 'Outfit', sans-serif;
+  --font-serif:'EB Garamond', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.7;
+  min-height:100vh;
+}
+
+/* ─── TOP HEADER ─────────────────────────────────────── */
+#hero{
+  background: linear-gradient(135deg,#060612 0%,#0c0c24 50%,#0a0a1e 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 2.5rem 2rem 2rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+#hero::before{
+  content:'';
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 50%, rgba(122,140,255,.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 35% at 70% 40%, rgba(61,214,196,.05) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  color:var(--teal);
+  background:rgba(61,214,196,.08);
+  border:1px solid rgba(61,214,196,.2);
+  padding:.25rem .75rem;
+  border-radius:2rem;
+  margin-bottom:1rem;
+}
+#hero h1{
+  font-family:var(--font-serif);
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:500;
+  color:#fff;
+  letter-spacing:-.01em;
+  line-height:1.2;
+}
+#hero h1 span{color:var(--gold);}
+.hero-sub{
+  font-size:.95rem;
+  color:var(--text-dim);
+  margin-top:.5rem;
+  font-style:italic;
+  font-family:var(--font-serif);
+}
+.hero-meta{
+  display:flex;
+  gap:1.5rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:1.5rem;
+}
+.hero-meta span{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text-mute);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.hero-meta span b{color:var(--text-dim);}
+
+/* ─── NAV ───────────────────────────────────────────── */
+#sticky-nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,8,16,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:.6rem 1.2rem;
+  display:flex;
+  gap:.25rem;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+#sticky-nav a{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  color:var(--text-mute);
+  text-decoration:none;
+  padding:.3rem .6rem;
+  border-radius:4px;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  transition:background .15s,color .15s;
+}
+#sticky-nav a:hover{
+  background:var(--bg-deep);
+  color:var(--teal);
+}
+
+/* ─── LAYOUT ────────────────────────────────────────── */
+main{max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+
+/* ─── LECTURE BLOCK ─────────────────────────────────── */
+.lec{
+  margin:2.5rem 0;
+  position:relative;
+}
+.lec-header{
+  display:flex;
+  align-items:flex-start;
+  gap:1rem;
+  margin-bottom:1.5rem;
+}
+.lec-num{
+  flex-shrink:0;
+  width:2.8rem;height:2.8rem;
+  background:var(--bg-deep);
+  border:1px solid var(--border-hi);
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);
+  font-size:.8rem;
+  font-weight:500;
+  color:var(--indigo);
+  line-height:1;
+  text-align:center;
+}
+.lec-title-block{flex:1;}
+.lec-title-block h2{
+  font-family:var(--font-serif);
+  font-size:1.55rem;
+  font-weight:500;
+  color:#fff;
+  line-height:1.2;
+}
+.lec-date{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  color:var(--text-mute);
+  letter-spacing:.1em;
+  margin-top:.2rem;
+}
+.lec-body{
+  padding-left:3.8rem;
+}
+
+hr.sec-div{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:2rem 0;
+}
+
+/* ─── SECTION HEADINGS ──────────────────────────────── */
+h3{
+  font-family:var(--font-serif);
+  font-size:1.2rem;
+  color:var(--gold);
+  margin:1.8rem 0 .7rem;
+  font-weight:400;
+}
+h4{
+  font-size:.95rem;
+  font-weight:600;
+  color:var(--text);
+  margin:1.2rem 0 .4rem;
+  letter-spacing:.02em;
+}
+p{margin:.5rem 0;}
+
+/* ─── BOXES ─────────────────────────────────────────── */
+.box{
+  border-radius:var(--radius);
+  padding:1rem 1.1rem;
+  margin:1rem 0;
+  border-left:3px solid transparent;
+  font-size:.93rem;
+}
+.box-key{
+  background:rgba(240,179,71,.06);
+  border-color:var(--gold);
+}
+.box-key .box-title{color:var(--gold);}
+
+.box-concept{
+  background:rgba(122,140,255,.06);
+  border-color:var(--indigo);
+}
+.box-concept .box-title{color:var(--indigo);}
+
+.box-warn{
+  background:rgba(240,92,122,.06);
+  border-color:var(--rose);
+}
+.box-warn .box-title{color:var(--rose);}
+
+.box-sage{
+  background:rgba(122,223,144,.05);
+  border-color:var(--sage);
+}
+.box-sage .box-title{color:var(--sage);}
+
+.box-teal{
+  background:rgba(61,214,196,.05);
+  border-color:var(--teal);
+}
+.box-teal .box-title{color:var(--teal);}
+
+.box-title{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-weight:500;
+  margin-bottom:.5rem;
+}
+
+/* ─── EQUATION DISPLAY ──────────────────────────────── */
+.eq-block{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:.9rem 1.2rem;
+  margin:.8rem 0;
+  font-family:var(--font-serif);
+  font-size:1.05rem;
+  text-align:center;
+  line-height:1.9;
+  overflow-x:auto;
+}
+.eq-block .eq-label{
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  color:var(--text-mute);
+  display:block;
+  text-align:right;
+  margin-top:.3rem;
+  letter-spacing:.06em;
+}
+.eq-inline{
+  font-family:var(--font-serif);
+  font-size:1.05em;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  padding:.05em .3em;
+  border-radius:4px;
+}
+
+/* ─── NUMBERED STEPS ────────────────────────────────── */
+.steps{
+  counter-reset:step;
+  margin:.8rem 0;
+}
+.step{
+  display:flex;
+  gap:.9rem;
+  margin:.5rem 0;
+  align-items:flex-start;
+}
+.step::before{
+  counter-increment:step;
+  content:counter(step);
+  flex-shrink:0;
+  width:1.5rem;height:1.5rem;
+  background:var(--bg-deep);
+  border:1px solid var(--border-hi);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  color:var(--indigo);
+  margin-top:.15rem;
+}
+
+/* ─── EXPANDABLE DERIVATION ─────────────────────────── */
+details.deriv{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin:1rem 0;
+  overflow:hidden;
+}
+details.deriv > summary{
+  cursor:pointer;
+  padding:.8rem 1rem;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  letter-spacing:.05em;
+  color:var(--teal);
+  user-select:none;
+  list-style:none;
+  background:var(--bg-lift);
+  border-bottom:1px solid transparent;
+  transition:background .15s;
+}
+details.deriv > summary:hover{background:var(--bg-deep);}
+details.deriv[open] > summary{
+  border-bottom-color:var(--border);
+  color:var(--text);
+}
+details.deriv > summary::before{
+  content:'▶';
+  font-size:.6rem;
+  color:var(--teal);
+  transition:transform .2s;
+}
+details.deriv[open] > summary::before{transform:rotate(90deg);}
+details.deriv .deriv-body{padding:1rem 1.2rem;}
+
+/* ─── Q&A ───────────────────────────────────────────── */
+.qa-block{margin:1.5rem 0;}
+.qa-block h4{
+  color:var(--text-dim);
+  font-size:.82rem;
+  font-family:var(--font-mono);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:.7rem;
+}
+details.qa{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin:.5rem 0;
+  overflow:hidden;
+}
+details.qa > summary{
+  cursor:pointer;
+  padding:.75rem 1rem;
+  background:var(--bg-card);
+  font-size:.9rem;
+  color:var(--text);
+  list-style:none;
+  display:flex;align-items:flex-start;gap:.7rem;
+  transition:background .15s;
+}
+details.qa > summary:hover{background:var(--bg-lift);}
+details.qa > summary::before{
+  content:'▶';
+  font-size:.6rem;
+  color:var(--gold);
+  flex-shrink:0;
+  margin-top:.3rem;
+  transition:transform .2s;
+}
+details.qa[open] > summary::before{transform:rotate(90deg);}
+details.qa .qa-ans{
+  padding:.9rem 1.1rem;
+  border-top:1px solid var(--border);
+  font-size:.9rem;
+  color:var(--text-dim);
+  line-height:1.75;
+}
+
+/* ─── DIAGRAM ───────────────────────────────────────── */
+.diagram{
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:1rem;
+  margin:1rem 0;
+  text-align:center;
+}
+.diagram figcaption{
+  font-size:.78rem;
+  color:var(--text-mute);
+  font-style:italic;
+  margin-top:.5rem;
+  font-family:var(--font-serif);
+  line-height:1.4;
+}
+
+/* ─── TABLE ─────────────────────────────────────────── */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.85rem;
+}
+th{
+  background:var(--bg-deep);
+  color:var(--text);
+  font-weight:600;
+  padding:.5rem .8rem;
+  text-align:left;
+  border-bottom:2px solid var(--border-hi);
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  letter-spacing:.05em;
+}
+td{
+  padding:.45rem .8rem;
+  border-bottom:1px solid var(--border);
+  color:var(--text-dim);
+}
+tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ─── FOOTER ────────────────────────────────────────── */
+footer{
+  text-align:center;
+  padding:2rem;
+  border-top:1px solid var(--border);
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  color:var(--text-mute);
+  letter-spacing:.08em;
+}
+footer span{color:var(--text-dim);}
+
+/* ─── UTIL ──────────────────────────────────────────── */
+.tag{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  padding:.1rem .45rem;
+  border-radius:3px;
+  letter-spacing:.05em;
+}
+.tag-ref{background:rgba(122,140,255,.12);color:var(--indigo);}
+.tag-assign{background:rgba(240,179,71,.1);color:var(--gold);}
+.tag-exam{background:rgba(240,92,122,.1);color:var(--rose);}
+
+sub,sup{font-size:.7em;}
+em{font-style:italic;color:var(--text);}
+strong{font-weight:600;color:var(--text);}
+
+@media(max-width:600px){
+  .lec-body{padding-left:0;}
+  .lec-header{flex-direction:column;gap:.5rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ HERO -->
+<header id="hero">
+  <div class="hero-tag">SMB Sir · Quantum Treatment · 2026</div>
+  <h1>Atomic Physics<br><span>— The Quantum Mechanical Way</span></h1>
+  <p class="hero-sub">From the Central Force Problem to Two-Electron Atoms — Complete Derivations &amp; Conceptual Depth</p>
+  <div class="hero-meta">
+    <span><b>Book:</b> Bransden &amp; Joachin · Ghatak &amp; Loknathan</span>
+    <span><b>Ref:</b> Landau &amp; Lifshitz Vol-III</span>
+    <span><b>Level:</b> Advanced Undergraduate</span>
+    <span><b>Lectures:</b> L-1 through L-9</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════ NAV -->
+<nav id="sticky-nav">
+  <a href="#lec1">L1 · H-atom Setup</a>
+  <a href="#lec2">L2 · CM Separation</a>
+  <a href="#lec3">L3 · Radial Equation</a>
+  <a href="#lec4">L4 · Series Solution</a>
+  <a href="#lec5">L5 · Laguerre &amp; Radial Wfn</a>
+  <a href="#lec6">L6 · Exotic Atoms</a>
+  <a href="#lec7">L7 · Two-e⁻ Atoms</a>
+  <a href="#lec8">L8 · Angular Momentum Add.</a>
+  <a href="#lec9">L9 · Atomic Units &amp; Levels</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════ L-1 -->
+<section class="lec" id="lec1">
+  <div class="lec-header">
+    <div class="lec-num">L<br>1</div>
+    <div class="lec-title-block">
+      <h2>Setting up the Hydrogen Atom Problem</h2>
+      <div class="lec-date">09 / 02 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-teal">
+      <div class="box-title">Course Roadmap</div>
+      This course (Atomic Physics, CO-2) covers one-electron and many-electron atoms. The mathematical prerequisites include:
+      the <strong>Central Force Problem</strong>, the <strong>Gamma function</strong>, <strong>Legendre and Associated Legendre Polynomials</strong>
+      (→ Spherical Harmonics), and the <strong>Confluent Hypergeometric / Associated Laguerre Polynomials</strong>.
+      Reference: <em>Rajput / Satya Prakash</em> for special functions.
+    </div>
+
+    <h3>The Hydrogen Atom as a Two-Body Problem</h3>
+    <p>
+      The H-atom consists of one proton (mass <em>m<sub>p</sub></em>, position <strong>r</strong><sub>1</sub>) and one electron (mass
+      <em>m<sub>e</sub></em>, position <strong>r</strong><sub>2</sub>). These two charged particles interact via the Coulomb potential.
+    </p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;">
+        <defs>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#8888b0"/>
+          </marker>
+          <marker id="arrt" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#3dd6c4"/>
+          </marker>
+          <marker id="arrg" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L6,3 z" fill="#f0b347"/>
+          </marker>
+        </defs>
+
+        <!-- Axes -->
+        <line x1="30" y1="130" x2="30" y2="20" stroke="#2a2a4a" stroke-width="1" marker-end="url(#arr)"/>
+        <line x1="20" y1="120" x2="360" y2="120" stroke="#2a2a4a" stroke-width="1" marker-end="url(#arr)"/>
+        <text x="34" y="18" fill="#55557a" font-size="10" font-family="JetBrains Mono">z</text>
+        <text x="355" y="132" fill="#55557a" font-size="10" font-family="JetBrains Mono">x,y</text>
+
+        <!-- Proton -->
+        <circle cx="100" cy="85" r="10" fill="#1a1a32" stroke="#f0b347" stroke-width="1.5"/>
+        <text x="96" y="89" fill="#f0b347" font-size="11" font-weight="bold">p</text>
+        <text x="83" y="75" fill="#f0b347" font-size="9" font-family="JetBrains Mono">r₁(x₁,y₁,z₁)</text>
+
+        <!-- Electron -->
+        <circle cx="270" cy="55" r="9" fill="#1a1a32" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="266" y="59" fill="#3dd6c4" font-size="11">e</text>
+        <text x="253" y="45" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">r₂(x₂,y₂,z₂)</text>
+
+        <!-- Vectors from origin -->
+        <line x1="30" y1="120" x2="95" y2="89" stroke="#f0b347" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrg)"/>
+        <line x1="30" y1="120" x2="261" y2="58" stroke="#3dd6c4" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrt)"/>
+        <!-- r12 vector -->
+        <line x1="108" y1="83" x2="261" y2="59" stroke="#8888b0" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="170" y="63" fill="#8888b0" font-size="10" font-family="JetBrains Mono">r⃗₁₂</text>
+
+        <!-- Labels -->
+        <text x="50" y="112" fill="#f0b347" font-size="9" font-family="JetBrains Mono">r⃗₁</text>
+        <text x="100" y="138" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono">r⃗₂</text>
+        <text x="15" y="125" fill="#55557a" font-size="9">O</text>
+      </svg>
+      <figcaption>Fig 1.1 — The hydrogen atom as a two-body problem. The proton (mass m<sub>p</sub>) and electron (mass m<sub>e</sub>) are at positions r⃗₁ and r⃗₂ respectively. The system has 6 degrees of freedom. The Coulomb interaction depends only on the separation r₁₂ = |r⃗₁ − r⃗₂|.</figcaption>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">Key Problem: 6 Degrees of Freedom</div>
+      The two-body system has <strong>6 degrees of freedom</strong> (3 per particle). Since the potential depends on both positions, the Hamiltonian couples the coordinates — we cannot immediately separate the wavefunction. The full Schrödinger equation would be <em>6-dimensional</em>.
+    </div>
+
+    <h3>The Full Hamiltonian</h3>
+    <p>The Schrödinger equation for the H-atom (with external potential V<sub>eff</sub> which may or may not depend on time):</p>
+
+    <div class="eq-block">
+      <em>Ĥ</em> = −ℏ²/2m<sub>p</sub> ∇²<sub>p</sub> − ℏ²/2m<sub>e</sub> ∇²<sub>e</sub> − (1/4πε₀)(Ze²/r<sub>12</sub>) + V<sub>eff</sub>
+      <span class="eq-label">Full Two-body Hamiltonian</span>
+    </div>
+
+    <p>where ∇²<sub>p</sub> = ∂²/∂x₁² + ∂²/∂y₁² + ∂²/∂z₁² acts on proton coordinates and ∇²<sub>e</sub> similarly on electron coordinates.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">The Coulomb Potential — Two Parts</div>
+      The potential energy of the H-atom consists of:
+      <ol style="margin-left:1.2rem;margin-top:.4rem;">
+        <li><strong>External potential</strong> V<sub>eff</sub> — e.g., from an external field (Stark effect, laser field)</li>
+        <li><strong>Coulomb interaction</strong> −Ze²/4πε₀r₁₂ — the attractive proton–electron interaction</li>
+      </ol>
+      Note: the positive–negative interaction <em>does not contain coordinate r</em> independently; it only depends on the relative separation r₁₂.
+    </div>
+
+    <h3>Mathematical Toolkit</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Tool</th><th>Where it appears</th><th>Reference</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Gamma Function</td><td>Normalisation integrals ∫₀^∞ rⁿe^{−αr} dr = n!/α^{n+1}</td><td>Arfken / Rajput</td></tr>
+          <tr><td>Legendre Polynomial P<sub>l</sub>(cosθ)</td><td>Angular separation → θ part</td><td>Ghatak &amp; Loknathan Ch.6</td></tr>
+          <tr><td>Associated Legendre P<sub>l</sub><sup>m</sup>(cosθ)</td><td>Full spherical harmonics Y<sub>l</sub><sup>m</sup>(θ,φ)</td><td>B&amp;J Ch.3</td></tr>
+          <tr><td>Associated Laguerre L<sub>p</sub><sup>q</sup>(ρ)</td><td>Radial equation solution</td><td>Satya Prakash</td></tr>
+          <tr><td>Confluent Hypergeometric ₁F₁</td><td>Kummer–Laplace equation → Laguerre as special case</td><td>Abramowitz &amp; Stegun</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 1</h4>
+      <details class="qa">
+        <summary>Why does the H-atom Hamiltonian yield a 6-dimensional wavefunction, and why is that a problem?</summary>
+        <div class="qa-ans">
+          The H-atom has two particles, each with 3 spatial degrees of freedom → 6 total. In quantum mechanics, the wavefunction must encode all degrees of freedom simultaneously: Ψ = Ψ(r⃗₁, r⃗₂, t). The Hamiltonian couples the proton and electron coordinates through the Coulomb potential (which depends on <em>both</em> r⃗₁ and r⃗₂). Therefore, Ĥ cannot be written as Ĥ₁ + Ĥ₂ with each part acting only on one particle — separation of variables would fail. The key trick is to transform to <strong>centre-of-mass (CM) coordinates</strong> and <strong>relative coordinates</strong>, which decouples the Hamiltonian into two independent parts (L-2).
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What does V<sub>eff</sub> represent physically, and give two examples.</summary>
+        <div class="qa-ans">
+          V<sub>eff</sub> is an effective external potential — any additional interaction the atom experiences from its environment. It can depend on coordinates, time, or both. Examples: (1) <strong>Electric field (Stark effect)</strong>: V<sub>eff</sub> = eEr cosθ — a uniform electric field E along z shifts the energy levels and breaks degeneracy; (2) <strong>Magnetic field (Zeeman effect)</strong>: V<sub>eff</sub> = μ<sub>B</sub>L⃗·B⃗ — an external magnetic field B causes the energy levels to split proportionally to m<sub>l</sub>. When V<sub>eff</sub> = 0 (free atom), we recover the pure Coulomb problem.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-2 -->
+<section class="lec" id="lec2">
+  <div class="lec-header">
+    <div class="lec-num">L<br>2</div>
+    <div class="lec-title-block">
+      <h2>Centre-of-Mass Separation &amp; Symmetries</h2>
+      <div class="lec-date">16 / 02 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Homogeneity of Space → Translational Symmetry</h3>
+    <div class="box box-key">
+      <div class="box-title">The Deep Reason for CM Separation</div>
+      <strong>Homogeneity of space</strong> means physics is the same everywhere — shifting the entire system by a constant displacement changes nothing observable.
+      This is a continuous symmetry, and by <em>Noether's theorem</em>, it implies <strong>conservation of linear momentum</strong>.
+      Mathematically: [Ĥ, p̂] = 0 → Ĥ commutes with the total linear momentum operator.
+      This is exactly why the centre-of-mass motion can be separated off completely.
+    </div>
+
+    <div class="steps">
+      <div class="step">Define CM and relative coordinates from (x₁,y₁,z₁; x₂,y₂,z₂) → (X,Y,Z, x,y,z): <br>
+        <strong>R⃗<sub>CM</sub></strong> = (m<sub>p</sub>r⃗₁ + m<sub>e</sub>r⃗₂)/(m<sub>p</sub>+m<sub>e</sub>), &emsp; <strong>r⃗</strong> = r⃗₂ − r⃗₁ (relative position of electron from nucleus)
+      </div>
+      <div class="step">The total mass M = m<sub>p</sub> + m<sub>e</sub>, reduced mass μ = m<sub>p</sub>m<sub>e</sub>/(m<sub>p</sub>+m<sub>e</sub>)</div>
+      <div class="step">The transformed Hamiltonian decouples:
+        <div class="eq-block">
+          Ĥ = −ℏ²/2M ∇²<sub>M</sub> − ℏ²/2μ ∇²<sub>μ</sub> − Ze²/(4πε₀r)
+          <span class="eq-label">CM + Relative decomposition — Assignment: derive this from original Ĥ</span>
+        </div>
+      </div>
+      <div class="step">Since the two parts are now decoupled (H<sub>CM</sub> + H<sub>rel</sub>), the total wavefunction separates: Ψ<sub>T</sub>(R⃗, r⃗) = Ψ<sub>R</sub>(R⃗) · Ψ<sub>n</sub>(r⃗), and E<sub>T</sub> = E<sub>R</sub> + E<sub>n</sub></div>
+    </div>
+
+    <h3>The Centre-of-Mass Equation</h3>
+    <div class="eq-block">
+      −ℏ²/2M ∇²<sub>M</sub> Ψ<sub>R</sub>(R⃗) = E<sub>R</sub> Ψ<sub>R</sub>(R⃗) &emsp;→&emsp; ∇²<sub>M</sub> Ψ<sub>R</sub> = −(2ME<sub>R</sub>/ℏ²) Ψ<sub>R</sub>
+      <span class="eq-label">Free particle equation — CM moves as a free particle (plane wave solution)</span>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Physical Meaning of CM Separation</div>
+      The CM moves as a <strong>free particle</strong> — translational motion with no force acting on it (since the internal Coulomb force is internal). This is the translational symmetry in action.
+      After separating CM (3 DoF), we are left with only <strong>3 DoF of the relative motion</strong> — the system of a particle of mass μ (reduced mass) in the Coulomb potential. This is the actual H-atom problem. The translational symmetry means <strong>linear momentum is conserved</strong> and the CM motion can be trivially solved.
+      <br><br>
+      <em>Note:</em> [Ĥ, p̂] = 0 is the mathematical statement of this symmetry (commutes with total linear momentum).
+    </div>
+
+    <h3>Isotropy of Space → Rotational Symmetry</h3>
+    <div class="box box-key">
+      <div class="box-title">Isotropy → Angular Momentum Conservation</div>
+      Isotropy of space (no preferred direction) implies <strong>rotational symmetry</strong>. By Noether's theorem, this gives conservation of <strong>angular momentum</strong>. The CM, once separated, leaves us in relative coordinates with a spherically symmetric Coulomb potential. Spherical symmetry → [Ĥ, L²] = [Ĥ, L<sub>z</sub>] = 0 → angular momentum is conserved → L² and L<sub>z</sub> are constants of motion → can be simultaneously diagonalised with Ĥ → quantum numbers l and m are good quantum numbers.
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;">
+        <style>.bl{font-family:'JetBrains Mono',monospace;font-size:10px;fill:#8888b0;}</style>
+        <!-- Flow diagram -->
+        <rect x="10" y="35" width="90" height="50" rx="5" fill="#0f0f1c" stroke="#2a2a4a"/>
+        <text x="55" y="57" text-anchor="middle" font-size="9" font-family="JetBrains Mono" fill="#dcdcf0">H-atom</text>
+        <text x="55" y="70" text-anchor="middle" font-size="8" fill="#8888b0">6 DoF</text>
+        <text x="55" y="83" text-anchor="middle" font-size="8" fill="#55557a">(r⃗₁, r⃗₂)</text>
+
+        <text x="106" y="62" fill="#f0b347" font-size="14">→</text>
+        <text x="100" y="45" text-anchor="middle" font-size="8" fill="#f0b347" font-family="JetBrains Mono">transl.</text>
+        <text x="100" y="54" text-anchor="middle" font-size="8" fill="#f0b347" font-family="JetBrains Mono">sym.</text>
+
+        <rect x="115" y="10" width="90" height="45" rx="5" fill="#0f0f1c" stroke="#3dd6c4" stroke-width="1.2"/>
+        <text x="160" y="28" text-anchor="middle" font-size="9" font-family="JetBrains Mono" fill="#3dd6c4">CM motion</text>
+        <text x="160" y="41" text-anchor="middle" font-size="8" fill="#8888b0">free particle</text>
+        <text x="160" y="52" text-anchor="middle" font-size="8" fill="#55557a">3 DoF → done</text>
+
+        <rect x="115" y="65" width="90" height="45" rx="5" fill="#0f0f1c" stroke="#f0b347" stroke-width="1.2"/>
+        <text x="160" y="83" text-anchor="middle" font-size="9" font-family="JetBrains Mono" fill="#f0b347">Rel. motion</text>
+        <text x="160" y="96" text-anchor="middle" font-size="8" fill="#8888b0">μ in Coulomb</text>
+        <text x="160" y="107" text-anchor="middle" font-size="8" fill="#55557a">3 DoF</text>
+
+        <text x="211" y="90" fill="#7a8cff" font-size="14">→</text>
+        <text x="207" y="75" text-anchor="middle" font-size="8" fill="#7a8cff" font-family="JetBrains Mono">L² feat.</text>
+
+        <rect x="220" y="55" width="90" height="55" rx="5" fill="#0f0f1c" stroke="#7a8cff" stroke-width="1.2"/>
+        <text x="265" y="73" text-anchor="middle" font-size="9" font-family="JetBrains Mono" fill="#7a8cff">Radial Eq.</text>
+        <text x="265" y="86" text-anchor="middle" font-size="8" fill="#8888b0">1 DoF (r)</text>
+        <text x="265" y="99" text-anchor="middle" font-size="8" fill="#8888b0">+ Y_l^m(θ,φ)</text>
+        <text x="265" y="108" text-anchor="middle" font-size="7" fill="#55557a">angular cons.</text>
+      </svg>
+      <figcaption>Fig 2.1 — Reduction of H-atom: 6 DoF → 3 (CM separated) → 1 (angular momentum separated). Two symmetries do the work: translational symmetry (Noether → linear momentum conservation) and rotational symmetry (Noether → angular momentum conservation).</figcaption>
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 2</h4>
+      <details class="qa">
+        <summary>What is the physical significance of the reduced mass μ? How does it affect the hydrogen spectrum?</summary>
+        <div class="qa-ans">
+          The reduced mass μ = m<sub>p</sub>m<sub>e</sub>/(m<sub>p</sub>+m<sub>e</sub>) encodes how the two-body problem maps onto an effective one-body problem. Physically: μ is the inertia of the relative motion. If m<sub>p</sub> → ∞ (infinitely heavy nucleus, fixed), then μ → m<sub>e</sub> — recovering the familiar result. For finite nuclear mass, μ &lt; m<sub>e</sub>, shifting all energy levels slightly: E<sub>n</sub> = −μZ²e⁴/(2ℏ²n²). For deuterium (D) vs hydrogen (H), the nuclear mass differs → different μ → slightly different energy levels → <strong>isotope shift</strong> in spectral lines. This is precisely why H and D spectral lines are displaced, and how isotopes were first detected spectroscopically.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why can the CM separation be done for <em>any</em> two-body problem with a central potential, not just the H-atom?</summary>
+        <div class="qa-ans">
+          The CM separation relies solely on the translational invariance of the system — the potential depending only on the separation |r⃗₁ − r⃗₂|, not on individual positions. This is true for any central force law: V(r⃗₁, r⃗₂) = V(|r⃗₁ − r⃗₂|). The transformation from (r⃗₁, r⃗₂) to (R⃗<sub>CM</sub>, r⃗) is purely a coordinate change and always works. Examples: electron-positron (positronium), proton-antiproton (protonium), muonic hydrogen (p + μ⁻) — all can be reduced to a one-body problem with the appropriate reduced mass. This is the power of the coordinate transformation.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-3 -->
+<section class="lec" id="lec3">
+  <div class="lec-header">
+    <div class="lec-num">L<br>3</div>
+    <div class="lec-title-block">
+      <h2>The Radial Equation &amp; Spherical Harmonics</h2>
+      <div class="lec-date">23 / 02 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Full Schrödinger Equation in Spherical Coordinates</h3>
+    <p>After CM separation, the relative-motion Schrödinger equation in spherical coordinates (r, θ, φ) for a spherically symmetric potential V(r):</p>
+
+    <div class="eq-block">
+      −ℏ²/2μ [1/r² ∂/∂r(r² ∂/∂r) + 1/(r²sinθ) ∂/∂θ(sinθ ∂/∂θ) + 1/(r²sin²θ) ∂²/∂φ²] Ψ + V(r)Ψ = EΨ
+      <span class="eq-label">SE in spherical polars — angular part = −L̂²/r²</span>
+    </div>
+
+    <h3>Why L² Features? Separation of Variables</h3>
+    <p>Since V = V(r) is spherically symmetric, we try Ψ(r,θ,φ) = R(r) · F(θ) · G(φ) = R(r) · Y<sub>l</sub><sup>m</sup>(θ,φ).</p>
+    <p>The angular part of the Laplacian is proportional to L̂². Using [L², L<sub>z</sub>] = 0 (mathematical simplicity — L<sub>z</sub> commutes with L²), the eigenfunctions of both are the <strong>Spherical Harmonics</strong>:</p>
+
+    <div class="eq-block">
+      L̂² Y<sub>l</sub><sup>m</sup>(θ,φ) = l(l+1)ℏ² Y<sub>l</sub><sup>m</sup>(θ,φ) &emsp;&emsp; L̂<sub>z</sub> Y<sub>l</sub><sup>m</sup>(θ,φ) = mℏ Y<sub>l</sub><sup>m</sup>(θ,φ)
+      <span class="eq-label">Spherical Harmonics as simultaneous eigenfunctions of L² and L<sub>z</sub></span>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Angular Momentum Conservation → Reduction to 1 DoF</div>
+      Because the potential is spherically symmetric → [Ĥ, L²] = [Ĥ, L<sub>z</sub>] = 0 → angular momentum is conserved. This is the isotropic rotational symmetry. Consequence: the θ and φ degrees of freedom separate completely from r. The entire angular structure is captured by Y<sub>l</sub><sup>m</sup>(θ,φ), which is known exactly. The full 3D equation reduces to a <strong>1D radial equation</strong> in r alone. From 3 DoF → 1 DoF (angular momentum conservation eliminates 2 angular co-ordinates θ and φ).
+    </div>
+
+    <h3>The Radial Equation</h3>
+    <p>Substituting Ψ = R(r)Y<sub>l</sub><sup>m</sup>(θ,φ) and using L̂²Y = l(l+1)ℏ²Y, the Schrödinger equation reduces to:</p>
+
+    <div class="eq-block">
+      −ℏ²/2μ ∇² Ψ − Ze²/(4πε₀r) Ψ = EΨ
+    </div>
+
+    <p>With the substitution <em>u(r) = r R(r)</em>:</p>
+
+    <div class="eq-block">
+      d²u/dr² + (2μ/ℏ²)[E − V<sub>eff</sub>(r)] u = 0
+      <br><br>
+      V<sub>eff</sub>(r) = −Ze²/(4πε₀r) + l(l+1)ℏ²/(2μr²)
+      <span class="eq-label">1D radial equation with effective potential including centrifugal barrier</span>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;">
+        <!-- Axes -->
+        <line x1="40" y1="20" x2="40" y2="160" stroke="#2a2a4a" stroke-width="1"/>
+        <line x1="40" y1="110" x2="340" y2="110" stroke="#2a2a4a" stroke-width="1"/>
+        <text x="44" y="18" fill="#55557a" font-size="9" font-family="JetBrains Mono">V</text>
+        <text x="335" y="122" fill="#55557a" font-size="9" font-family="JetBrains Mono">r</text>
+
+        <!-- Coulomb -1/r -->
+        <path d="M 55,25 Q 80,40 100,70 T 150,100 T 220,108 T 320,110" stroke="#f05c7a" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <text x="155" y="98" fill="#f05c7a" font-size="9">−Ze²/4πε₀r</text>
+
+        <!-- centrifugal l(l+1)/r² -->
+        <path d="M 55,150 Q 70,130 90,115 T 140,111 T 200,110 T 320,110" stroke="#3dd6c4" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+        <text x="60" y="145" fill="#3dd6c4" font-size="9">l(l+1)ℏ²/2μr²</text>
+
+        <!-- Veff total -->
+        <path d="M 65,155 Q 75,110 85,65 Q 95,40 115,30 Q 140,25 180,40 Q 220,60 270,90 Q 300,100 330,108" stroke="#f0b347" stroke-width="2" fill="none"/>
+        <text x="108" y="27" fill="#f0b347" font-size="10" font-family="JetBrains Mono">Veff (l≥1)</text>
+
+        <!-- E < 0 -->
+        <line x1="40" y1="75" x2="340" y2="75" stroke="#7a8cff" stroke-width="1" stroke-dasharray="3,3"/>
+        <text x="42" y="73" fill="#7a8cff" font-size="9">E&lt;0 (bound)</text>
+
+        <!-- l=0 label -->
+        <text x="200" y="165" fill="#55557a" font-size="8" font-family="JetBrains Mono">l=0: no centrifugal barrier, pure Coulomb</text>
+        <text x="200" y="175" fill="#55557a" font-size="8" font-family="JetBrains Mono">l≥1: barrier creates well → bound states</text>
+      </svg>
+      <figcaption>Fig 3.1 — Effective potential V<sub>eff</sub>(r) for l ≥ 1. The attractive Coulomb −Ze²/r (dashed red) plus repulsive centrifugal barrier l(l+1)ℏ²/2μr² (dashed teal) combine to give a potential well (gold). Bound states (E &lt; 0) occur in the well. For l = 0 there is no centrifugal term and the electron can reach r = 0.</figcaption>
+    </div>
+
+    <h3>The Parity Operator</h3>
+    <p>The parity operator inverts all spatial coordinates: r⃗ → −r⃗. In spherical polars: r → r, θ → π−θ, φ → φ+π.</p>
+
+    <div class="box box-sage">
+      <div class="box-title">Parity of Spherical Harmonics</div>
+      Under parity: Ŷ<sub>l</sub><sup>m</sup>(θ,φ) → Y<sub>l</sub><sup>m</sup>(π−θ, φ+π) = (−1)<sup>l</sup> Y<sub>l</sub><sup>m</sup>(θ,φ)
+      <br><br>
+      <strong>Even parity (l = 0,2,4,...): (+1)</strong> &emsp; <strong>Odd parity (l = 1,3,5,...): (−1)</strong>
+      <br><br>
+      This has deep consequences: the electric dipole selection rule Δl = ±1 requires <strong>parity must change</strong> in a transition (since the electric dipole operator r⃗ has odd parity). States with l and l±1 have opposite parity → dipole transition allowed.
+    </div>
+
+    <details class="deriv">
+      <summary>▸ Derivation: Parity operator eigenvalue equations</summary>
+      <div class="deriv-body">
+        <div class="steps">
+          <div class="step">Parity operator P̂: r⃗ → −r⃗. This means (x,y,z) → (−x,−y,−z), or in spherical polars: (r,θ,φ) → (r, π−θ, φ+π).</div>
+          <div class="step">Check that P̂² = 1 (applying parity twice returns to original): P̂(P̂ f(r⃗)) = P̂ f(−r⃗) = f(r⃗). So P̂² = identity operator.</div>
+          <div class="step">Eigenvalue equation: P̂ ψ = α ψ → P̂²ψ = α²ψ = ψ → α² = 1 → α = ±1. So parity eigenvalues are ±1 (even or odd parity).</div>
+          <div class="step">For spherical harmonics Y<sub>l</sub><sup>m</sup>(θ,φ) = N P<sub>l</sub><sup>|m|</sup>(cosθ) e<sup>imφ</sup>, under θ → π−θ: cosθ → −cosθ, so P<sub>l</sub><sup>m</sup>(cosθ) → P<sub>l</sub><sup>m</sup>(−cosθ) = (−1)<sup>l−|m|</sup> P<sub>l</sub><sup>m</sup>(cosθ).</div>
+          <div class="step">Under φ → φ+π: e<sup>imφ</sup> → e<sup>im(φ+π)</sup> = e<sup>imφ</sup> · e<sup>imπ</sup> = (−1)<sup>m</sup> e<sup>imφ</sup>.</div>
+          <div class="step">Combined parity: (−1)<sup>l−|m|</sup> × (−1)<sup>|m|</sup> = (−1)<sup>l</sup>. So P̂ Y<sub>l</sub><sup>m</sup> = (−1)<sup>l</sup> Y<sub>l</sub><sup>m</sup> ✓</div>
+          <div class="step">The parity of a many-electron atom with configuration l₁, l₂, ... is the product: total parity = (−1)<sup>l₁+l₂+...</sup>. This is NOT simply (−1)<sup>l</sup> for multi-electron systems — note the notes show parity = (−1)<sup>l₁+l₂</sup> ≠ (−1)<sup>l</sup> in general.</div>
+        </div>
+      </div>
+    </details>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 3</h4>
+      <details class="qa">
+        <summary>Why does the centrifugal term l(l+1)ℏ²/2μr² appear in the effective potential? What is its physical origin?</summary>
+        <div class="qa-ans">
+          In 3D, when an electron has angular momentum L⃗, there is a component of motion perpendicular to the radial direction. This transverse kinetic energy, when expressed in terms of r alone, appears as L²/2μr² = l(l+1)ℏ²/2μr². This is the quantum analogue of the classical centrifugal force (or centrifugal potential) experienced in a rotating frame. Physically: an electron with angular momentum "avoids" the nucleus — the centrifugal term pushes it away. For l = 0 (s-states), there is no centrifugal barrier, so the electron can reach r = 0 (and indeed ψ<sub>1s</sub>(r=0) ≠ 0). For l ≥ 1, the effective potential has a barrier, and the wavefunction goes to zero at r = 0 as r<sup>l</sup>.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>QM says the electron "cannot state as a particle." What does this mean for the potential V(r)?</summary>
+        <div class="qa-ans">
+          In quantum mechanics, the electron does not follow a classical trajectory. It exists as a charge distribution described by |Ψ|². The potential at a given point r depends on the charge distribution of the electron across all of space — it is an average effect. This means the effective potential V(r) experienced by an electron changes depending on its quantum state (n, l, m) because the shape of |Ψ|² changes. Therefore, V depends on the state of the electron — not just the position. In a many-electron atom, this leads to the concept of the self-consistent field (Hartree-Fock theory) where each electron moves in the average potential created by all others, and the potential must be solved self-consistently.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-4 -->
+<section class="lec" id="lec4">
+  <div class="lec-header">
+    <div class="lec-num">L<br>4</div>
+    <div class="lec-title-block">
+      <h2>Solving the Radial Equation — Asymptotic Analysis &amp; Power Series</h2>
+      <div class="lec-date">25 / 02 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Dimensionless Variables</h3>
+    <p>Introduce dimensionless variable ρ and parameter λ:</p>
+
+    <div class="eq-block">
+      ρ = (−8μE/ℏ²)<sup>1/2</sup> r &emsp;&emsp; λ = Ze²/(4πε₀ℏ) (−μ/2E)<sup>1/2</sup>
+      <span class="eq-label">E &lt; 0 for bound states; −8μE/ℏ² &gt; 0</span>
+    </div>
+
+    <p>The radial equation becomes:</p>
+    <div class="eq-block">
+      [d²/dρ² − l(l+1)/ρ² + λ/ρ − 1/4] u(ρ) = 0
+      <span class="eq-label">Standard form — the goal is to find all well-behaved solutions</span>
+    </div>
+
+    <h3>Asymptotic Analysis</h3>
+
+    <div class="box box-warn">
+      <div class="box-title">Two Asymptotic Regimes to Examine</div>
+      Before attempting a full series solution, we must understand the behaviour at the two extremes:
+      (i) ρ → ∞ (far from nucleus) and (ii) ρ → 0 (near nucleus). The physical solution must be well-behaved (normalisable) in both limits. This constrains the form of u(ρ) and ultimately quantises the energy.
+    </div>
+
+    <details class="deriv">
+      <summary>▸ Asymptotic Limit ρ → ∞: Behaviour at far end</summary>
+      <div class="deriv-body">
+        <div class="steps">
+          <div class="step">For ρ → ∞, the terms l(l+1)/ρ² and λ/ρ become negligible. The equation reduces to: d²u/dρ² ≈ (1/4)u</div>
+          <div class="step">General solution: u ~ Ae<sup>+ρ/2</sup> + Be<sup>−ρ/2</sup></div>
+          <div class="step">Physical requirement: u must be normalisable → u → 0 as ρ → ∞ → must choose A = 0.</div>
+          <div class="step"><strong>∴ u ~ e<sup>−ρ/2</sup></strong> as ρ → ∞. This is the exponentially decaying behaviour at large r (classically forbidden region for E &lt; 0).</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="deriv">
+      <summary>▸ Asymptotic Limit ρ → 0: Behaviour near nucleus</summary>
+      <div class="deriv-body">
+        <div class="steps">
+          <div class="step">For ρ → 0, the l(l+1)/ρ² term dominates (it's the most singular). The equation approaches: d²u/dρ² ≈ [l(l+1)/ρ²]u</div>
+          <div class="step">Try power-law solution: u ~ ρ<sup>s</sup>. Then d²u/dρ² ~ s(s−1)ρ<sup>s−2</sup>.</div>
+          <div class="step">Substituting: s(s−1)ρ<sup>s−2</sup> = l(l+1)ρ<sup>s−2</sup> → s(s−1) = l(l+1). This is a quadratic: s = l+1 or s = −l.</div>
+          <div class="step">The solution s = −l gives u ~ ρ<sup>−l</sup> which <strong>diverges</strong> at ρ → 0 and is not admissible (not normalisable for l ≥ 1, and |Ψ|² would be singular).</div>
+          <div class="step"><strong>∴ u ~ ρ<sup>l+1</sup></strong> as ρ → 0. This means R(r) = u/r ~ r<sup>l</sup> → the wavefunction vanishes at the nucleus for l ≥ 1, goes to a constant for l = 0.</div>
+        </div>
+      </div>
+    </details>
+
+    <div class="box box-key">
+      <div class="box-title">Summary: Boundary Conditions Fixed the Form</div>
+      Combining both limits, write u(ρ) = e<sup>−ρ/2</sup> · ρ<sup>l+1</sup> · f(ρ), where f(ρ) is a function that must be well-behaved (finite polynomial at both ends). The entire quantisation problem reduces to finding when f(ρ) is a polynomial.
+    </div>
+
+    <h3>The Series Solution — Frobenius Method</h3>
+
+    <details class="deriv">
+      <summary>▸ Full Series Solution: Quantisation of Energy</summary>
+      <div class="deriv-body">
+        <p>Substitute u(ρ) = e<sup>−ρ/2</sup> f(ρ) to remove the asymptotic behaviour, then f(ρ) = ρ<sup>l+1</sup> g(ρ). The equation for f(ρ) becomes:</p>
+        <div class="eq-block" style="font-size:.95rem;">
+          [d²/dρ² − d/dρ − l(l+1)/ρ² + λ/ρ] f(ρ) = 0
+        </div>
+        <p>Substituting f = ρ<sup>l+1</sup>g, the equation for g(ρ) becomes:</p>
+        <div class="eq-block" style="font-size:.95rem;">
+          ρ d²g/dρ² + (2l+2−ρ) dg/dρ + (λ−l−1) g(ρ) = 0
+        </div>
+        <p>This is the <strong>Confluent Hypergeometric (Kummer's) equation</strong>. Try a power series:</p>
+        <div class="eq-block" style="font-size:.9rem;">
+          g(ρ) = Σ<sub>k=0</sub><sup>∞</sup> c<sub>k</sub> ρ<sup>k</sup>
+        </div>
+        <p>Substituting and equating coefficients of ρ<sup>k</sup>:</p>
+        <div class="eq-block">
+          c<sub>k+1</sub>/c<sub>k</sub> = (k − λ + l + 1) / [(k+1)(2l+2+k)]
+          <span class="eq-label">Recurrence relation for series coefficients</span>
+        </div>
+        <p>For large k: c<sub>k+1</sub>/c<sub>k</sub> ~ 1/k → the series behaves like e<sup>+ρ</sup> (same as expansion of e<sup>ρ</sup>). Then u ~ ρ<sup>l+1</sup>e<sup>−ρ/2</sup>·e<sup>+ρ</sup> ~ ρ<sup>l+1</sup>e<sup>+ρ/2</sup> → <strong>diverges</strong> at ρ → ∞. This is not admissible.</p>
+        <p><strong>Termination Condition:</strong> The series must terminate after a finite number of terms. If c<sub>k+1</sub> = 0 for some k = p:</p>
+        <div class="eq-block">
+          p − λ + l + 1 = 0 &emsp;→&emsp; <strong>λ = p + l + 1</strong>
+          <span class="eq-label">p = 0,1,2,... (radial quantum number)</span>
+        </div>
+        <p>Define the <strong>principal quantum number</strong> n = p + l + 1, so λ = n.</p>
+        <div class="eq-block">
+          But λ = Ze²/(4πε₀ℏ)·(−μ/2E)<sup>1/2</sup> must be an integer n → <strong>Energy is quantised!</strong>
+          <br>
+          E<sub>n</sub> = −μZ²e⁴ / (2ℏ²(4πε₀)² n²) = −Z²·13.6 eV / n²
+          <span class="eq-label">Hydrogen energy levels emerge from series termination — quantisation!</span>
+        </div>
+      </div>
+    </details>
+
+    <div class="box box-concept">
+      <div class="box-title">The Principal Quantum Number n</div>
+      The integer λ is conventionally denoted <strong>n</strong> — the principal quantum number.
+      <ul style="margin-left:1.2rem;margin-top:.4rem;">
+        <li>n = p + l + 1, where p = 0,1,2,... is the radial quantum number</li>
+        <li>For fixed n: l<sub>max</sub> = n−1 (when p = 0, all amplitude in angular motion)</li>
+        <li>For fixed n: l ranges from 0 to n−1</li>
+        <li>For fixed n and l: m ranges from −l to +l (2l+1 values)</li>
+      </ul>
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 4</h4>
+      <details class="qa">
+        <summary>Why must the power series terminate? What happens if it doesn't?</summary>
+        <div class="qa-ans">
+          If the power series g(ρ) continues infinitely, the ratio of successive terms c<sub>k+1</sub>/c<sub>k</sub> → 1/k for large k, which is the same growth rate as the Taylor series of e<sup>ρ</sup>. In that case, u(ρ) ~ e<sup>−ρ/2</sup> · e<sup>+ρ</sup> · ρ<sup>l+1</sup> = ρ<sup>l+1</sup> e<sup>+ρ/2</sup>, which diverges exponentially as ρ → ∞. A divergent u means the probability density |Ψ|² grows without bound at large r — the electron would be found with equal probability everywhere in space, which is not physical for a bound state. Therefore, the series <em>must</em> terminate at a finite order p, giving a polynomial. This is the quantisation condition, and it is what forces λ = n to be an integer. The energy quantisation of hydrogen is not put in by hand — it emerges from the requirement of normalisability.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Examine the behaviour of the H-atom radial function near the nucleus and far from it. <span class="tag tag-exam">Exam Q</span></summary>
+        <div class="qa-ans">
+          <strong>Near nucleus (r → 0):</strong> The radial function R<sub>nl</sub>(r) ~ r<sup>l</sup> from the Frobenius analysis. For l = 0 (s-states): R ~ r⁰ = constant → |Ψ|² is finite at the origin, meaning there is non-zero probability of finding the electron at the nucleus. For l ≥ 1: R ~ r<sup>l</sup> → 0, so the electron avoids the nucleus due to the centrifugal barrier.
+          <br><br>
+          <strong>Far from nucleus (r → ∞):</strong> R ~ e<sup>−r/na₀</sup> where a₀ = Bohr radius. The probability decays exponentially at large distances. The characteristic length scale is na₀ — for higher n, the electron is found further from the nucleus.
+          <br><br>
+          <em>Numerical estimate for 1s (from notes):</em> ψ<sub>1s</sub> = 2(1/a₀)<sup>3/2</sup> e<sup>−r/a₀</sup>, with a₀ ≈ 0.53 Å. At r = 1.5 Å (typical nuclear dimension is ~10<sup>−15</sup> m ≈ 10<sup>−5</sup> Å), the wavefunction is not zero but is extremely small. So ψ<sub>1s</sub> ≠ 0 at r = 0, but the probability of finding the electron inside the nucleus is negligible. Refer to B&amp;J eq. 7.56 through 7.58.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-5 -->
+<section class="lec" id="lec5">
+  <div class="lec-header">
+    <div class="lec-num">L<br>5</div>
+    <div class="lec-title-block">
+      <h2>Associated Laguerre Polynomials &amp; Radial Wavefunctions</h2>
+      <div class="lec-date">16 / 03 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>From Series to Special Polynomials</h3>
+    <p>The terminated power series g(ρ) that solves the radial equation is identified as an <strong>Associated Laguerre Polynomial</strong>. The full radial wavefunction is:</p>
+
+    <div class="eq-block">
+      R<sub>nl</sub>(r) = N<sub>l</sub> e<sup>−ρ/2</sup> ρ<sup>l</sup> L<sub>n+l</sub><sup>2l+1</sup>(ρ) &emsp; [equivalently using ₁F₁]
+      <br><br>
+      R<sub>nl</sub>(r) = N<sub>H</sub> e<sup>−ρ/2</sup> ρ<sup>l</sup> <sub>1</sub>F<sub>1</sub>(l+1−n, 2l+2; ρ)
+      <span class="eq-label">ρ = 2Zr/na₀; N = normalisation constant; a₀ = Bohr radius</span>
+    </div>
+
+    <h3>Vector Space and Completeness</h3>
+
+    <div class="box box-concept">
+      <div class="box-title">Hermitian Operators &amp; Vector Space — Why This Matters</div>
+      The Hamiltonian Ĥ is a Hermitian operator: Ĥ† = Ĥ.
+      <strong>Three key properties of Hermitian operators:</strong>
+      <ol style="margin-left:1.2rem;margin-top:.4rem;">
+        <li>All eigenvalues are <strong>real</strong> (energies are real — physically required)</li>
+        <li>Eigenfunctions are <strong>orthonormal</strong>: ⟨ψ<sub>n</sub>|ψ<sub>m</sub>⟩ = δ<sub>nm</sub></li>
+        <li><strong>Completeness condition</strong>: the eigenfunctions form a basis set (complete set) — any function can be expanded as a linear combination of eigenfunctions</li>
+      </ol>
+      This completeness is what allows perturbation theory: if the potential is slightly distorted, the solution can be constructed using the unperturbed eigenfunctions as a basis. The solution space is a vector space (function space / Hilbert space), with eigenfunctions as basis vectors.
+    </div>
+
+    <h3>Structure of Radial Wavefunctions</h3>
+
+    <div class="box box-sage">
+      <div class="box-title">Nodes of the Radial Distribution Function</div>
+      The radial distribution function r²|R<sub>nl</sub>|² has exactly <strong>(n−l−1)</strong> nodes (zeros, not counting r = 0 and r = ∞). This equals the radial quantum number p = n−l−1.
+      <ul style="margin-left:1.2rem;margin-top:.4rem;">
+        <li>1s (n=1, l=0): p = 0 nodes → single maximum</li>
+        <li>2s (n=2, l=0): p = 1 node → two maxima</li>
+        <li>2p (n=2, l=1): p = 0 nodes → single maximum (but wavefunction has different shape)</li>
+        <li>3s (n=3, l=0): p = 2 nodes → three maxima</li>
+      </ul>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;">
+        <!-- 1s plot -->
+        <text x="30" y="20" fill="#f0b347" font-size="10" font-family="JetBrains Mono">1s (n=1, l=0)</text>
+        <line x1="30" y1="90" x2="170" y2="90" stroke="#2a2a4a" stroke-width="1"/>
+        <line x1="30" y1="30" x2="30" y2="92" stroke="#2a2a4a" stroke-width="1"/>
+        <text x="168" y="98" fill="#55557a" font-size="8">r</text>
+        <text x="18" y="35" fill="#55557a" font-size="8">r²R²</text>
+        <!-- 1s curve: single peak -->
+        <path d="M 30,89 Q 50,30 75,40 Q 100,55 130,75 Q 150,84 170,88" stroke="#3dd6c4" stroke-width="2" fill="none"/>
+        <text x="60" y="28" fill="#55557a" font-size="8" font-family="JetBrains Mono">0 nodes</text>
+
+        <!-- 2s plot -->
+        <text x="200" y="20" fill="#f0b347" font-size="10" font-family="JetBrains Mono">2s (n=2, l=0)</text>
+        <line x1="200" y1="90" x2="360" y2="90" stroke="#2a2a4a" stroke-width="1"/>
+        <line x1="200" y1="30" x2="200" y2="92" stroke="#2a2a4a" stroke-width="1"/>
+        <text x="358" y="98" fill="#55557a" font-size="8">r</text>
+        <!-- 2s: two humps with one node -->
+        <path d="M 200,89 Q 210,60 225,55 Q 235,52 240,58 Q 245,65 248,90 Q 252,88 258,65 Q 268,40 285,48 Q 305,58 330,75 Q 348,84 360,88" stroke="#7a8cff" stroke-width="2" fill="none"/>
+        <!-- node marker -->
+        <circle cx="248" cy="90" r="3" fill="#f05c7a"/>
+        <text x="240" y="103" fill="#f05c7a" font-size="8">node</text>
+        <text x="230" y="28" fill="#55557a" font-size="8" font-family="JetBrains Mono">1 node</text>
+
+        <!-- 1s label -->
+        <text x="30" y="115" fill="#55557a" font-size="8" font-family="JetBrains Mono">Ψ₁s ≠ 0 at r=0</text>
+
+        <!-- 2p plot -->
+        <text x="30" y="135" fill="#f0b347" font-size="10" font-family="JetBrains Mono">2p (n=2, l=1)</text>
+        <line x1="30" y1="195" x2="170" y2="195" stroke="#2a2a4a" stroke-width="1"/>
+        <line x1="30" y1="140" x2="30" y2="197" stroke="#2a2a4a" stroke-width="1"/>
+        <!-- 2p: starts at 0, single hump, no node -->
+        <path d="M 30,195 Q 50,194 65,170 Q 80,150 95,148 Q 115,150 135,168 Q 155,183 170,193" stroke="#f0b347" stroke-width="2" fill="none"/>
+        <text x="45" y="145" fill="#55557a" font-size="8" font-family="JetBrains Mono">0 nodes</text>
+        <text x="30" y="186" fill="#55557a" font-size="8" font-family="JetBrains Mono">Ψ₂p = 0 at r=0 (l=1)</text>
+      </svg>
+      <figcaption>Fig 5.1 — Radial distribution functions r²|R<sub>nl</sub>|² for 1s, 2s, and 2p states. The number of nodes (excluding r = 0 and r = ∞) equals n−l−1. The 2s state has a small inner maximum not shown to scale.</figcaption>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-title">Assignment (from notes)</div>
+      <strong>A)</strong> Show schematically the radial function R<sub>nl</sub>(r) and the radial distribution function r²|R<sub>nl</sub>|² for all states up to n = 3.
+      <br>
+      <strong>B)</strong> Find the node positions for all radial distribution functions up to n = 3.
+    </div>
+
+    <h3>Why Does ψ<sub>1s</sub>(r=0) ≠ 0 But Electrons Are Not Found Inside the Nucleus?</h3>
+    <div class="box box-concept">
+      <div class="box-title">Conceptual Point — Density vs Probability</div>
+      <strong>Density</strong> = probability per unit volume = |Ψ|². At r = 0, ψ<sub>1s</sub> = 2(1/a₀)<sup>3/2</sup> ≠ 0, so the probability density is non-zero at the origin.
+      <br><br>
+      However, <strong>probability</strong> = density × volume element = |Ψ|² · 4πr²dr. At r → 0: 4πr² → 0 faster than |Ψ|² remains finite. So the actual probability of finding the electron in a tiny shell around r = 0 is zero. The electron is not found inside the nucleus even though ψ ≠ 0 there. The relevant probability is:
+      <br><br>
+      P(r)dr = r²|R<sub>nl</sub>(r)|² dr &emsp; ← this is the radial distribution function.
+      <br><br>
+      At r = 0: P(0) = 0 (for all states) since the r² factor vanishes. So SI (probability/m³) × volume → 0 at the nucleus. The answer exists "in nuclear dimension" as the notes state — the wavefunction is non-zero but the nuclear volume is so tiny that the integrated probability is negligible.
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 5</h4>
+      <details class="qa">
+        <summary>Why are the Legendre polynomials P<sub>l</sub>(cosθ) a Fourier series is not used? When do they appear naturally?</summary>
+        <div class="qa-ans">
+          Fourier series expand functions on a flat domain with periodic boundary conditions (e.g., 0 to 2π). The θ coordinate on a sphere has boundary conditions at θ = 0 (north pole) and θ = π (south pole), and regularity requirements (the function must be finite and smooth there). The natural eigenfunctions of the angular part of the Laplacian on a sphere are the Legendre polynomials P<sub>l</sub>(cosθ), which automatically satisfy these boundary conditions. They arise naturally because: (1) Legendre's differential equation appears when you separate the SE in spherical polars; (2) They are orthogonal on [−1, +1]: ∫_{-1}^{+1} P<sub>l</sub> P<sub>l'</sub> d(cosθ) = δ_{ll'} × 2/(2l+1); (3) They form a complete basis for functions of cosθ. Fourier series use e<sup>imφ</sup> for the φ direction (periodic on [0, 2π]) but Legendre polynomials for θ. Together they give the spherical harmonics Y<sub>l</sub><sup>m</sup>(θ,φ).
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-6 -->
+<section class="lec" id="lec6">
+  <div class="lec-header">
+    <div class="lec-num">L<br>6</div>
+    <div class="lec-title-block">
+      <h2>Exotic Atoms, H-like Ions &amp; Rydberg Atoms</h2>
+      <div class="lec-date">30 / 03 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Beyond Standard Hydrogen: H-like Atoms</h3>
+
+    <div class="box box-teal">
+      <div class="box-title">H-like Isoelectronic Sequence</div>
+      Any system with a single electron and nuclear charge Z has the same Hamiltonian as H (up to Z). Examples: He<sup>+</sup> (Z=2), Li<sup>2+</sup> (Z=3), C<sup>5+</sup> (Z=6).
+      The same calculation applies with Z substituted in. Energy: E<sub>n</sub> = −Z²·13.6 eV/n².
+      <br><br>
+      <strong>Key question:</strong> What differs between H, D, T (isotopes)? → Only the nuclear mass → only the reduced mass μ → only the energy scale. The angular distribution (Y<sub>l</sub><sup>m</sup>) is <em>unchanged</em>; only energy levels shift.
+    </div>
+
+    <h3>Exotic Atoms (H-like)</h3>
+    <p>We can replace the proton or electron with other particles to create exotic atoms:</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>System</th><th>Composition</th><th>Name</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>e<sup>+</sup>e<sup>−</sup></td><td>Positron + Electron</td><td><strong>Positronium</strong></td><td>μ = m<sub>e</sub>/2; will annihilate. Used in PET (cancer treatment)</td></tr>
+          <tr><td>p̄e<sup>−</sup></td><td>Antiproton + Electron</td><td><strong>Anti-hydrogen</strong></td><td>KE of e⁻ and proton same as H; interaction is positive (repulsive → same binding by symmetry)</td></tr>
+          <tr><td>p<sup>+</sup>μ<sup>−</sup></td><td>Proton + Muon</td><td><strong>Muonic Hydrogen</strong></td><td>μ mass ≈ 207m<sub>e</sub> → orbit 207× smaller → proton size effects visible</td></tr>
+          <tr><td>p̄μ<sup>+</sup></td><td>Antiproton + Antimuon</td><td>Anti-muonic H</td><td>—</td></tr>
+          <tr><td>μ<sup>+</sup>μ<sup>−</sup></td><td>Muon pair</td><td>Muonium</td><td>—</td></tr>
+          <tr><td>p̄p</td><td>Antiproton + Proton</td><td><strong>Protonium</strong></td><td>Anti-protonic hydrogen</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">Fermi-Teller Radius</div>
+      The <strong>Fermi-Teller radius</strong> is the minimum distance between two particles at which they can form a bound system. Used in gravitational cosmology. It defines the smallest stable "atom-like" configuration. For our purposes: it characterises the size below which classical orbits break down and quantum treatment is essential.
+    </div>
+
+    <h3>Rydberg Atoms</h3>
+    <p>A Rydberg atom has one electron promoted to a <em>very high</em> quantum number n. Near the highest angular momentum state (l = n−1), the orbit becomes approximately circular → <strong>circular Rydberg state</strong>.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Properties of Circular Rydberg States</div>
+      <ul style="margin-left:1.2rem;">
+        <li><strong>l = n−1</strong> (maximum angular momentum for given n) → circular orbit (Bohr correspondence)</li>
+        <li><strong>Very high polarisability</strong> — can detect extremely small electric/magnetic field fluctuations</li>
+        <li><strong>Very long lifetime</strong> — dipole transitions to lower states are heavily suppressed for high n (selection rules + small matrix elements)</li>
+        <li><strong>Detection methods</strong>: laser excitation, microwave excitation, state-selective field ionisation</li>
+        <li>For the highest k (Sommerfeld) value → circular orbit = Bohr atom (Sommerfeld's theorem)</li>
+      </ul>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 340 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;">
+        <!-- n=4 Rydberg orbits: k=1,2,3,4 -->
+        <text x="170" y="15" text-anchor="middle" fill="#dcdcf0" font-size="10" font-family="JetBrains Mono">n=4 Rydberg States (Sommerfeld-like orbits)</text>
+        <!-- Nucleus -->
+        <circle cx="110" cy="110" r="5" fill="#f0b347"/>
+        <text x="117" y="114" fill="#f0b347" font-size="9">p</text>
+        <!-- k=4: circle -->
+        <ellipse cx="165" cy="110" rx="60" ry="60" fill="none" stroke="#3dd6c4" stroke-width="1.2"/>
+        <text x="228" y="114" fill="#3dd6c4" font-size="9">k=4 (circle)</text>
+        <!-- k=3: ellipse 3/4 ratio -->
+        <ellipse cx="155" cy="110" rx="50" ry="37" fill="none" stroke="#7a8cff" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="210" y="80" fill="#7a8cff" font-size="9">k=3</text>
+        <!-- k=2: more eccentric -->
+        <ellipse cx="145" cy="110" rx="40" ry="20" fill="none" stroke="#f0b347" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="185" y="135" fill="#f0b347" font-size="9">k=2</text>
+        <!-- k=1: most eccentric -->
+        <ellipse cx="130" cy="110" rx="25" ry="7" fill="none" stroke="#f05c7a" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="155" y="120" fill="#f05c7a" font-size="9">k=1 (most eccentric)</text>
+
+        <text x="170" y="185" text-anchor="middle" fill="#55557a" font-size="8" font-family="JetBrains Mono">Highest k → circular (Bohr-like)</text>
+        <text x="170" y="196" text-anchor="middle" fill="#55557a" font-size="8" font-family="JetBrains Mono">Lower k → elliptical (lower angular momentum)</text>
+      </svg>
+      <figcaption>Fig 6.1 — Rydberg atom orbits for n=4. The k=4 (l=3) state is circular; lower k values give increasingly elliptical orbits. In QM, l = n−1 (maximum l for given n) gives the circular Rydberg state with minimal radial excitation. These states approach the Bohr model prediction.</figcaption>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Size of an Atom — What Does It Mean?</div>
+      The "size" of an atom is the expectation value ⟨r⟩ in the relevant quantum state. For the highest angular momentum state (circular Rydberg state, l = n−1): the orbit is circular, and ⟨r⟩ ≈ n²a₀/Z. For very large n, ⟨r⟩ → n²a₀ — Rydberg atoms can be as large as micrometres! This is why Rydberg atoms respond to tiny fields: a small field exerts a force F = eE at large r, giving a large torque. Also, for very high n and l = n−1, the state corresponds to a Bohr orbit — the quantum and classical pictures merge (Bohr's correspondence principle).
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-title">Assignment (from notes)</div>
+      Write a short note on the Rydberg atom covering: (i) Preparation, (ii) Circular Rydberg state, (iii) Lifetime of CRS, (iv) Applications.
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 6</h4>
+      <details class="qa">
+        <summary>Write down the Hamiltonian for anti-hydrogen. How does it differ from hydrogen?</summary>
+        <div class="qa-ans">
+          Anti-hydrogen consists of an antiproton (p̄, charge −e, mass m<sub>p</sub>) and a positron (e<sup>+</sup>, charge +e, mass m<sub>e</sub>). The kinetic energy terms are identical to hydrogen (same masses). The interaction potential: the positron (+e) and antiproton (−e) attract each other, so the Coulomb term is negative (attractive), exactly like H. Therefore: Ĥ<sub>anti-H</sub> = −ℏ²/2m<sub>p</sub>∇²<sub>p̄</sub> − ℏ²/2m<sub>e</sub>∇²<sub>e+</sub> − e²/(4πε₀r₁₂). This is <em>identical</em> to the hydrogen Hamiltonian! Anti-hydrogen has exactly the same energy levels, spectral lines, and quantum numbers as hydrogen — this is required by CPT symmetry (charge conjugation + parity + time reversal invariance). Experimental verification of this is a major goal of the ALPHA experiment at CERN.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>For positronium (e⁺e⁻), what is the reduced mass and how do the energy levels compare to hydrogen?</summary>
+        <div class="qa-ans">
+          For positronium: m₁ = m₂ = m<sub>e</sub> → μ = m<sub>e</sub>²/(2m<sub>e</sub>) = m<sub>e</sub>/2. Since Z = 1 (one unit charge on the positron), the energy levels: E<sub>n</sub> = −(μ/m<sub>e</sub>)(Z²×13.6)/n² = −(1/2)(13.6)/n² = −6.8 eV/n². All energy levels are exactly half those of hydrogen, and the Bohr radius is doubled: a<sub>Ps</sub> = 2a₀. The spectral lines of positronium are redshifted by a factor of 2 compared to hydrogen — this has been experimentally confirmed, providing a clean test of QED.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-7 -->
+<section class="lec" id="lec7">
+  <div class="lec-header">
+    <div class="lec-num">L<br>7</div>
+    <div class="lec-title-block">
+      <h2>Two-Electron Atoms — Structure &amp; the Three-Body Problem</h2>
+      <div class="lec-date">06 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Helium Atom — A Three-Body Problem</h3>
+    <p>The He atom has a nucleus (charge Ze) and two electrons at (r⃗₁, θ₁, φ₁) and (r⃗₂, θ₂, φ₂). This is a <strong>three-body problem</strong> — it cannot be solved exactly in closed form.</p>
+
+    <div class="box box-warn">
+      <div class="box-title">Why This is Hard — The Coupling Problem</div>
+      The H-atom had one electron in the Coulomb field of the nucleus. The problem was separable. For He, there are now three terms in the Hamiltonian, and the critical difference is the <strong>electron-electron repulsion e²/4πε₀r₁₂</strong>. This term couples the two electrons — it depends on <em>both</em> r⃗₁ and r⃗₂ simultaneously. Therefore [Ĥ, L₁²] ≠ 0 and [Ĥ, L₂²] ≠ 0. Neither l₁ nor l₂ is a good quantum number separately!
+    </div>
+
+    <div class="eq-block">
+      Ĥ = −ℏ²/2m ∇₁² − Ze²/4πε₀r₁ − ℏ²/2m ∇₂² − Ze²/4πε₀r₂ + e²/4πε₀r₁₂
+      <br><br>
+      = H₁ + H₂ + H₁₂
+      <span class="eq-label">He Hamiltonian: H₁ and H₂ are H-like; H₁₂ is the coupling (electron repulsion)</span>
+    </div>
+
+    <p>Where r₁₂ = |r⃗₁ − r⃗₂| = (r₁² + r₂² − 2r₁r₂ cosθ)<sup>1/2</sup>. Note: r₁₂ can be expanded in Legendre polynomials when r₁ > r₂:</p>
+    <div class="eq-block">
+      1/r₁₂ = Σ<sub>l</sub> (r₂<sup>l</sup>/r₁<sup>l+1</sup>) P<sub>l</sub>(cosθ) &emsp; (for r₁ &gt; r₂)
+      <span class="eq-label">Legendre polynomial expansion — multipole expansion</span>
+    </div>
+
+    <h3>Degrees of Freedom — Reducing the Problem</h3>
+    <div class="steps">
+      <div class="step">Start with 9 coordinates (3 nuclear + 3 for e₁ + 3 for e₂) — technically even nuclear coordinates, though usually the nucleus is treated as fixed in the Born-Oppenheimer approximation.</div>
+      <div class="step">Translational symmetry → separate CM motion → 6 DoF remaining (relative coordinates of two electrons with respect to nucleus).</div>
+      <div class="step">Unlike H-atom: <strong>[Ĥ, L₁²] ≠ 0</strong> because H₁₂ mixes different l₁ values. So l₁, l₂ separately are not conserved.</div>
+      <div class="step">However, the <strong>total angular momentum L⃗ = L⃗₁ + L⃗₂</strong> does commute with Ĥ (overall rotational symmetry preserved). So total L, total S, and total J are good quantum numbers.</div>
+      <div class="step">Pauli Exclusion Principle becomes crucial: <em>exchange degeneracy</em> must be handled by requiring antisymmetric total wavefunctions.</div>
+    </div>
+
+    <h3>The Permutation / Exchange Operator</h3>
+
+    <div class="box box-concept">
+      <div class="box-title">Many-Electron Systems and Indistinguishability</div>
+      Electrons are <strong>indistinguishable</strong>. The physical state cannot depend on which label we assign to which electron. The permutation operator P̂<sub>ij</sub> swaps all coordinates (spatial + spin) of electrons i and j:
+      <br><br>
+      P̂<sub>ij</sub> Ψ(q₁,...,qᵢ,...,qⱼ,...,q<sub>N</sub>) = αΨ(q₁,...,qⱼ,...,qᵢ,...,q<sub>N</sub>)
+      <br><br>
+      Since P̂²<sub>ij</sub> = 1 → eigenvalues α = ±1. For <strong>fermions</strong> (electrons): α = −1 → <strong>antisymmetric</strong>. For bosons: α = +1 → symmetric.
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">Mathematics of the Pauli Exclusion Principle</div>
+      For antisymmetric states (α = −1): if two electrons have identical quantum numbers qᵢ = qⱼ, then:
+      Ψ(q₁,...,qᵢ,...,qᵢ,...) = −Ψ(q₁,...,qᵢ,...,qᵢ,...) → Ψ = 0.
+      <br><br>
+      A wavefunction that equals its own negative must be zero. This is the <strong>mathematical embodiment of the Pauli exclusion principle</strong>: no two electrons can have the same complete set of quantum numbers (n, l, m, m<sub>s</sub>).
+    </div>
+
+    <h3>The Spin-Orbital Wavefunction</h3>
+    <p>The total two-electron wavefunction must be antisymmetric. It factors as spatial × spin:</p>
+
+    <div class="eq-block">
+      Ψ<sub>n</sub>(q) = Ψ(r⃗₁, r⃗₂) · χ(1,2)
+      <span class="eq-label">q = all coordinates (spatial + spin). The total function must be antisymmetric.</span>
+    </div>
+
+    <p>Since Pauli requires the total to be antisymmetric:</p>
+    <ul style="margin-left:1.5rem;margin-top:.5rem;">
+      <li>If spatial part is <strong>symmetric</strong> → spin part must be <strong>antisymmetric</strong></li>
+      <li>If spatial part is <strong>antisymmetric</strong> → spin part must be <strong>symmetric</strong></li>
+    </ul>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 7</h4>
+      <details class="qa">
+        <summary>Why do l₁ and l₂ fail to be good quantum numbers in helium?</summary>
+        <div class="qa-ans">
+          A quantum number is "good" if the corresponding operator commutes with the Hamiltonian. In H-like atoms, each electron's Hamiltonian H₁ = −ℏ²/2m∇₁² − Ze²/4πε₀r₁ commutes with L₁² because the potential depends only on r₁. In helium, the full Hamiltonian Ĥ = H₁ + H₂ + H₁₂. The term H₁₂ = e²/4πε₀r₁₂ depends on both r⃗₁ and r⃗₂ — it has no reason to commute with L₁² alone: [H₁₂, L₁²] ≠ 0. Therefore [Ĥ, L₁²] ≠ 0, so l₁ is not conserved. The electron-electron repulsion continuously transfers angular momentum between the two electrons. However, [Ĥ, L²<sub>total</sub>] = 0 since H₁₂ depends only on r₁₂ which is invariant under overall rotations → total L is conserved.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-8 -->
+<section class="lec" id="lec8">
+  <div class="lec-header">
+    <div class="lec-num">L<br>8</div>
+    <div class="lec-title-block">
+      <h2>Addition of Angular Momentum &amp; Spin States</h2>
+      <div class="lec-date">13 / 04 / 2026 (Sw.)</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>General Rules for Adding Angular Momenta</h3>
+    <p>Given two angular momenta j⃗₁ (quantum number j₁) and j⃗₂ (quantum number j₂), their sum j⃗ = j⃗₁ + j⃗₂ has:</p>
+
+    <div class="box box-key">
+      <div class="box-title">Addition of Angular Momentum — Key Rules</div>
+      <strong>Allowed values of j:</strong> j = |j₁−j₂|, |j₁−j₂|+1, ..., j₁+j₂ (in integer steps)
+      <br><br>
+      <strong>For each j:</strong> m<sub>j</sub> ranges from −j to +j in integer steps (2j+1 values)
+      <br><br>
+      <strong>Uncoupled basis:</strong> |j₁, m<sub>j₁</sub>, j₂, m<sub>j₂</sub>⟩ (labelled by individual z-projections)
+      <br><br>
+      <strong>Coupled basis:</strong> |j, m<sub>j</sub>, j₁, j₂⟩ (labelled by total j)
+      <br><br>
+      The transformation between the two bases involves the <strong>Clebsch-Gordan coefficients</strong>.
+    </div>
+
+    <h3>Example: s Orbital + p Orbital</h3>
+    <p>For s orbital (l₁ = 0, j₁ = ½ with spin) and p orbital (l₂ = 1, j₂ = ½ or 3/2 with spin):</p>
+    <div class="eq-block">
+      s orbital: j₁ = l₁ = 0 → ȧ₁ = 1 &emsp;&emsp; p orbital: l₂ = 1 → ȧ₂ = 2
+      <br>
+      Total: j = ȧ₁ + ȧ₂ values → 3, 2, 1 &emsp; (F, D, P states)
+    </div>
+
+    <h3>Two-Electron Spin States</h3>
+    <p>Each electron has s = ½. Total spin S⃗ = S⃗₁ + S⃗₂:</p>
+
+    <div class="eq-block">
+      S = s₁ + s₂ = 1 &emsp; (triplet, symmetric) &emsp; or &emsp; S = |s₁ − s₂| = 0 &emsp; (singlet, antisymmetric)
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;">
+        <!-- Triplet states S=1 -->
+        <rect x="20" y="15" width="150" height="130" rx="6" fill="#0f0f1c" stroke="#3dd6c4" stroke-width="1.2"/>
+        <text x="95" y="32" text-anchor="middle" fill="#3dd6c4" font-size="10" font-family="JetBrains Mono">S=1 TRIPLET (sym.)</text>
+
+        <text x="95" y="52" text-anchor="middle" fill="#dcdcf0" font-size="9">χ₁(1,2) = α(1)α(2)</text>
+        <text x="95" y="64" text-anchor="middle" fill="#8888b0" font-size="8">m_S = +1</text>
+
+        <text x="95" y="84" text-anchor="middle" fill="#dcdcf0" font-size="9">χ₃(1,2) = [α(1)β(2)+β(1)α(2)]/√2</text>
+        <text x="95" y="96" text-anchor="middle" fill="#8888b0" font-size="8">m_S = 0</text>
+
+        <text x="95" y="116" text-anchor="middle" fill="#dcdcf0" font-size="9">χ₂(1,2) = β(1)β(2)</text>
+        <text x="95" y="128" text-anchor="middle" fill="#8888b0" font-size="8">m_S = −1</text>
+
+        <text x="95" y="143" text-anchor="middle" fill="#3dd6c4" font-size="8">symmetric under exchange</text>
+
+        <!-- Singlet S=0 -->
+        <rect x="190" y="15" width="150" height="130" rx="6" fill="#0f0f1c" stroke="#f05c7a" stroke-width="1.2"/>
+        <text x="265" y="32" text-anchor="middle" fill="#f05c7a" font-size="10" font-family="JetBrains Mono">S=0 SINGLET (anti.)</text>
+
+        <text x="265" y="75" text-anchor="middle" fill="#dcdcf0" font-size="9">χ₄(1,2) = [α(1)β(2)−β(1)α(2)]/√2</text>
+        <text x="265" y="88" text-anchor="middle" fill="#8888b0" font-size="8">m_S = 0 only</text>
+        <text x="265" y="110" text-anchor="middle" fill="#f05c7a" font-size="8">antisymmetric under exchange</text>
+        <text x="265" y="122" text-anchor="middle" fill="#55557a" font-size="7">(Para-helium ground state</text>
+        <text x="265" y="133" text-anchor="middle" fill="#55557a" font-size="7">uses this spin state)</text>
+      </svg>
+      <figcaption>Fig 8.1 — Two-electron spin states. α = spin up (↑), β = spin down (↓). The three triplet states are symmetric under exchange of electron labels 1↔2; the singlet is antisymmetric. Note: χ₃ is symmetric because α(1)β(2)+β(1)α(2) is unchanged when 1↔2.</figcaption>
+    </div>
+
+    <h3>Ortho- and Para-Helium</h3>
+    <div class="box box-concept">
+      <div class="box-title">Why 1s² is a Singlet (Para-He ground state)</div>
+      For the He ground state 1s²: both electrons have the same spatial quantum numbers (n=1, l=0, m=0). As the set of quantum numbers for the radial part is <em>same</em> for both electrons, therefore to maintain Pauli Exclusion Principle, the <strong>spin part must be antisymmetric</strong> → singlet state (S=0). So the 1s² ground state is a singlet.
+      <br><br>
+      For excited states: 1s2p or 2s2p → electrons have <em>different</em> spatial quantum numbers → space part can be symmetric or antisymmetric → spin can be antisymmetric (singlet) or symmetric (triplet) respectively.
+      <br><br>
+      <strong>Para-He</strong>: singlet states (S=0, space sym.) &emsp; <strong>Ortho-He</strong>: triplet states (S=1, space antisym.)
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Configuration</th><th>Possible L</th><th>Terms</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1s²</td><td>L = 0</td><td>¹S₀</td><td>Singlet only (Pauli)</td></tr>
+          <tr><td>1s2p</td><td>L = 1</td><td>¹P₁, ³P₀,₁,₂</td><td>Both possible</td></tr>
+          <tr><td>2s2p</td><td>L = 1</td><td>¹P₁, ³P₀,₁,₂</td><td></td></tr>
+          <tr><td>2p²</td><td>L = 0,1,2</td><td>¹S₀, ³P₀,₁,₂, ¹D₂ etc.</td><td>Pauli restricts some</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Spectroscopic Symbol for Two-Electron Atoms</h3>
+    <div class="eq-block">
+      <sup>(2S+1)</sup>L<sub>J</sub>
+      <br><br>
+      <strong>Non-relativistic parity:</strong> (−1)<sup>l₁+l₂</sup> &emsp; ← NOT the same as (−1)<sup>l</sup> for one electron
+      <span class="eq-label">The total parity multiplies the parities of individual electrons</span>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-title">Assignment (from notes)</div>
+      Assume a He atom is in 1s2p3d configuration. What are the possible L values? (Combine l₁=0, l₂=1, l₃=2 in LS coupling.)
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 8</h4>
+      <details class="qa">
+        <summary>What are Clebsch-Gordan coefficients and where do they appear?</summary>
+        <div class="qa-ans">
+          Clebsch-Gordan (CG) coefficients are the transformation coefficients between the uncoupled basis {|j₁,m₁,j₂,m₂⟩} and the coupled basis {|j,m_j,j₁,j₂⟩}:
+          |j, m_j⟩ = Σ<sub>m₁,m₂</sub> ⟨j₁,m₁,j₂,m₂|j,m_j⟩ |j₁,m₁⟩|j₂,m₂⟩.
+          The quantities ⟨j₁,m₁,j₂,m₂|j,m_j⟩ are the CG coefficients. They are tabulated (Condon and Shortley convention). They appear in: (1) atomic spectroscopy — coupling L and S to get J; (2) nuclear physics — coupling nucleon angular momenta; (3) Wigner-Eckart theorem — simplifying matrix elements in perturbation theory; (4) quantum computing — entangled state construction. They are non-zero only when m_j = m₁ + m₂ (z-component addition) and |j₁−j₂| ≤ j ≤ j₁+j₂ (triangle rule).
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Explain exchange degeneracy and why it matters for He energy levels.</summary>
+        <div class="qa-ans">
+          For two identical particles, if we swap their labels (1↔2), the physical state is unchanged. But for a non-symmetric Hamiltonian, the states Ψ(r⃗₁,r⃗₂) and Ψ(r⃗₂,r⃗₁) would have the same energy — this is exchange degeneracy. The true eigenstates are not Ψ(r⃗₁,r⃗₂) alone but symmetric/antisymmetric combinations: Ψ<sub>±</sub> = [Ψ(r⃗₁,r⃗₂) ± Ψ(r⃗₂,r⃗₁)]/√2. The Pauli principle resolves this degeneracy by requiring the total wavefunction to be antisymmetric. This splitting is energetically significant: the symmetric (ortho-He) and antisymmetric (para-He) spatial states have different energies because the electron-electron repulsion ⟨e²/4πε₀r₁₂⟩ has different values when electrons avoid each other (antisymmetric) vs. can be close (symmetric). This is the origin of Hund's rule: triplet (antisymmetric spatial) states lie lower in energy because electrons avoid each other → less repulsion.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ L-9 -->
+<section class="lec" id="lec9">
+  <div class="lec-header">
+    <div class="lec-num">L<br>9</div>
+    <div class="lec-title-block">
+      <h2>Two-Electron Energy Diagrams &amp; Atomic Units</h2>
+      <div class="lec-date">20 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Atomic Units — Simplifying the Equations</h3>
+    <p>In atomic physics, SI units carry around many constants. The <strong>atomic unit</strong> (a.u.) system sets the most natural atomic quantities to 1:</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Quantity</th><th>Atomic Unit</th><th>SI Value</th><th>Why?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Charge of e⁻</td><td>e = 1</td><td>1.6 × 10⁻¹⁹ C</td><td>natural charge scale</td></tr>
+          <tr><td>Rest mass of e⁻</td><td>m<sub>e</sub> = 1</td><td>9.1 × 10⁻³¹ kg</td><td>natural mass scale</td></tr>
+          <tr><td>Reduced Planck const.</td><td>ℏ = 1</td><td>1.05 × 10⁻³⁴ J·s</td><td>natural action scale</td></tr>
+          <tr><td>Coulomb constant</td><td>1/4πε₀ = 1</td><td>8.99 × 10⁹ N·m²/C²</td><td>natural potential scale</td></tr>
+          <tr><td>Length</td><td>a₀ = 1</td><td>0.529 Å (Bohr radius)</td><td>natural length scale</td></tr>
+          <tr><td>Energy</td><td>1 Hartree = 2 × 13.6 eV</td><td>27.2 eV (1 a.u. of E)</td><td>E₁ of H = −½ a.u.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-key">
+      <div class="box-title">Two-Electron Hamiltonian in Atomic Units</div>
+      <div style="font-family:'EB Garamond',serif;font-size:1.05rem;text-align:center;line-height:2;">
+        H = −½∇₁² − ½∇₂² − Z/r₁ − Z/r₂ + 1/r₁₂
+      </div>
+      <br>
+      For He (Z=2), n=1, single electron: E<sub>n</sub> = −Z²/2n² → E₁ = −4/2 = −2 a.u. = −54.4 eV.
+    </div>
+
+    <div class="box box-sage">
+      <div class="box-title">Assignment: Estimate Atomic Units</div>
+      In atomic units, find the values of:
+      (i) unit length, (ii) wavelength, (iii) energy, (iv) temperature (from k<sub>B</sub>T), (v) time (1 a.u. of time = ? sec, from frequency), (vi) velocity, (vii) value of fine structure constant α.
+    </div>
+
+    <h3>Two-Electron Energy Level Diagram (He)</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;">
+        <!-- Para-He singlet -->
+        <text x="60" y="20" text-anchor="middle" fill="#f05c7a" font-size="10" font-family="JetBrains Mono">Para-He (S=0)</text>
+        <text x="60" y="30" text-anchor="middle" fill="#f05c7a" font-size="8">singlet states</text>
+        <!-- Para levels -->
+        <line x1="20" y1="55" x2="100" y2="55" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="105" y="59" fill="#3dd6c4" font-size="9">¹S₀ (1s2s)</text>
+        <line x1="20" y1="75" x2="100" y2="75" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="105" y="79" fill="#7a8cff" font-size="9">¹P₁ (1s2p)</text>
+        <line x1="20" y1="95" x2="100" y2="95" stroke="#f0b347" stroke-width="1.5"/>
+        <text x="105" y="99" fill="#f0b347" font-size="9">¹D₂ (1s3d)</text>
+        <!-- Ionization -->
+        <line x1="20" y1="135" x2="100" y2="135" stroke="#55557a" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="105" y="139" fill="#55557a" font-size="8">He⁺ + e⁻ (24.6 eV)</text>
+        <!-- Ground 1s² -->
+        <line x1="20" y1="260" x2="100" y2="260" stroke="#f05c7a" stroke-width="2"/>
+        <text x="105" y="264" fill="#f05c7a" font-size="9">¹S₀ (1s²) GS</text>
+        <!-- Arrow GS to ionization -->
+        <line x1="60" y1="258" x2="60" y2="137" stroke="#55557a" stroke-width="1" stroke-dasharray="2,2" marker-end="url(#arr)"/>
+        <text x="5" y="200" fill="#55557a" font-size="8" transform="rotate(-90 15 200)">~24.6 eV</text>
+
+        <!-- Ortho-He triplet -->
+        <text x="280" y="20" text-anchor="middle" fill="#3dd6c4" font-size="10" font-family="JetBrains Mono">Ortho-He (S=1)</text>
+        <text x="280" y="30" text-anchor="middle" fill="#3dd6c4" font-size="8">triplet states</text>
+        <!-- Ortho levels — lower than singlet for same config -->
+        <line x1="240" y1="80" x2="330" y2="80" stroke="#3dd6c4" stroke-width="1.5"/>
+        <text x="335" y="84" fill="#3dd6c4" font-size="9">³S₁ (1s2s)</text>
+        <line x1="240" y1="100" x2="330" y2="100" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="335" y="104" fill="#7a8cff" font-size="9">³P₀,₁,₂ (1s2p)</text>
+        <line x1="240" y1="120" x2="330" y2="120" stroke="#f0b347" stroke-width="1.5"/>
+        <text x="335" y="124" fill="#f0b347" font-size="9">³D (1s3d)</text>
+        <line x1="240" y1="135" x2="330" y2="135" stroke="#55557a" stroke-width="1" stroke-dasharray="4,2"/>
+        <text x="335" y="139" fill="#55557a" font-size="8">ionization</text>
+
+        <!-- Note: no triplet ground state because 1s² must be singlet -->
+        <text x="280" y="260" text-anchor="middle" fill="#55557a" font-size="8">No 1s² triplet ground state</text>
+        <text x="280" y="270" text-anchor="middle" fill="#55557a" font-size="7">(Pauli: 1s² must be singlet)</text>
+
+        <!-- Exchange splitting arrow -->
+        <line x1="105" y1="55" x2="235" y2="80" stroke="#f05c7a" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="165" y="60" fill="#f05c7a" font-size="7" transform="rotate(15 165 60)">exchange splitting</text>
+      </svg>
+      <figcaption>Fig 9.1 — Schematic He energy level diagram. Para-He (singlet S=0) levels are higher in energy than the corresponding Ortho-He (triplet S=1) states for the same configuration. The exchange splitting arises from the different expectation values of the electron-electron repulsion. The 1s² ground state is necessarily singlet (Pauli). There are no radiative transitions between ortho and para-He in LS coupling (ΔS = 0 selection rule).</figcaption>
+    </div>
+
+    <h3>Why Ortho is Lower than Para (Same Config)</h3>
+
+    <div class="box box-concept">
+      <div class="box-title">Hund's First Rule — Physical Origin</div>
+      For the same electron configuration (e.g., 1s2s), the triplet (S=1, ortho) lies <em>lower</em> in energy than the singlet (S=0, para). Why?
+      <br><br>
+      The triplet has an antisymmetric spatial wavefunction → electrons are more likely to be far apart (less probable to be at the same point) → lower electron-electron repulsion energy → lower total energy.
+      <br><br>
+      The singlet has a symmetric spatial wavefunction → electrons can be close → higher repulsion → higher energy.
+      <br><br>
+      This is the physical basis of <strong>Hund's first rule</strong>: for equivalent electrons, the term with highest multiplicity (highest S) lies lowest in energy.
+    </div>
+
+    <h3>Inter-system Transitions and Forbidden Lines</h3>
+    <div class="box box-warn">
+      <div class="box-title">ΔS = 0 Selection Rule and Intercombination Lines</div>
+      In LS coupling, the selection rule ΔS = 0 forbids transitions between singlet and triplet states. Therefore ortho-He and para-He have <em>separate</em> spectra and do not interconvert by radiation. This caused early spectroscopists to think helium was two different elements ("parhelium" and "orthohelium")!
+      <br><br>
+      When spin-orbit coupling is strong (high-Z elements), ΔS = 0 breaks down → <strong>intercombination lines</strong> appear. For example, the 254 nm Hg line ³P₁ → ¹S₀ is an intercombination line of great practical importance (UV lamps, atomic clocks).
+    </div>
+
+    <div class="qa-block">
+      <h4>Important Questions — Lecture 9</h4>
+      <details class="qa">
+        <summary>Estimate the values of atomic units of energy, length, time, and velocity, and find the value of α in a.u.</summary>
+        <div class="qa-ans">
+          <strong>Length:</strong> 1 a.u. = a₀ = ℏ²/m<sub>e</sub>e² = 0.529 Å = 5.29 × 10⁻¹¹ m.
+          <br><br>
+          <strong>Energy:</strong> 1 Hartree = e²/a₀ = m<sub>e</sub>e⁴/ℏ² = 27.2 eV = 4.36 × 10⁻¹⁸ J. Note: 1 a.u. of energy = 2 Rydbergs. The ground state H energy is −½ a.u. = −13.6 eV.
+          <br><br>
+          <strong>Velocity:</strong> 1 a.u. = e²/ℏ = αc ≈ c/137 ≈ 2.19 × 10⁶ m/s (velocity of e⁻ in H ground state).
+          <br><br>
+          <strong>Time:</strong> 1 a.u. = ℏ/(1 Hartree) = ℏa₀/e² = a₀/v<sub>a.u.</sub> ≈ 24.2 × 10⁻¹⁸ s ≈ 24 attoseconds. This is the orbital period scale.
+          <br><br>
+          <strong>Fine structure constant in a.u.:</strong> α = e²/ℏc. In a.u.: e=1, ℏ=1, so α = 1/c<sub>a.u.</sub>. The speed of light in atomic units is c<sub>a.u.</sub> = c/(αc) = 1/α ≈ 137. So α = 1/137 in both SI and atomic units — it's dimensionless and universal.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why does helium have two distinct spectroscopic series (ortho-He and para-He)?</summary>
+        <div class="qa-ans">
+          Helium has two electrons. Their spins can combine to S=0 (singlet, para-He) or S=1 (triplet, ortho-He). In LS coupling, the electric dipole selection rule ΔS = 0 means a photon cannot flip the total electron spin. Therefore, transitions between singlet and triplet states are forbidden. The para-He and ortho-He states are energetically distinct (exchange splitting) and do not communicate spectroscopically. This gives two completely independent sets of spectral lines — as if they were two different atoms. Historically, the "two heliums" were called parahelium and orthohelium and were thought to be separate elements. The puzzle was resolved when Heisenberg explained in 1926 that exchange degeneracy and the Pauli principle cause the singlet-triplet splitting and the selection rule ΔS = 0 forbids intercombination.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What is the lowest state of the He atom? Give its quantum numbers and term symbol.</summary>
+        <div class="qa-ans">
+          Ground state: 1s² configuration. Both electrons in the n=1, l=0 orbital. Since both spatial quantum numbers are identical, Pauli Exclusion forces the spin part to be antisymmetric → singlet state S=0. Total: S=0 → 2S+1=1, L=0 → l₁+l₂=0, J=|L−S|=0. Term symbol: <strong>¹S₀</strong>. This is the para-He ground state. The energy in atomic units: E = 2×(−Z²/2n²) + ⟨1/r₁₂⟩ ≈ −4 + 5/8 = −2.75 a.u. ≈ −74.8 eV (the exact experimental value is −79.0 eV; the discrepancy is due to electron correlation). The simple orbital model gives a first approximation; perturbation theory and variational methods improve it.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>SMB Sir · Atomic Physics (QM Approach)</span> &nbsp;·&nbsp;
+  <span>L-1 through L-9 · Feb – Apr 2026</span> &nbsp;·&nbsp;
+  <span>Reference: Bransden &amp; Joachin · Ghatak &amp; Loknathan · Landau &amp; Lifshitz Vol-III</span>
+  <br><br>
+  Notes: Class · Webpage expanded for examination preparation
+</footer>
+
+</body>
+</html>
