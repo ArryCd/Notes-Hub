@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class Notes · Central Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --bg:           #0d0f14;
+      --bg-card:      #13161e;
+      --bg-card-hover:#181c28;
+      --border:       #232840;
+      --border-bright:#3a4070;
+      --accent:       #7eb8f7;
+      --accent2:      #a78bfa;
+      --accent3:      #6ee7b7;
+      --dim:          #4a5280;
+      --muted:        #7a85b0;
+      --text:         #d8ddf5;
+      --text-bright:  #eef0fc;
+      --soon-bg:      #0f1118;
+      --soon-border:  #1e2235;
+      --soon-text:    #3a4060;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Background grid texture ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(126,184,247,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126,184,247,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Radial glow ── */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-orb-1 {
+      width: 600px; height: 600px;
+      top: -200px; left: -100px;
+      background: radial-gradient(circle, rgba(126,184,247,0.07) 0%, transparent 70%);
+    }
+    .glow-orb-2 {
+      width: 500px; height: 500px;
+      bottom: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%);
+    }
+
+    /* ── Layout wrapper ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 72px 0 56px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
+    .header-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 7vw, 4.2rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: var(--text-bright);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .header-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 300;
+    }
+
+    .header-sub {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 0;
+    }
+
+    .header-rule {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 28px auto 0;
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Grid ── */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    /* ── Card ── */
+    .card {
+      display: block;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 26px 24px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-bright);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+    .card:hover::before { opacity: 1; }
+
+    .card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 14px;
+    }
+
+    .card-subject {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--text-bright);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: auto;
+    }
+
+    .card-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent3);
+    }
+
+    .card-arrow {
+      font-size: 1.1rem;
+      color: var(--accent);
+      transition: transform 0.2s ease;
+    }
+    .card:hover .card-arrow { transform: translateX(4px); }
+
+    /* ── Color variants per card ── */
+    .card-chem .card::before { background: linear-gradient(90deg, #6ee7b7, #34d399); }
+    .card-chem .card:hover .card-status { color: #6ee7b7; }
+    .card-chem .card:hover .card-arrow  { color: #6ee7b7; }
+
+    .card-db .card::before { background: linear-gradient(90deg, #7eb8f7, #60a5fa); }
+
+    .card-ard .card::before { background: linear-gradient(90deg, #f9a8d4, #ec4899); }
+    .card-ard .card:hover .card-status { color: #f9a8d4; }
+    .card-ard .card:hover .card-arrow  { color: #f9a8d4; }
+
+    .card-smb .card::before { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+    .card-smb .card:hover .card-status { color: #fbbf24; }
+    .card-smb .card:hover .card-arrow  { color: #fbbf24; }
+
+    /* ── Coming-soon cards ── */
+    .coming-soon-section {
+      margin-top: 44px;
+    }
+
+    .card-soon {
+      background: var(--soon-bg);
+      border: 1px dashed var(--soon-border);
+      border-radius: 6px;
+      padding: 28px 26px 24px;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .card-soon .card-tag { color: var(--soon-text); }
+    .card-soon .card-subject {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 300;
+      color: var(--soon-text);
+      opacity: 0.6;
+      font-style: italic;
+    }
+    .card-soon .card-desc { color: var(--soon-text); opacity: 0.7; }
+    .card-soon .card-footer { border-color: var(--soon-border); }
+    .card-soon .card-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--soon-text);
+    }
+
+    .soon-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--soon-text);
+      border: 1px solid var(--soon-border);
+      border-radius: 3px;
+      padding: 3px 7px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 56px 0 48px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    .footer-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+    }
+
+    .footer-text a {
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .footer-text a:hover { opacity: 1; }
+
+    /* ── Entrance animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    header     { animation: fadeUp 0.7s ease both; }
+    .active-section { animation: fadeUp 0.7s 0.15s ease both; }
+    .coming-soon-section { animation: fadeUp 0.7s 0.3s ease both; }
+    footer     { animation: fadeIn 0.8s 0.4s ease both; }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      header { padding: 52px 0 40px; }
+      .notes-grid { grid-template-columns: 1fr; gap: 14px; }
+      .card, .card-soon { padding: 22px 20px 18px; }
+      .card-subject { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Atmospheric orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <div class="wrapper">
+
+    <!-- ── Header ── -->
+    <header>
+      <p class="header-eyebrow">B.Sc. Physics · Anuska Dey</p>
+      <h1 class="header-title">Class <em>Notes</em> Hub</h1>
+      <p class="header-sub">Expanded lecture notes, derivations &amp; reference — all in one place</p>
+      <div class="header-rule"></div>
+    </header>
+
+    <!-- ── Active notes ── -->
+    <section class="active-section">
+      <p class="section-label">Available now</p>
+
+      <div class="notes-grid">
+
+        <!-- Chemistry -->
+        <span class="card-chem">
+          <a class="card" href="#" title="Chemistry Notes">
+            <p class="card-tag">Physical Chemistry</p>
+            <h2 class="card-subject">Chemistry<br/>Notes</h2>
+            <p class="card-desc">Thermodynamics, kinetics, quantum chemistry &amp; more.</p>
+            <div class="card-footer">
+              <span class="card-status">● Live</span>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+        </span>
+
+        <!-- DB Sir -->
+        <span class="card-db">
+          <a class="card" href="https://arrycd.github.io/DB-Sir-Atomic-Physics/" target="_blank" title="DB Sir — Atomic Physics">
+            <p class="card-tag">Atomic Physics</p>
+            <h2 class="card-subject">DB Sir<br/>Notes</h2>
+            <p class="card-desc">Bohr → Wilson-Sommerfeld → Zeeman effect. Full derivations &amp; diagrams.</p>
+            <div class="card-footer">
+              <span class="card-status">● Live</span>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+        </span>
+
+        <!-- ARD Sir -->
+        <span class="card-ard">
+          <a class="card" href="#" title="ARD Sir Notes">
+            <p class="card-tag">Physics</p>
+            <h2 class="card-subject">ARD Sir<br/>Notes</h2>
+            <p class="card-desc">Expanded lecture notes with step-by-step derivations.</p>
+            <div class="card-footer">
+              <span class="card-status">● Live</span>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+        </span>
+
+        <!-- SMB Sir -->
+        <span class="card-smb">
+          <a class="card" href="#" title="SMB Sir Notes">
+            <p class="card-tag">Mathematics</p>
+            <h2 class="card-subject">SMB Sir<br/>Notes</h2>
+            <p class="card-desc">Complete solutions, theorems, and worked examples.</p>
+            <div class="card-footer">
+              <span class="card-status">● Live</span>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+        </span>
+
+      </div>
+    </section>
+
+    <!-- ── Coming Soon ── -->
+    <section class="coming-soon-section">
+      <p class="section-label">Coming soon</p>
+
+      <div class="notes-grid">
+
+        <!-- KD Sir -->
+        <div class="card-soon">
+          <span class="soon-badge">Soon</span>
+          <p class="card-tag">Physics</p>
+          <h2 class="card-subject">KD Sir<br/>Notes</h2>
+          <p class="card-desc">Notes currently being compiled and formatted.</p>
+          <div class="card-footer">
+            <span class="card-status">○ Pending</span>
+          </div>
+        </div>
+
+        <!-- RR Maam -->
+        <div class="card-soon">
+          <span class="soon-badge">Soon</span>
+          <p class="card-tag">Chemistry / Physics</p>
+          <h2 class="card-subject">RR Maam<br/>Notes</h2>
+          <p class="card-desc">Notes currently being compiled and formatted.</p>
+          <div class="card-footer">
+            <span class="card-status">○ Pending</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+      <p class="footer-text">
+        Notes: Anuska Dey &nbsp;·&nbsp; Webpage: Arya Naiya &nbsp;·&nbsp;
+        <a href="https://arrycd.github.io/DB-Sir-Atomic-Physics/" target="_blank">DB Sir · Atomic Physics ↗</a>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
