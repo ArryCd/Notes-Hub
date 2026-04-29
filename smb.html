@@ -111,6 +111,42 @@ body{
 }
 .hero-meta span b{color:var(--text-dim);}
 
+.credits-block {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: .4rem .8rem;
+  margin-top: 1.4rem;
+  padding: .5rem 1.2rem;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 2rem;
+  background: rgba(255,255,255,.03);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .06em;
+}
+.credits-item {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  white-space: nowrap;
+}
+.credits-label {
+  text-transform: uppercase;
+  color: #55557a;   /* use var(--text-mute) if your site has it */
+  letter-spacing: .12em;
+  font-size: .65rem;
+}
+.credits-name {
+  color: #dcdcf0;   /* use var(--text) if your site has it */
+  font-weight: 500;
+}
+.credits-divider {
+  color: #2a2a4a;   /* use var(--border-hi) if your site has it */
+  font-size: .9rem;
+}
+  
 /* ─── NAV ───────────────────────────────────────────── */
 #sticky-nav{
   position:sticky;top:0;z-index:100;
@@ -449,6 +485,15 @@ footer{
   letter-spacing:.08em;
 }
 footer span{color:var(--text-dim);}
+.footer-row{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.4rem 1.2rem;
+}
+.footer-row span,.footer-row a{
+  white-space:nowrap;
+}
 
 /* ─── UTIL ──────────────────────────────────────────── */
 .tag{
@@ -467,9 +512,103 @@ sub,sup{font-size:.7em;}
 em{font-style:italic;color:var(--text);}
 strong{font-weight:600;color:var(--text);}
 
+/* ─── HAMBURGER NAV (mobile only) ──────────────────── */
+.nav-burger{
+  display:none;
+  position:sticky;top:0;z-index:101;
+  background:rgba(8,8,16,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:.55rem 1.2rem;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-burger-label{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--teal);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.burger-btn{
+  background:none;border:none;cursor:pointer;
+  padding:.3rem;display:flex;flex-direction:column;gap:4px;
+}
+.burger-btn span{
+  display:block;width:20px;height:1.5px;
+  background:var(--text-dim);
+  transition:transform .2s,opacity .2s;
+}
+.burger-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.burger-btn.open span:nth-child(2){opacity:0;}
+.burger-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+
+.nav-dropdown{
+  position:sticky;top:2.45rem;z-index:100;
+  display:none;
+  background:rgba(8,8,16,.99);
+  border-bottom:1px solid var(--border);
+  padding:.3rem 0;
+  max-height:70vh;overflow-y:auto;
+}
+.nav-dropdown.open{display:block;}
+.nav-dropdown a{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:.8rem;
+  color:var(--text-mute);
+  text-decoration:none;
+  padding:.7rem 1.4rem;
+  letter-spacing:.04em;
+  border-left:2px solid transparent;
+  transition:color .15s,border-color .15s,background .15s;
+}
+.nav-dropdown a:hover,
+.nav-dropdown a:active{
+  color:var(--teal);
+  border-left-color:var(--teal);
+  background:rgba(61,214,196,.05);
+}
+
+/* ─── MOBILE OVERRIDES ──────────────────────────── */
+@media(max-width:680px){
+  #sticky-nav{display:none !important;}
+  .nav-burger{display:flex;}
+}
+
 @media(max-width:600px){
   .lec-body{padding-left:0;}
   .lec-header{flex-direction:column;gap:.5rem;}
+
+  /* Fix numbered steps — switch to block so text wraps freely */
+  .step{display:block;}
+  .step::before{
+    display:inline-flex;
+    margin-right:.5rem;
+    margin-bottom:.25rem;
+    vertical-align:middle;
+  }
+
+  /* Equations: left-align and allow horizontal scroll */
+  .eq-block{
+    font-size:.88rem;
+    text-align:left;
+    padding:.75rem .9rem;
+    word-break:break-word;
+  }
+
+  /* Hero meta: tighter on small screens */
+  .hero-meta{gap:.6rem;}
+  .hero-meta span{font-size:.68rem;}
+
+  /* Tables scroll horizontally */
+  .tbl-wrap{-webkit-overflow-scrolling:touch;}
+
+  /* Ensure boxes don't overflow */
+  .box{word-break:break-word;}
+
+  /* Nested eq-block inside a step */
+  .step .eq-block{margin-top:.5rem;}
 }
 </style>
 </head>
@@ -486,6 +625,17 @@ strong{font-weight:600;color:var(--text);}
     <span><b>Level:</b> Advanced Undergraduate</span>
     <span><b>Lectures:</b> L-1 through L-9</span>
   </div>
+  <div class="credits-block">
+  <span class="credits-item">
+    <span class="credits-label">Notes</span>
+    <span class="credits-name">Anuska Dey</span>
+  </span>
+  <span class="credits-divider">·</span>
+  <span class="credits-item">
+    <span class="credits-label">Webpage</span>
+    <span class="credits-name">Arya Naiya</span>
+  </span>
+</div>
 </header>
 
 <!-- ═══════════════════════════════════════ NAV -->
@@ -499,6 +649,25 @@ strong{font-weight:600;color:var(--text);}
   <a href="#lec7">L7 · Two-e⁻ Atoms</a>
   <a href="#lec8">L8 · Angular Momentum Add.</a>
   <a href="#lec9">L9 · Atomic Units &amp; Levels</a>
+</nav>
+
+<!-- ═══════════════════════════════════════ HAMBURGER NAV (mobile) -->
+<div class="nav-burger" id="navBurger">
+  <span class="nav-burger-label">SMB Sir · Lectures</span>
+  <button class="burger-btn" id="burgerBtn" aria-label="Toggle lecture menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<nav class="nav-dropdown" id="navDropdown">
+  <a href="#lec1"  onclick="closeMenu()">L-1 · H-atom Setup</a>
+  <a href="#lec2"  onclick="closeMenu()">L-2 · CM Separation</a>
+  <a href="#lec3"  onclick="closeMenu()">L-3 · Radial Equation</a>
+  <a href="#lec4"  onclick="closeMenu()">L-4 · Series Solution</a>
+  <a href="#lec5"  onclick="closeMenu()">L-5 · Laguerre &amp; Radial Wfn</a>
+  <a href="#lec6"  onclick="closeMenu()">L-6 · Exotic Atoms</a>
+  <a href="#lec7"  onclick="closeMenu()">L-7 · Two-e⁻ Atoms</a>
+  <a href="#lec8"  onclick="closeMenu()">L-8 · Angular Momentum Add.</a>
+  <a href="#lec9"  onclick="closeMenu()">L-9 · Atomic Units &amp; Levels</a>
 </nav>
 
 <main>
@@ -1602,12 +1771,38 @@ strong{font-weight:600;color:var(--text);}
 </main>
 
 <footer>
-  <span>SMB Sir · Atomic Physics (QM Approach)</span> &nbsp;·&nbsp;
-  <span>L-1 through L-9 · Feb – Apr 2026</span> &nbsp;·&nbsp;
-  <span>Reference: Bransden &amp; Joachin · Ghatak &amp; Loknathan · Landau &amp; Lifshitz Vol-III</span>
-  <br><br>
-  Notes: Class · Webpage expanded for examination preparation
+  <div class="footer-row">
+    <span>SMB Sir · Atomic Physics (QM Approach)</span>
+  </div>
+  <div class="footer-row" style="margin-top:.9rem;">
+    <span>Notes: Anuska Dey</span>
+    <span>Webpage: Arya Naiya</span>
+    <a href="index.html" style="color:#3dd6c4;text-decoration:none;opacity:.8;">← All Notes</a>
+  </div>
 </footer>
 
+<script>
+  const burgerBtn    = document.getElementById('burgerBtn');
+  const navDropdown  = document.getElementById('navDropdown');
+
+  burgerBtn.addEventListener('click', function () {
+    const isOpen = navDropdown.classList.toggle('open');
+    burgerBtn.classList.toggle('open', isOpen);
+    burgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  function closeMenu() {
+    navDropdown.classList.remove('open');
+    burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Close when clicking outside
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('#navBurger') && !e.target.closest('#navDropdown')) {
+      closeMenu();
+    }
+  });
+</script>
 </body>
 </html>
