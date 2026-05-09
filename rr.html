@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solid State Physics — RR Ma'am Class Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #080810;
+  --bg-card:   #0f0f1c;
+  --bg-lift:   #14142a;
+  --bg-deep:   #1a1a32;
+  --border:    #2a2a4a;
+  --border-hi: #3d3d6a;
+
+  --text:      #dcdcf0;
+  --text-dim:  #8888b0;
+  --text-mute: #55557a;
+
+  --gold:      #f0b347;
+  --gold-dim:  #7a5c20;
+  --teal:      #3dd6c4;
+  --teal-dim:  #1a5c56;
+  --rose:      #f05c7a;
+  --rose-dim:  #6a1a28;
+  --indigo:    #7a8cff;
+  --indigo-dim:#2a2e6a;
+  --sage:      #7adf90;
+  --sage-dim:  #1a4a26;
+
+  --radius:    8px;
+  --font-body: 'Outfit', sans-serif;
+  --font-serif:'EB Garamond', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;min-height:100vh;}
+
+/* ─── HERO ─── */
+#hero{
+  background:linear-gradient(135deg,#060612 0%,#0c0c24 50%,#0a0a1e 100%);
+  border-bottom:1px solid var(--border);
+  padding:2.5rem 2rem 2rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 50%,rgba(122,140,255,.07) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 35% at 70% 40%,rgba(61,214,196,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-tag{display:inline-block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);background:rgba(61,214,196,.08);border:1px solid rgba(61,214,196,.2);padding:.25rem .75rem;border-radius:2rem;margin-bottom:1rem;}
+#hero h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;color:#fff;letter-spacing:-.01em;line-height:1.2;}
+#hero h1 span{color:var(--gold);}
+.hero-sub{font-size:.95rem;color:var(--text-dim);margin-top:.5rem;font-style:italic;font-family:var(--font-serif);}
+.hero-meta{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+.hero-meta span{font-family:var(--font-mono);font-size:.72rem;color:var(--text-mute);letter-spacing:.08em;text-transform:uppercase;}
+.hero-meta span b{color:var(--text-dim);}
+
+/* ─── NAV ─── */
+#sticky-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.6rem 1.2rem;display:flex;gap:.25rem;flex-wrap:wrap;justify-content:center;}
+#sticky-nav a{font-family:var(--font-mono);font-size:.7rem;color:var(--text-mute);text-decoration:none;padding:.3rem .6rem;border-radius:4px;letter-spacing:.04em;white-space:nowrap;transition:background .15s,color .15s;}
+#sticky-nav a:hover{background:var(--bg-deep);color:var(--teal);}
+
+/* ─── HAMBURGER NAV ─── */
+.nav-burger{display:none;position:sticky;top:0;z-index:101;background:rgba(8,8,16,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.55rem 1.2rem;justify-content:space-between;align-items:center;}
+.nav-burger-label{font-family:var(--font-mono);font-size:.72rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;}
+.burger-btn{background:none;border:none;cursor:pointer;padding:.3rem;display:flex;flex-direction:column;gap:4px;}
+.burger-btn span{display:block;width:20px;height:1.5px;background:var(--text-dim);transition:transform .2s,opacity .2s;}
+.burger-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.burger-btn.open span:nth-child(2){opacity:0;}
+.burger-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+.nav-dropdown{position:sticky;top:2.45rem;z-index:100;display:none;background:rgba(8,8,16,.99);border-bottom:1px solid var(--border);padding:.3rem 0;max-height:70vh;overflow-y:auto;}
+.nav-dropdown.open{display:block;}
+.nav-dropdown a{display:block;font-family:var(--font-mono);font-size:.8rem;color:var(--text-mute);text-decoration:none;padding:.7rem 1.4rem;letter-spacing:.04em;border-left:2px solid transparent;transition:color .15s,border-color .15s,background .15s;}
+.nav-dropdown a:hover,.nav-dropdown a:active{color:var(--teal);border-left-color:var(--teal);background:rgba(61,214,196,.05);}
+
+/* ─── LAYOUT ─── */
+main{max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+
+/* ─── LECTURE BLOCK ─── */
+.lec{margin:2.5rem 0;position:relative;}
+.lec-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+.lec-num{flex-shrink:0;width:2.8rem;height:2.8rem;background:var(--bg-deep);border:1px solid var(--border-hi);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.8rem;font-weight:500;color:var(--indigo);line-height:1;text-align:center;}
+.lec-title-block{flex:1;}
+.lec-title-block h2{font-family:var(--font-serif);font-size:1.55rem;font-weight:500;color:#fff;line-height:1.2;}
+.lec-date{font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.1em;margin-top:.2rem;}
+.lec-body{padding-left:3.8rem;}
+hr.sec-div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+
+/* ─── HEADINGS ─── */
+h3{font-family:var(--font-serif);font-size:1.2rem;color:var(--gold);margin:1.8rem 0 .7rem;font-weight:400;}
+h4{font-size:.95rem;font-weight:600;color:var(--text);margin:1.2rem 0 .4rem;letter-spacing:.02em;}
+p{margin:.5rem 0;}
+
+/* ─── BOXES ─── */
+.box{border-radius:var(--radius);padding:1rem 1.1rem;margin:1rem 0;border-left:3px solid transparent;font-size:.93rem;}
+.box-key{background:rgba(240,179,71,.06);border-color:var(--gold);}
+.box-key .box-title{color:var(--gold);}
+.box-concept{background:rgba(122,140,255,.06);border-color:var(--indigo);}
+.box-concept .box-title{color:var(--indigo);}
+.box-warn{background:rgba(240,92,122,.06);border-color:var(--rose);}
+.box-warn .box-title{color:var(--rose);}
+.box-sage{background:rgba(122,223,144,.05);border-color:var(--sage);}
+.box-sage .box-title{color:var(--sage);}
+.box-teal{background:rgba(61,214,196,.05);border-color:var(--teal);}
+.box-teal .box-title{color:var(--teal);}
+.box-title{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem;}
+
+/* ─── EQUATIONS ─── */
+.eq-block{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1.2rem;margin:.8rem 0;font-family:var(--font-serif);font-size:1.05rem;text-align:center;line-height:1.9;overflow-x:auto;}
+.eq-block .eq-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-mute);display:block;text-align:right;margin-top:.3rem;letter-spacing:.06em;}
+.eq-inline{font-family:var(--font-serif);font-size:1.05em;background:rgba(255,255,255,.04);border:1px solid var(--border);padding:.05em .3em;border-radius:4px;}
+
+/* ─── DERIVATION ─── */
+details.deriv{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin:1rem 0;overflow:hidden;}
+details.deriv > summary{cursor:pointer;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.05em;color:var(--teal);user-select:none;list-style:none;background:var(--bg-lift);border-bottom:1px solid transparent;transition:background .15s;}
+details.deriv > summary:hover{background:var(--bg-deep);}
+details.deriv[open] > summary{border-bottom-color:var(--border);color:var(--text);}
+details.deriv > summary::before{content:'▶';font-size:.6rem;color:var(--teal);transition:transform .2s;}
+details.deriv[open] > summary::before{transform:rotate(90deg);}
+details.deriv .deriv-body{padding:1rem 1.2rem;}
+
+/* ─── Q&A ─── */
+.qa-block{margin:1.5rem 0;}
+.qa-block > h4{color:var(--text-dim);font-size:.82rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;}
+details.qa{border:1px solid var(--border);border-radius:var(--radius);margin:.5rem 0;overflow:hidden;}
+details.qa > summary{cursor:pointer;padding:.75rem 1rem;background:var(--bg-card);font-size:.9rem;color:var(--text);list-style:none;display:flex;align-items:flex-start;gap:.7rem;transition:background .15s;}
+details.qa > summary:hover{background:var(--bg-lift);}
+details.qa > summary::before{content:'▶';font-size:.6rem;color:var(--gold);flex-shrink:0;margin-top:.3rem;transition:transform .2s;}
+details.qa[open] > summary::before{transform:rotate(90deg);}
+details.qa .qa-ans{padding:.9rem 1.1rem;border-top:1px solid var(--border);font-size:.9rem;color:var(--text-dim);line-height:1.75;}
+
+/* ─── DIAGRAM ─── */
+.diagram{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1rem 0;text-align:center;}
+.diagram figcaption{font-size:.78rem;color:var(--text-mute);font-style:italic;margin-top:.5rem;font-family:var(--font-serif);line-height:1.4;}
+
+/* ─── TABLE ─── */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+th{background:var(--bg-deep);color:var(--text);font-weight:600;padding:.5rem .8rem;text-align:left;border-bottom:2px solid var(--border-hi);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.05em;}
+td{padding:.45rem .8rem;border-bottom:1px solid var(--border);color:var(--text-dim);}
+tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ─── STEPS ─── */
+.steps{counter-reset:step;margin:.8rem 0;}
+.step{display:flex;gap:.9rem;margin:.5rem 0;align-items:flex-start;}
+.step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:1.5rem;height:1.5rem;background:var(--bg-deep);border:1px solid var(--border-hi);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.65rem;color:var(--indigo);margin-top:.15rem;}
+
+/* ─── TAGS ─── */
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.65rem;padding:.1rem .45rem;border-radius:3px;letter-spacing:.05em;}
+.tag-ref{background:rgba(122,140,255,.12);color:var(--indigo);}
+.tag-assign{background:rgba(240,179,71,.1);color:var(--gold);}
+.tag-exam{background:rgba(240,92,122,.1);color:var(--rose);}
+
+/* ─── FOOTER ─── */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.08em;}
+footer span{color:var(--text-dim);}
+.footer-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.2rem;}
+
+/* ─── IQ SECTION ─── */
+.iq-section{background:var(--bg-card);border:1px solid var(--border-hi);border-radius:12px;padding:1.5rem 1.8rem;margin:3rem 0;}
+.iq-title{font-family:var(--font-serif);font-size:1.6rem;color:var(--gold);margin-bottom:.3rem;}
+.iq-sub{font-family:var(--font-mono);font-size:.7rem;color:var(--text-mute);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;}
+
+sub,sup{font-size:.7em;}
+em{font-style:italic;color:var(--text);}
+strong{font-weight:600;color:var(--text);}
+
+/* ─── MOBILE ─── */
+@media(max-width:680px){
+  #sticky-nav{display:none !important;}
+  .nav-burger{display:flex;}
+}
+@media(max-width:600px){
+  .lec-body{padding-left:0;}
+  .lec-header{flex-direction:column;gap:.5rem;}
+  .step{display:block;}
+  .step::before{display:inline-flex;margin-right:.5rem;margin-bottom:.25rem;vertical-align:middle;}
+  .eq-block{font-size:.88rem;text-align:left;padding:.75rem .9rem;word-break:break-word;}
+  .hero-meta{gap:.6rem;}
+  .hero-meta span{font-size:.68rem;}
+  .tbl-wrap{-webkit-overflow-scrolling:touch;}
+  .box{word-break:break-word;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header id="hero">
+  <div class="hero-tag">RR Ma'am · Solid State Physics · 2026</div>
+  <h1>Solid State Physics<br><span>— Complete Class Notes</span></h1>
+  <p class="hero-sub">Free Electron Theory · Band Theory · Magnetism — Expanded with Derivations &amp; Conceptual Depth</p>
+  <div class="hero-meta">
+    <span><b>Ref:</b> Kittel · Dekker · Ashcroft &amp; Mermin</span>
+    <span><b>Lectures:</b> L-1 through L-10 + Online</span>
+    <span><b>Topics:</b> Drude · Sommerfeld · KP Model · Magnetism</span>
+  </div>
+</header>
+
+<!-- ══════════════ DESKTOP NAV ══════════════ -->
+<nav id="sticky-nav">
+  <a href="#lec1">L1 · Intro</a>
+  <a href="#lec2">L2 · Drude</a>
+  <a href="#lec3">L3 · Sommerfeld</a>
+  <a href="#lec4">L4 · Fermi Gas</a>
+  <a href="#lec5">L5 · Band Theory</a>
+  <a href="#lec6">L6 · KP Model</a>
+  <a href="#lec7">L7 · Effective Mass</a>
+  <a href="#lec8">L8 · Metal/Insulator</a>
+  <a href="#lec9">L9 · Magnetism</a>
+  <a href="#lec10">L10 · Quantum Mag.</a>
+  <a href="#lec11">L11 · Ferromagnetism</a>
+  <a href="#iq">Important Q&amp;A</a>
+</nav>
+
+<!-- ══════════════ MOBILE NAV ══════════════ -->
+<div class="nav-burger" id="navBurger">
+  <span class="nav-burger-label">RR Ma'am · SSP Notes</span>
+  <button class="burger-btn" id="burgerBtn" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<nav class="nav-dropdown" id="navDropdown">
+  <a href="#lec1"  onclick="closeMenu()">L-1 · Introduction to SSP</a>
+  <a href="#lec2"  onclick="closeMenu()">L-2 · Drude Model &amp; Conductivity</a>
+  <a href="#lec3"  onclick="closeMenu()">L-3 · Sommerfeld / Quantum Free e⁻</a>
+  <a href="#lec4"  onclick="closeMenu()">L-4 · Fermi Gas &amp; Fermi Energy</a>
+  <a href="#lec5"  onclick="closeMenu()">L-5 · Band Theory Intro (KP)</a>
+  <a href="#lec6"  onclick="closeMenu()">L-6 · Kronig–Penney Model</a>
+  <a href="#lec7"  onclick="closeMenu()">L-7 · Effective Mass &amp; Holes</a>
+  <a href="#lec8"  onclick="closeMenu()">L-8 · Metal / Insulator / Semicon.</a>
+  <a href="#lec9"  onclick="closeMenu()">L-9 · Magnetism Fundamentals</a>
+  <a href="#lec10" onclick="closeMenu()">L-10 · Quantum Paramagnetism</a>
+  <a href="#lec11" onclick="closeMenu()">L-11 · Ferromagnetism &amp; Weiss</a>
+  <a href="#iq"    onclick="closeMenu()">★ Important Questions</a>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 1
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec1">
+  <div class="lec-header">
+    <div class="lec-num">L<br>1</div>
+    <div class="lec-title-block">
+      <h2>Introduction to Solid State Physics</h2>
+      <div class="lec-date">05 / 02 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>What is Solid State Physics?</h3>
+    <p>Solid State Physics studies matter in its densest form — the crystalline solid — where atoms are packed close enough that their mutual interactions fundamentally alter every property. It spans <strong>electrical, magnetic, thermal, optical</strong>, and mechanical behaviour of solids.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Why is the density so high?</div>
+      At T = 300 K, thermal energy k<sub>B</sub>T ≈ 26 meV. Bonding energies in solids are typically 1–10 eV — orders of magnitude larger. So at room temperature, the crystal lattice is essentially rigid; atoms just vibrate around fixed sites.
+    </div>
+
+    <h3>Chemical Bonding in Solids</h3>
+    <p>The nature of bonding determines almost everything about a solid's properties:</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Bond Type</th><th>Example</th><th>Mechanism</th><th>Typical ΔE</th></tr></thead>
+        <tbody>
+          <tr><td>Ionic</td><td>NaCl</td><td>Electrostatic attraction of oppositely charged ions</td><td>~5–10 eV/pair</td></tr>
+          <tr><td>Covalent</td><td>Diamond</td><td>Shared electron pairs; directional</td><td>~3–8 eV/bond</td></tr>
+          <tr><td>Metallic</td><td>Cu, Fe</td><td>Sea of delocalised electrons binding positive ions</td><td>~1–5 eV/atom</td></tr>
+          <tr><td>Van der Waals</td><td>Solid Ar, organic crystals</td><td>Fluctuating dipole–dipole (London dispersion)</td><td>~10–100 meV</td></tr>
+          <tr><td>Hydrogen</td><td>Ice</td><td>H atom shared between electronegative atoms</td><td>~0.1–0.5 eV</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Energy Scales and Why they Matter</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Energy Range</th><th>Physics</th><th>Probe</th></tr></thead>
+        <tbody>
+          <tr><td>meV – keV (Low Energy Physics)</td><td>Electronic structure, phonons, magnons. Nucleus is a <em>single</em> point-like entity.</td><td>Optical photons (eV), neutrons</td></tr>
+          <tr><td>keV – MeV (Intermediate)</td><td>Nuclear structure; nucleus is no longer a point — nucleons matter</td><td>X-rays (keV), γ-rays</td></tr>
+          <tr><td>MeV – GeV (High Energy)</td><td>Quark–gluon physics</td><td>Particle accelerators</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Optical probe in SSP</div>
+      Optical / EM radiation (UV-Visible-IR) carries photon energies from meV to a few keV — perfectly matched to electronic transitions in solids. X-rays (λ ~ 1 Å, hν ~ keV) are used to determine crystal structure via diffraction.
+    </div>
+
+    <h3>Conductivity — the Central Observable</h3>
+    <p>Conductivity σ spans an enormous range:</p>
+    <div class="eq-block">σ(metal) ~ 10<sup>6</sup> Ω<sup>−1</sup>cm<sup>−1</sup> &nbsp;&nbsp;↔&nbsp;&nbsp; σ(insulator) ~ 10<sup>−20</sup> Ω<sup>−1</sup>cm<sup>−1</sup></div>
+    <p>That is 26 orders of magnitude! SSP explains this using <strong>band structure</strong> — the way quantum mechanics determines which electron energies are allowed or forbidden in a periodic potential.</p>
+
+    <h3>Band Structure: A First Glimpse</h3>
+    <p>In a crystal, the energy levels of ~10<sup>23</sup> electrons per cm<sup>3</sup> bunch into <strong>quasi-continuous bands</strong> separated by <em>forbidden gaps</em>. The energy separation between adjacent allowed levels within a band is ~10<sup>−18</sup> eV — effectively continuous.</p>
+
+    <div class="box box-key">
+      <div class="box-title">The key physical distinction</div>
+      <strong>Metal:</strong> outermost band <em>partially</em> filled → electrons at the Fermi level can be excited by any tiny electric field → conduction.<br>
+      <strong>Insulator:</strong> outermost occupied band <em>completely</em> filled, gap ≫ k<sub>B</sub>T → no available states nearby → no conduction.<br>
+      <strong>Semiconductor:</strong> gap small (~1 eV) → thermal excitation at room temperature can bridge it.
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 2
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec2">
+  <div class="lec-header">
+    <div class="lec-num">L<br>2</div>
+    <div class="lec-title-block">
+      <h2>Free Electron Gas: The Drude Model</h2>
+      <div class="lec-date">05 / 02 / 2026 &amp; 12 / 02 / 2026 — Ref: Ashcroft &amp; Mermin</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Free Electron Gas Model</h3>
+    <p>Proposed by Drude (1900), this classical model treats the conduction electrons of a metal as an ideal gas of free particles, applying the Kinetic Theory of Gases (KTG). The positive ion cores are ignored except as scattering centres.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Assumptions of the Drude Model</div>
+      1. Electrons are free and non-interacting between collisions.<br>
+      2. Collisions are instantaneous and random, characterised by a <strong>mean free time</strong> (relaxation time) τ.<br>
+      3. After a collision, an electron's velocity is random (no memory of previous velocity).<br>
+      4. The classical Maxwell–Boltzmann distribution governs electron speeds.
+    </div>
+
+    <h3>Crystal Structure: Packing Fractions</h3>
+    <p>Before computing conductivity, we need the electron density n. This requires knowing how many atoms fit in a unit cell.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Structure</th><th>Atoms/cell</th><th>Packing Fraction</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>Simple Cubic (SC)</td><td>1</td><td>π/6 ≈ 52%</td><td>Po</td></tr>
+          <tr><td>Body-Centred Cubic (BCC)</td><td>2</td><td>π√3/8 ≈ 68%</td><td>Na, K, W, Fe</td></tr>
+          <tr><td>Face-Centred Cubic (FCC)</td><td>4</td><td>π√2/6 ≈ 74%</td><td>Cu, Al, Ni, Au</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>For copper (Cu): atomic weight 63.546 g/mol, density 8.96 g/cm³. Number density: n = (6.022×10<sup>23</sup> / 63.546) × 8.96 ≈ <strong>8.5 × 10<sup>22</sup> atoms/cm<sup>3</sup></strong>. Each Cu atom contributes 1 conduction electron → n<sub>e</sub> ≈ 8.5 × 10<sup>22</sup> e⁻/cm<sup>3</sup>.</p>
+
+    <h3>Drude Equation of Motion</h3>
+    <p>An electron in an electric field <strong>E</strong> experiences force F = eE (e &gt; 0 is the elementary charge magnitude; the electron has charge −e). Including a resistive drag term proportional to velocity:</p>
+    <div class="eq-block">m dv/dt = eE − (m/τ)v</div>
+    <p>The resistive term models the effect of collisions: on average, an electron that has been drifting for time τ will collide and lose its directed velocity. The factor m/τ is called the <strong>damping coefficient</strong>.</p>
+
+    <details class="deriv">
+      <summary>▸ Full Derivation: Drift Velocity and Conductivity</summary>
+      <div class="deriv-body">
+        <p>At steady state, dv/dt = 0:</p>
+        <div class="eq-block">eE = (m/τ)v<sub>d</sub> &nbsp;→&nbsp; v<sub>d</sub> = eEτ/m</div>
+        <p>Current density j = nev<sub>d</sub> (n = electron density, e = charge magnitude):</p>
+        <div class="eq-block">j = ne · (eEτ/m) = (ne²τ/m)E</div>
+        <p>Comparing with Ohm's law j = σE:</p>
+        <div class="eq-block" style="font-size:1.3rem;">σ = ne²τ/m<span class="eq-label">Drude Conductivity Formula</span></div>
+        <p>For the transient case, solving m dv/dt = eE − mv/τ with v(0) = 0:</p>
+        <div class="eq-block">v(t) = v<sub>d</sub>(1 − e<sup>−t/τ</sup>)</div>
+        <p>At t → ∞, v → v<sub>d</sub>. The characteristic time to reach steady state is τ ~ 10<sup>−14</sup> s.</p>
+      </div>
+    </details>
+
+    <h3>Numerical Success of Drude</h3>
+    <p>Using n ~ 10<sup>22</sup>/cc, e = 1.6×10<sup>−19</sup> C, m = 9.1×10<sup>−31</sup> kg, τ ~ 10<sup>−14</sup> s:</p>
+    <div class="eq-block">σ = (10<sup>22</sup>×10<sup>6</sup> × (1.6×10<sup>−19</sup>)² × 10<sup>−14</sup>) / (9.1×10<sup>−31</sup>) ~ 10<sup>6</sup> Ω<sup>−1</sup>cm<sup>−1</sup></div>
+    <p>This matches experiment! The Drude model successfully predicts room-temperature conductivity of metals.</p>
+
+    <h3>Hall Effect and Drude</h3>
+    <p>The Hall effect provides a crucial test: apply E in ŷ direction and B in ẑ direction. The Lorentz force pushes electrons in x̂. At steady state, a transverse Hall field E<sub>x</sub> builds up.</p>
+    <div class="eq-block">R<sub>H</sub> = −1/(ne) &nbsp;&nbsp;&nbsp; (Hall coefficient from Drude)</div>
+    <p>For monovalent metals (Cu, Ag), R<sub>H</sub> is measured to be ~ −1.5/(ne), in good agreement. However, for <strong>divalent/trivalent metals</strong> (Be, Al), R<sub>H</sub> comes out <em>positive</em> experimentally — meaning the carriers behave as <strong>positive holes</strong>. Drude cannot explain this; it requires quantum band theory.</p>
+
+    <h3>Thermal Conductivity and Wiedemann–Franz Law</h3>
+    <p>The Drude model also successfully derives thermal conductivity κ. In a temperature gradient, electrons near the hot end carry more energy than those near the cold end:</p>
+    <div class="eq-block">κ = (nv²τ/3) · (dE/dT) &nbsp;=&nbsp; (1/3)n⟨v²⟩τ · C<sub>v</sub><sup>e</sup></div>
+    <p>The ratio κ/σT = (4/π)(k<sub>B</sub>/e)² = constant — this is the <strong>Wiedemann–Franz Law</strong>, a major success of the Drude model.</p>
+
+    <h3>Failures of the Drude Model</h3>
+    <div class="box box-warn">
+      <div class="box-title">Major Failures</div>
+      1. <strong>Specific heat of electrons:</strong> Drude predicts C<sub>v</sub><sup>e</sup> = (3/2)Nk<sub>B</sub>. Experiment gives a value ~100× smaller at room temperature. Drude counts all electrons as contributing, but only those near E<sub>F</sub> do.<br><br>
+      2. <strong>Low-temperature conductivity:</strong> At low T, τ → 10<sup>−13</sup> s, giving mean free path λ ~ 10<sup>−7</sup> m = 1000 Å. But the lattice spacing is ~1 Å — electrons should scatter much more. This is unexplained.<br><br>
+      3. <strong>Positive Hall coefficients:</strong> Cannot explain hole-like carriers in divalent metals.<br><br>
+      4. <strong>Insulators:</strong> Drude assumes all valence electrons are free, predicting similar conductivity for all materials. Cannot explain insulators.
+    </div>
+
+    <p>The resolution of all these failures requires <strong>quantum mechanics</strong> — specifically, Fermi–Dirac statistics and the concept of energy bands.</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 3
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec3">
+  <div class="lec-header">
+    <div class="lec-num">L<br>3</div>
+    <div class="lec-title-block">
+      <h2>Sommerfeld / Quantum Free Electron Theory</h2>
+      <div class="lec-date">19 / 02 / 2026 — Ref: Kittel / Dekker</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Why Quantum Mechanics?</h3>
+    <p>Electrons are quantum particles — they obey Fermi–Dirac statistics, not Maxwell–Boltzmann. This one change resolves almost all failures of the Drude model.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Key Conceptual Difference: Standing vs. Progressive Waves</div>
+      The Drude model confines electrons to a box with hard-wall boundary conditions → standing waves (sin functions).<br><br>
+      The Sommerfeld model uses <strong>periodic boundary conditions</strong> (Born–von Kármán conditions) → <strong>progressive / travelling waves</strong> e<sup>ikx</sup>. This is physically appropriate because electrons in a solid circulate through the crystal, not bounce off walls. In practice, both give the same density of states, but the physics picture is cleaner with progressive waves.
+    </div>
+
+    <h3>1D Quantum Well: Standing Wave Approach</h3>
+    <p>Consider an electron in a 1D infinite well [0, L]. The Schrödinger equation:</p>
+    <div class="eq-block">−(ℏ²/2m)d²ψ/dx² = Eψ &nbsp;&nbsp;→&nbsp;&nbsp; ψ(x) = √(2/L) sin(nπx/L)</div>
+    <div class="eq-block">E<sub>n</sub> = ℏ²k²/2m = n²π²ℏ²/(2mL²) &nbsp;&nbsp;&nbsp; k = nπ/L</div>
+    <p>Energy goes as n². In 3D, for a cube of side L: E<sub>n<sub>x</sub>,n<sub>y</sub>,n<sub>z</sub></sub> = (π²ℏ²/2mL²)(n<sub>x</sub>² + n<sub>y</sub>² + n<sub>z</sub>²).</p>
+
+    <h3>Progressive Wave (Periodic BC) Approach</h3>
+    <p>Require ψ(x+L) = ψ(x). Then k = 2πn/L, and the wavefunction is a plane wave:</p>
+    <div class="eq-block">ψ(x) = (1/√V)e<sup>ikx</sup> &nbsp;&nbsp;→&nbsp;&nbsp; in 3D: ψ(r) = (1/√V)e<sup>ik·r</sup></div>
+    <p>Each k-state is doubly degenerate (spin up and down). States form a <strong>k-space lattice</strong> with unit cell volume (2π/L)³.</p>
+
+    <h3>Fermi–Dirac Distribution</h3>
+    <p>Electrons, being fermions, obey the Pauli exclusion principle — no two electrons can share the same quantum state. The probability of a state with energy E being occupied at temperature T is:</p>
+    <div class="eq-block" style="font-size:1.15rem;">f<sub>D</sub>(E) = 1/(1 + e<sup>(E−E<sub>F</sub>)/k<sub>B</sub>T</sup>)<span class="eq-label">Fermi–Dirac Distribution</span></div>
+    <p>At T = 0: f = 1 for E &lt; E<sub>F</sub>, f = 0 for E &gt; E<sub>F</sub>. The Fermi energy E<sub>F</sub> is the highest occupied energy level at T = 0.</p>
+
+    <div class="box box-key">
+      <div class="box-title">Physical meaning of E<sub>F</sub></div>
+      For typical metals, E<sub>F</sub> ~ 3–7 eV. Room temperature k<sub>B</sub>T ~ 0.026 eV. Since k<sub>B</sub>T ≪ E<sub>F</sub>, only electrons within ~k<sub>B</sub>T of the Fermi surface can be thermally excited. This is why only ~1% of electrons participate in thermal processes — explaining the 100× discrepancy in specific heat!
+    </div>
+
+    <h3>Density of States in 3D</h3>
+    <p>The density of states D(E) tells us how many electron states exist per unit energy interval:</p>
+    <div class="eq-block">D(E) = (V/2π²)(2m/ℏ²)<sup>3/2</sup> E<sup>1/2</sup> = C·E<sup>1/2</sup></div>
+    <p>This E<sup>1/2</sup> dependence (parabolic DOS) is a key feature of the free electron model in 3D. The number of electrons in dE is: N(E)dE = D(E)f(E)dE.</p>
+
+    <h3>Fermi Energy at T = 0</h3>
+    <p>Fill all states up to E<sub>F₀</sub> (ground state Fermi energy):</p>
+    <div class="eq-block">N = ∫₀<sup>E<sub>F₀</sub></sup> D(E)dE = (2/3)CE<sub>F₀</sub><sup>3/2</sup></div>
+    <div class="eq-block" style="font-size:1.2rem;">E<sub>F₀</sub> = (ℏ²/2m)(3π²n)<sup>2/3</sup><span class="eq-label">Ground-state Fermi Energy</span></div>
+    <p>For Cu: n = 8.5×10<sup>22</sup>/cm³ → E<sub>F₀</sub> ≈ 7 eV. Corresponds to T<sub>F</sub> = E<sub>F</sub>/k<sub>B</sub> ≈ 80,000 K! This "quantum temperature" is far above room temperature, confirming that the electron gas is always highly degenerate.</p>
+
+    <h3>Average Energy at T = 0</h3>
+    <div class="eq-block">Ē = (3/5)E<sub>F₀</sub></div>
+    <p>Compare with classical result (3/2)k<sub>B</sub>T — for copper at room T, the quantum average is ~100× larger. Quantum zero-point motion (Pauli pressure) is enormous.</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 4
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec4">
+  <div class="lec-header">
+    <div class="lec-num">L<br>4</div>
+    <div class="lec-title-block">
+      <h2>Temperature Dependence of the Fermi Gas</h2>
+      <div class="lec-date">26 / 02 / 2026 – 19 / 03 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Temperature Dependence of E<sub>F</sub></h3>
+    <p>At finite T, some electrons near E<sub>F₀</sub> get thermally excited to higher states. The Fermi level shifts slightly:</p>
+    <div class="eq-block">E<sub>F</sub>(T) = E<sub>F₀</sub>[1 − (π²/12)(k<sub>B</sub>T/E<sub>F₀</sub>)²]</div>
+    <p>The correction is of order (k<sub>B</sub>T/E<sub>F₀</sub>)² ~ 10<sup>−4</sup> at room temperature — E<sub>F</sub> barely changes. This is why tables list a single Fermi energy for metals.</p>
+
+    <h3>Average Energy at Finite T</h3>
+    <div class="eq-block">Ū(T) = U₀[1 + (5π²/12)(k<sub>B</sub>T/E<sub>F</sub>)²]</div>
+
+    <h3>Electronic Heat Capacity — Sommerfeld's Triumph</h3>
+    <p>Differentiating with respect to T:</p>
+    <div class="eq-block">C<sub>v</sub><sup>e</sup>/vol = (π²/2)nk<sub>B</sub>(k<sub>B</sub>T/E<sub>F</sub>) = γT</div>
+    <p>where γ = π²nk<sub>B</sub>²/(2E<sub>F</sub>) is the <strong>Sommerfeld parameter</strong>. This is linear in T — far smaller than the classical (3/2)Nk<sub>B</sub>. Physically, only electrons within k<sub>B</sub>T of E<sub>F</sub> can be excited.</p>
+
+    <div class="box box-key">
+      <div class="box-title">Experimental test: C<sub>v</sub>/T vs T²</div>
+      At low T, total specific heat C<sub>v</sub>/vol = γT + AT³, where the AT³ term is the Debye lattice contribution. Plotting C<sub>v</sub>/T vs T² gives a straight line with intercept γ (electronic) and slope A (lattice). This is a standard experimental method to extract E<sub>F</sub> from measurements.
+    </div>
+
+    <h3>Sommerfeld Conductivity</h3>
+    <p>In Sommerfeld theory, only electrons near E<sub>F</sub> contribute to transport. The conductivity formula is the same form as Drude but τ is now evaluated at the <strong>Fermi energy</strong>:</p>
+    <div class="eq-block">σ = ne²τ(E<sub>F</sub>)/m</div>
+    <p>Mean free path: λ = v<sub>F</sub>τ(E<sub>F</sub>), where v<sub>F</sub> = √(2E<sub>F</sub>/m) ~ 10<sup>6</sup> m/s is the Fermi velocity. At room T, λ ~ 100–1000 Å — much larger than the lattice spacing, because quantum mechanics forbids scattering from a perfectly periodic lattice (Bloch states are exact eigenstates).</p>
+
+    <h3>Why is λ ≫ a at low T?</h3>
+    <div class="box box-concept">
+      <div class="box-title">Bloch's Theorem — No Scattering from Perfect Lattice</div>
+      This is a profound quantum result: an electron in a <em>perfectly periodic</em> potential propagates without scattering — it is an eigenstate (Bloch state) of the Hamiltonian. Scattering only occurs from <strong>deviations</strong> from periodicity: thermal vibrations (phonons), impurities, defects. At low T, phonons freeze out → τ → ∞, λ → ∞ → resistivity → 0.
+    </div>
+
+    <h3>Pauli Spin Paramagnetism</h3>
+    <p>Free electrons have spin magnetic moment μ<sub>B</sub> = eℏ/2mc. In a magnetic field B, spin-up and spin-down states split by 2μ<sub>B</sub>B. At T=0, more spins align with the field, creating a net magnetisation:</p>
+    <div class="eq-block">χ<sub>P</sub> = nμ<sub>B</sub>²/k<sub>B</sub>T<sub>F</sub> = (3nμ<sub>B</sub>²)/(2E<sub>F</sub>)</div>
+    <p>This is <strong>temperature-independent</strong> — unlike classical paramagnetism which goes as 1/T (Curie law). The experimental observation of T-independent paramagnetism in alkali metals was early evidence for Fermi–Dirac statistics.</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 5 — BAND THEORY / BLOCH THEOREM
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec5">
+  <div class="lec-header">
+    <div class="lec-num">L<br>5</div>
+    <div class="lec-title-block">
+      <h2>Band Theory: Periodic Potential &amp; Bloch's Theorem</h2>
+      <div class="lec-date">02 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Beyond the Free Electron Model</h3>
+    <p>The free electron model ignores the periodic array of positive ion cores. In reality, the electron moves in a potential V(x) that has the periodicity of the lattice:</p>
+    <div class="eq-block">V(x) = V(x + a) &nbsp;&nbsp;&nbsp; (a = lattice constant)</div>
+    <p>The Schrödinger equation is then:</p>
+    <div class="eq-block">−(ℏ²/2m)d²ψ/dx² + V(x)ψ(x) = Eψ(x)</div>
+    <p>For a free electron (V = 0): solutions are plane waves ψ = Ae<sup>±ikx</sup>. But with periodic V, the plain wave is modulated.</p>
+
+    <h3>Bloch's Theorem</h3>
+    <div class="box box-key">
+      <div class="box-title">Bloch's Theorem (1928)</div>
+      The eigenfunction of a Hamiltonian with a periodic potential can always be written as:
+      <div class="eq-block">ψ<sub>k</sub>(x) = e<sup>ikx</sup>u<sub>k</sub>(x) &nbsp;&nbsp;&nbsp; where &nbsp;&nbsp;&nbsp; u<sub>k</sub>(x) = u<sub>k</sub>(x+a)</div>
+      That is, the wavefunction is a <em>plane wave</em> e<sup>ikx</sup> modulated by a function u<sub>k</sub>(x) that has the <strong>same periodicity as the lattice</strong>. This is Bloch's theorem, and the solutions are called <strong>Bloch states</strong> or <strong>Bloch waves</strong>.
+    </div>
+
+    <p>This is non-trivial — it tells us that despite the complicated periodic potential, the electron still propagates like a plane wave (it's just not a simple plane wave). The crystal momentum ℏk is a good quantum number.</p>
+
+    <h3>Consequences of Bloch's Theorem</h3>
+    <div class="box box-concept">
+      <div class="box-title">Why no scattering from a perfect lattice?</div>
+      Because Bloch states are <em>exact eigenstates</em> of the periodic Hamiltonian. The electron "knows about" all the ion cores simultaneously through the periodic potential — it propagates without being scattered. This is the quantum mechanical explanation for why metals are good conductors: only deviations from perfect periodicity (phonons, impurities) cause resistance.
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 6 — KRONIG–PENNEY MODEL
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec6">
+  <div class="lec-header">
+    <div class="lec-num">L<br>6</div>
+    <div class="lec-title-block">
+      <h2>The Kronig–Penney Model</h2>
+      <div class="lec-date">02 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>The Model Potential</h3>
+    <p>The Kronig–Penney (KP) model is the simplest tractable model of a periodic potential. Instead of the smooth Coulomb potential of actual ion cores, we use a <strong>periodic square-wave potential</strong>:</p>
+    <div class="eq-block">V(x) = 0 &nbsp; for &nbsp; 0 &lt; x &lt; a &nbsp;&nbsp;&nbsp; (well region)<br>V(x) = V₀ &nbsp; for &nbsp; −b &lt; x &lt; 0 &nbsp;&nbsp;&nbsp; (barrier region)</div>
+    <p>with period (a + b). The barrier represents the potential energy hill near the ion cores. We assume V₀ &gt; E (the electron energy is below the barrier top, so classically it would be forbidden in the barrier region, but quantum tunnelling allows it through).</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:550px;">
+        <!-- baseline -->
+        <line x1="30" y1="120" x2="470" y2="120" stroke="#3d3d6a" stroke-width="1"/>
+        <!-- axis -->
+        <line x1="30" y1="140" x2="470" y2="140" stroke="#55557a" stroke-width="1"/>
+        <!-- Potential wells and barriers -->
+        <!-- barrier 1 -->
+        <rect x="30" y="30" width="40" height="90" fill="rgba(240,179,71,.12)" stroke="#f0b347" stroke-width="1.2"/>
+        <!-- well 1 -->
+        <line x1="70" y1="120" x2="130" y2="120" stroke="#3dd6c4" stroke-width="2.5"/>
+        <!-- barrier 2 -->
+        <rect x="130" y="30" width="40" height="90" fill="rgba(240,179,71,.12)" stroke="#f0b347" stroke-width="1.2"/>
+        <!-- well 2 -->
+        <line x1="170" y1="120" x2="230" y2="120" stroke="#3dd6c4" stroke-width="2.5"/>
+        <!-- barrier 3 -->
+        <rect x="230" y="30" width="40" height="90" fill="rgba(240,179,71,.12)" stroke="#f0b347" stroke-width="1.2"/>
+        <!-- well 3 -->
+        <line x1="270" y1="120" x2="330" y2="120" stroke="#3dd6c4" stroke-width="2.5"/>
+        <!-- barrier 4 -->
+        <rect x="330" y="30" width="40" height="90" fill="rgba(240,179,71,.12)" stroke="#f0b347" stroke-width="1.2"/>
+        <!-- well 4 -->
+        <line x1="370" y1="120" x2="430" y2="120" stroke="#3dd6c4" stroke-width="2.5"/>
+        <!-- barrier 5 -->
+        <rect x="430" y="30" width="40" height="90" fill="rgba(240,179,71,.12)" stroke="#f0b347" stroke-width="1.2"/>
+        <!-- labels -->
+        <text x="50" y="20" fill="#f0b347" font-size="9" font-family="JetBrains Mono" text-anchor="middle">V₀</text>
+        <text x="100" y="135" fill="#3dd6c4" font-size="9" font-family="JetBrains Mono" text-anchor="middle">V=0</text>
+        <!-- dimension labels -->
+        <text x="100" y="155" fill="#55557a" font-size="8" font-family="JetBrains Mono" text-anchor="middle">←a→</text>
+        <text x="50" y="155" fill="#55557a" font-size="8" font-family="JetBrains Mono" text-anchor="middle">←b→</text>
+        <!-- E line -->
+        <line x1="30" y1="85" x2="470" y2="85" stroke="#7a8cff" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="475" y="89" fill="#7a8cff" font-size="9">E</text>
+      </svg>
+      <figcaption>Fig 6.1 — The Kronig–Penney potential: alternating wells (V=0, width a) and barriers (V=V₀, width b). The period is d = a+b. The dashed line marks the electron energy E. Since E &lt; V₀, classical physics would confine the electron to the wells, but quantum tunnelling allows propagation through the crystal.</figcaption>
+    </div>
+
+    <h3>Setting Up the Equations</h3>
+    <p>In region 0 &lt; x &lt; a (well): −(ℏ²/2m)d²ψ/dx² = Eψ → solution ψ₁ with parameter α² = 2mE/ℏ²<br>
+    In region −b &lt; x &lt; 0 (barrier, V₀ &gt; E): d²ψ/dx² = β²ψ → solution ψ₂ with β² = 2m(V₀−E)/ℏ²</p>
+
+    <details class="deriv">
+      <summary>▸ Full Derivation: Bloch Condition → KP Dispersion Relation</summary>
+      <div class="deriv-body">
+        <p>Using Bloch's theorem ψ = e<sup>ikx</sup>u<sub>k</sub>(x), substitute into the Schrödinger equation to get equations for u<sub>1</sub> and u<sub>2</sub>:</p>
+        <div class="eq-block">d²u₁/dx² + 2ik(du₁/dx) + (α²−k²)u₁ = 0 &nbsp;&nbsp;— (3)<br>d²u₂/dx² + 2ik(du₂/dx) − (β²+k²)u₂ = 0 &nbsp;&nbsp;— (4)</div>
+        <p>Try u = Ae<sup>mx</sup>. From (3): m² + 2ikm + (α²−k²) = 0 → m = −ik ± iα → m = i(α−k) or −i(α+k)</p>
+        <div class="eq-block">u₁ = Ae<sup>i(α−k)x</sup> + Be<sup>−i(α+k)x</sup> &nbsp;&nbsp;— (5)</div>
+        <p>From (4): m² + 2ikm − (β²+k²) = 0 → m = −ik ± β → m = (β−ik) or −(β+ik)</p>
+        <div class="eq-block">u₂ = Ce<sup>(β−ik)x</sup> + De<sup>−(β+ik)x</sup> &nbsp;&nbsp;— (6)</div>
+        <p>Apply 4 boundary conditions (ψ and dψ/dx continuous at x=0 and x=a, using periodicity at x=−b):</p>
+        <div class="eq-block">A + B = C + D &nbsp;— (7)<br>i(α−k)A − i(α+k)B = (β−ik)C − (β+ik)D &nbsp;— (8)<br>Ae<sup>i(α−k)a</sup> + Be<sup>−i(α+k)a</sup> = Ce<sup>−(β−ik)b</sup> + De<sup>(β+ik)b</sup> &nbsp;— (9)<br>... &nbsp;— (10)</div>
+        <p>For non-trivial solutions, the 4×4 determinant must vanish. After algebra:</p>
+        <div class="eq-block" style="font-size:1.1rem;">[(β²−α²)/(2αβ)]sinh(βb)sin(αa) + cosh(βb)cos(αa) = cos[k(a+b)]<span class="eq-label">General KP Dispersion Relation — Eq. (11)</span></div>
+        <p>This is the central result. The left side is a function of energy E (through α and β), the right side is bounded by ±1. Solutions only exist where |LHS| ≤ 1 → this gives <strong>allowed energy bands</strong>.</p>
+      </div>
+    </details>
+
+    <h3>The Dirac-Comb Limit: P Model</h3>
+    <p>Take V₀ → ∞ and b → 0 while keeping P = mV₀ab/ℏ² finite (a "Dirac comb" of delta function barriers). Then β ≫ α, sinh(βb) ≈ βb, cosh(βb) ≈ 1, β²≫α²:</p>
+    <div class="eq-block" style="font-size:1.15rem;">(P/αa)sin(αa) + cos(αa) = cos(ka)<span class="eq-label">KP Model (Dirac comb form)</span></div>
+    <p>where P = mV₀ab/ℏ² is a <strong>dimensionless strength parameter</strong> representing the height of the potential barriers. The LHS is plotted as a function of αa (∝ √E).</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;">
+        <!-- axes -->
+        <line x1="40" y1="110" x2="480" y2="110" stroke="#3d3d6a" stroke-width="1"/>
+        <line x1="40" y1="20" x2="40" y2="200" stroke="#3d3d6a" stroke-width="1"/>
+        <!-- +1 and -1 lines -->
+        <line x1="40" y1="55" x2="480" y2="55" stroke="#f0b347" stroke-width="1" stroke-dasharray="6,3"/>
+        <line x1="40" y1="165" x2="480" y2="165" stroke="#f0b347" stroke-width="1" stroke-dasharray="6,3"/>
+        <text x="15" y="58" fill="#f0b347" font-size="10">+1</text>
+        <text x="15" y="168" fill="#f0b347" font-size="10">−1</text>
+        <!-- KP function curve (schematic) -->
+        <!-- first arch allowed -->
+        <path d="M50,110 Q80,30 120,55 Q150,70 160,110 Q170,160 200,165" fill="none" stroke="#7a8cff" stroke-width="1.8"/>
+        <!-- gap zone 1 -->
+        <rect x="120" y="55" width="80" height="110" fill="rgba(240,92,122,.08)"/>
+        <text x="160" y="95" text-anchor="middle" fill="#f05c7a" font-size="8" font-family="JetBrains Mono">GAP</text>
+        <!-- second arch -->
+        <path d="M200,165 Q220,200 250,165 Q270,145 280,110 Q290,75 310,55" fill="none" stroke="#7a8cff" stroke-width="1.8"/>
+        <!-- gap zone 2 -->
+        <rect x="310" y="55" width="70" height="110" fill="rgba(240,92,122,.08)"/>
+        <text x="345" y="95" text-anchor="middle" fill="#f05c7a" font-size="8" font-family="JetBrains Mono">GAP</text>
+        <!-- third arch -->
+        <path d="M380,55 Q400,30 420,55 Q440,75 450,110" fill="none" stroke="#7a8cff" stroke-width="1.8"/>
+        <!-- allowed bands shaded -->
+        <rect x="50" y="55" width="70" height="55" fill="rgba(122,140,255,.06)"/>
+        <text x="85" y="75" text-anchor="middle" fill="#7a8cff" font-size="7" font-family="JetBrains Mono">BAND 1</text>
+        <rect x="200" y="55" width="110" height="110" fill="rgba(122,140,255,.06)"/>
+        <text x="255" y="100" text-anchor="middle" fill="#7a8cff" font-size="7" font-family="JetBrains Mono">BAND 2</text>
+        <!-- axis labels -->
+        <text x="480" y="115" fill="#55557a" font-size="10">αa</text>
+        <text x="42" y="17" fill="#55557a" font-size="10">f(E)</text>
+        <text x="100" y="210" fill="#55557a" font-size="8" font-family="JetBrains Mono">π</text>
+        <text x="190" y="210" fill="#55557a" font-size="8" font-family="JetBrains Mono">2π</text>
+        <text x="300" y="210" fill="#55557a" font-size="8" font-family="JetBrains Mono">3π</text>
+      </svg>
+      <figcaption>Fig 6.2 — Plot of f(E) = (P/αa)sin(αa) + cos(αa) vs αa. Solutions only exist where |f(E)| ≤ 1 (between the dashed ±1 lines — shaded blue). The red shaded regions where |f(E)| &gt; 1 are <strong>energy gaps</strong> — forbidden bands. The allowed blue regions are the <strong>energy bands</strong>.</figcaption>
+    </div>
+
+    <h3>Physical Interpretation: Three Limiting Cases</h3>
+
+    <h4>Case 1: P very large (strong barriers)</h4>
+    <p>f(E) oscillates wildly → very narrow allowed bands. In the extreme P → ∞: the bands shrink to discrete lines at αa = nπ → α = nπ/a → E = n²π²ℏ²/(2ma²). These are the energy levels of an <strong>infinite square well</strong> — electrons are completely trapped and cannot move from one well to the next. This is the <strong>atomic limit</strong>.</p>
+
+    <h4>Case 2: P → 0 (no barriers)</h4>
+    <p>f(E) → cos(αa) = cos(ka) → α = k → E = ℏ²k²/(2m). This is the <strong>free electron result</strong> — continuous parabola, no gaps. The energy is continuous in k.</p>
+
+    <h4>Case 3: General P — Energy Gaps</h4>
+    <p>Gaps open at k = nπ/a (i.e., Brillouin zone boundaries). Physically, at these k values the electron wavelength exactly satisfies the Bragg condition 2a = nλ — the electron wave is strongly Bragg-reflected by the periodic lattice, leading to standing waves and a splitting of energy levels (analogous to avoided crossings in perturbation theory).</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Why do gaps open at zone boundaries?</div>
+      At k = π/a, there are two standing wave combinations: ψ₊ ∝ cos(πx/a) (charge density peaks at ion sites, lower energy) and ψ₋ ∝ sin(πx/a) (charge density peaks between ions, higher energy). The energy difference between these two is the <strong>band gap E<sub>g</sub></strong>. In the nearly-free electron model, E<sub>g</sub> = 2|V<sub>G</sub>| where V<sub>G</sub> is the Fourier component of the potential at reciprocal lattice vector G = 2π/a.
+    </div>
+
+    <h3>Number of States in a Band</h3>
+    <p>For a 1D crystal of N unit cells with periodic BC, the allowed k values in the first Brillouin zone are k = 2πn/L (n = 0, ±1, ..., ±N/2), giving exactly N distinct k-values. Including spin: each band holds exactly <strong>2N electron states</strong> (where N = number of primitive unit cells).</p>
+
+    <div class="eq-block">k<sub>max</sub> = π/a = Nπ/L &nbsp;→&nbsp; N distinct k values per band &nbsp;→&nbsp; 2N states per band</div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 7 — EFFECTIVE MASS
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec7">
+  <div class="lec-header">
+    <div class="lec-num">L<br>7</div>
+    <div class="lec-title-block">
+      <h2>Effective Mass, Velocity &amp; the Concept of Holes</h2>
+      <div class="lec-date">09 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Electron Velocity in a Band</h3>
+    <p>An electron in a Bloch state is a wavepacket. Its group velocity (the velocity at which the wavepacket — and hence the probability density — propagates) is:</p>
+    <div class="eq-block">v = (1/ℏ)(dE/dk) &nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp; v = (1/ℏ)∇<sub>k</sub>E(k)</div>
+    <p>For a free electron E = ℏ²k²/2m → v = ℏk/m = p/m. Correct! For a Bloch electron in a band, the same formula holds but with the actual band dispersion E(k).</p>
+
+    <h3>Effective Mass</h3>
+    <p>Apply an external force F = eE (electric field). By Newton's second law, F = dp/dt = ℏ(dk/dt). The acceleration is:</p>
+    <div class="eq-block">a = dv/dt = (1/ℏ)(d²E/dk²)(dk/dt) = (1/ℏ²)(d²E/dk²)F</div>
+    <p>Comparing with F = m*a:</p>
+    <div class="eq-block" style="font-size:1.2rem;">1/m* = (1/ℏ²)(d²E/dk²) &nbsp;&nbsp;→&nbsp;&nbsp; m* = ℏ²/(d²E/dk²)<span class="eq-label">Effective Mass of an Electron</span></div>
+    <p>The effective mass m* captures the effect of the crystal potential. It tells us: in an applied field, the electron behaves as a <em>free particle</em> with mass m* — the complicated band structure is absorbed into this single parameter.</p>
+
+    <div class="box box-key">
+      <div class="box-title">Physical Meaning of m*</div>
+      ● m* = m (free electron) when E = ℏ²k²/2m (parabolic band).<br>
+      ● m* &gt; m when the band flattens (d²E/dk² &lt; 1/m free value) — electron is "heavier".<br>
+      ● m* &lt; m near band bottom — electron accelerates faster than free.<br>
+      ● m* &lt; 0 in the upper half of a band (d²E/dk² &lt; 0) — this leads to holes!
+    </div>
+
+    <h3>Holes — Empty States Acting as Positive Carriers</h3>
+    <p>In the upper part of a band, m* &lt; 0: when an electric field E is applied, these electrons <em>decelerate</em> — they move opposite to what you'd expect. It is more useful to think of the <strong>absence</strong> of an electron (a "hole") as a particle with:</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Property</th><th>Electron (near band top)</th><th>Hole</th></tr></thead>
+        <tbody>
+          <tr><td>Charge</td><td>−e</td><td>+e (positive!)</td></tr>
+          <tr><td>Effective mass</td><td>m* &lt; 0</td><td>m<sub>h</sub>* = −m* &gt; 0</td></tr>
+          <tr><td>Wave vector</td><td>k</td><td>k<sub>h</sub> = −k</td></tr>
+          <tr><td>Velocity</td><td>v<sub>e</sub></td><td>v<sub>h</sub> = v<sub>e</sub></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Holes are not real particles — they are a mathematical convenience for describing the collective behaviour of many electrons near the top of a nearly-full band. But they behave exactly like positive charge carriers and explain the positive Hall coefficients seen in Be, Al, and semiconductors.</p>
+
+    <h3>Effective Number of Free Electrons</h3>
+    <p>The "effective" number of free electrons contributing to conductivity is:</p>
+    <div class="eq-block">N<sub>eff</sub> = (2mL/πℏ²) |dE/dk|<sub>k₁</sub></div>
+    <p>When the band is filled to k<sub>max</sub> = π/a: N<sub>eff</sub> = 0 — no conductivity (insulator). When filled to k₀ where d²E/dk² is maximum: N<sub>eff</sub> = max — best conductivity.</p>
+
+    <h3>Metal vs Insulator: Band Filling</h3>
+    <div class="box box-concept">
+      <div class="box-title">The fundamental distinction</div>
+      <strong>Metal:</strong> Outermost band half-filled (Na: 3s¹, one electron in 3s band → half full) or bands overlap.<br><br>
+      <strong>Insulator:</strong> All bands completely filled (diamond: 4 valence electrons fill 4N states = 2 bands of 2N each; gap ~5.5 eV). No available states near E<sub>F</sub> → no conduction at T=0.<br><br>
+      <strong>Semiconductor:</strong> Like insulator but gap small (Si: ~1.1 eV, Ge: ~0.67 eV) → thermal excitation at T=300K promotes some electrons to conduction band, leaving holes in valence band.
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 8 — METAL/INSULATOR/SEMICONDUCTOR
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec8">
+  <div class="lec-header">
+    <div class="lec-num">L<br>8</div>
+    <div class="lec-title-block">
+      <h2>Metals, Insulators &amp; Semiconductors — Band Theory Perspective</h2>
+      <div class="lec-date">09 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Sommerfeld vs Band Theory</h3>
+    <p>In Sommerfeld theory, electrons move freely — no periodic potential. In Band theory, the periodic lattice creates gaps. The Sommerfeld theory is recovered in the limit P → 0 (no barriers) from the KP model.</p>
+
+    <h3>Electron Configuration Examples</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Element</th><th>Config</th><th>Band filling</th><th>Behaviour</th></tr></thead>
+        <tbody>
+          <tr><td>Na</td><td>3s¹</td><td>3s band: half full (1 e/N states of 2N)</td><td>Metal</td></tr>
+          <tr><td>Be</td><td>2s²</td><td>2s band full, BUT overlaps with 2p band</td><td>Metal (band overlap)</td></tr>
+          <tr><td>Diamond C</td><td>2s²2p²</td><td>sp³ hybridisation → valence band full, gap 5.5 eV</td><td>Insulator</td></tr>
+          <tr><td>Si</td><td>3s²3p²</td><td>Same as diamond, gap 1.1 eV</td><td>Semiconductor</td></tr>
+          <tr><td>Ge</td><td>4s²4p²</td><td>Gap 0.67 eV</td><td>Semiconductor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>ITO and Complex Conductors</h3>
+    <p>Indium Tin Oxide (ITO = Sn-coated In₂O₃) is an unusual material that is simultaneously a good electrical conductor AND optically transparent. It is widely used in touchscreens, solar cells, and LCD displays. This is only possible because its band gap falls in the UV — visible light is not absorbed — while its conduction band has enough electrons from Sn doping for conductivity.</p>
+
+    <h3>Boltzmann Transport Equation (Sommerfeld Theory)</h3>
+    <p>The full quantum treatment of conductivity uses the <strong>Boltzmann transport equation</strong>, which describes how the Fermi distribution function f(r,p,t) evolves under an applied field and collisions:</p>
+    <div class="eq-block">∂f/∂t|<sub>field</sub> = −v·∇<sub>r</sub>f + e[E + v×B]·∇<sub>p</sub>f</div>
+    <p>At steady state, this balances with the collision term. Using the relaxation time approximation (τ depends only on energy, not on k direction):</p>
+    <div class="eq-block">∂f/∂t|<sub>collision</sub> = −(f − f₀)/τ</div>
+    <p>Solving gives the Sommerfeld result σ = ne²τ(E<sub>F</sub>)/m, with the key insight that τ must be evaluated at the Fermi energy (only Fermi surface electrons contribute to transport).</p>
+
+    <div class="eq-block" style="font-size:1.1rem;">σ = e²λm²/(12π³ℏ³) · S<sub>F</sub><span class="eq-label">Conductivity in terms of Fermi surface area S<sub>F</sub></span></div>
+    <p>This elegant result says: conductivity is proportional to the Fermi surface area. Large Fermi surface → good conductor. Insulators and semiconductors have zero Fermi surface area (band gap) → zero conductivity at T = 0.</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 9 — MAGNETISM
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec9">
+  <div class="lec-header">
+    <div class="lec-num">L<br>9</div>
+    <div class="lec-title-block">
+      <h2>Magnetism: Fundamentals &amp; Classification</h2>
+      <div class="lec-date">16 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Magnetic Field Quantities</h3>
+    <p>An electric current creates a magnetic field. For a solenoid of N turns, length L, current i:</p>
+    <div class="eq-block">H = iN/L &nbsp;&nbsp;&nbsp; (units: A/m or Oersted in CGS)</div>
+    <p>H is the <strong>magnetic field strength</strong> or magnetising field. In vacuum, the magnetic flux density is B₀ = μ₀H.</p>
+
+    <h3>Effect of Inserting a Material</h3>
+    <p>When a material is placed in the field, it develops a <strong>magnetisation</strong> M = magnetic moment per unit volume. The total B inside the material:</p>
+    <div class="eq-block">B = μ₀H + μ₀M = μ₀(H + M) = μH</div>
+    <p>M depends on H through the magnetic susceptibility χ: M = χH. Therefore:</p>
+    <div class="eq-block">B = μ₀(1 + χ)H = μ<sub>r</sub>μ₀H &nbsp;&nbsp;→&nbsp;&nbsp; μ<sub>r</sub> = 1 + χ = relative permeability</div>
+
+    <h3>Classification of Magnetic Materials</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>χ</th><th>Temperature</th><th>Example</th><th>Origin</th></tr></thead>
+        <tbody>
+          <tr><td>Diamagnetic</td><td>&lt;0, ~10⁻⁶</td><td>T-independent</td><td>Cu, Bi, organic molecules</td><td>Induced orbital moments oppose B</td></tr>
+          <tr><td>Paramagnetic</td><td>&gt;0, small</td><td>χ ∝ 1/T (Curie)</td><td>Al, O₂, transition metal salts</td><td>Permanent moments align with B; thermal disorder resists</td></tr>
+          <tr><td>Ferromagnetic</td><td>≫0, large</td><td>χ ∝ 1/(T−θ<sub>f</sub>) above T<sub>C</sub></td><td>Fe, Ni, Co</td><td>Spontaneous parallel alignment via exchange interaction</td></tr>
+          <tr><td>Antiferromagnetic</td><td>small +ve</td><td>peak at T<sub>N</sub></td><td>MnO, FeO, Cr</td><td>Alternating antiparallel alignment; net M=0</td></tr>
+          <tr><td>Ferrimagnetic</td><td>large +ve</td><td>like ferro below T<sub>C</sub></td><td>Fe₃O₄, ferrites</td><td>Antiparallel but unequal moments; net M≠0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Origin of Permanent Magnetic Moments</h3>
+    <p>Sources of magnetic moment in an atom:</p>
+    <div class="steps">
+      <div class="step"><strong>Orbital motion:</strong> electron revolving around nucleus = current loop → μ<sub>L</sub> = −(e/2mc)L = −μ<sub>B</sub>√[l(l+1)]ℏ where μ<sub>B</sub> = eℏ/2mc is the <strong>Bohr magneton</strong> = 9.27 × 10⁻²⁴ J/T.</div>
+      <div class="step"><strong>Spin angular momentum:</strong> intrinsic quantum spin → μ<sub>S</sub> = −g<sub>s</sub>(e/2mc)S = ∓μ<sub>B</sub> for m<sub>s</sub> = ±½. The spin g-factor g<sub>s</sub> ≈ 2.0023.</div>
+      <div class="step"><strong>Nuclear spin:</strong> much smaller by m<sub>e</sub>/m<sub>p</sub> ~ 1/1836; relevant in NMR, not bulk magnetism.</div>
+    </div>
+
+    <h3>Total Angular Momentum and Landé g-factor</h3>
+    <p>For an atom with total orbital angular momentum L, spin S, and total J = L + S:</p>
+    <div class="eq-block">μ<sub>J</sub> = −g<sub>J</sub>(e/2mc)√[J(J+1)]ℏ</div>
+    <div class="eq-block">g<sub>J</sub> = 1 + [J(J+1) + S(S+1) − L(L+1)] / [2J(J+1)] &nbsp;&nbsp;&nbsp; (Landé g-factor)</div>
+    <p>In an applied field, J<sub>z</sub> = m<sub>J</sub>ℏ with m<sub>J</sub> = −J, ..., +J (space quantisation). The (2J+1) orientations have different energies E = −μ<sub>J</sub>·H = g<sub>J</sub>μ<sub>B</sub>m<sub>J</sub>H.</p>
+
+    <h3>Classical Theory of Diamagnetism (Langevin)</h3>
+    <p>Lenz's law in electricity: changing B induces an EMF opposing the change. Similarly, an orbiting electron will adjust its orbital frequency when B changes — increasing or decreasing it depending on the orbital orientation. This always produces a moment <em>opposing</em> B → diamagnetism.</p>
+    <div class="eq-block">χ<sub>dia</sub> = −NZ(e²/6mc²)⟨r²⟩</div>
+    <p>where N = nucleon density, Z = atomic number, ⟨r²⟩ = mean squared orbital radius. χ<sub>dia</sub> ~ −10⁻⁶ — small, negative, temperature-independent. Note: the Larmor (precession) frequency ω<sub>L</sub> = eH/2mc ~ 10<sup>11</sup> s⁻¹.</p>
+
+    <h3>Classical Theory of Paramagnetism (Langevin)</h3>
+    <p>Each atom has a permanent dipole μ. In the absence of B, moments are randomly oriented → M = 0. In field H, the Boltzmann factor e<sup>−PE/k<sub>B</sub>T</sup> gives more weight to aligned configurations. The magnetisation:</p>
+    <div class="eq-block">M = nμ·L(a) &nbsp;&nbsp;&nbsp; where &nbsp;&nbsp;&nbsp; a = μH/k<sub>B</sub>T</div>
+    <p>L(a) = coth(a) − 1/a is the <strong>Langevin function</strong>. At ordinary temperatures (a ≪ 1):</p>
+    <div class="eq-block">χ<sub>para</sub> = M/H = nμ²/(3k<sub>B</sub>T) = C/T &nbsp;&nbsp;&nbsp; (Curie Law)</div>
+    <p>This is the classical Curie Law. But it doesn't match experiment for transition metal ions — quantum theory is needed.</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 10 — QUANTUM PARAMAGNETISM
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec10">
+  <div class="lec-header">
+    <div class="lec-num">L<br>10</div>
+    <div class="lec-title-block">
+      <h2>Quantum Theory of Paramagnetism</h2>
+      <div class="lec-date">26 / 04 / 2026</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Hund's Rules — Ground State of Free Atoms</h3>
+    <p>To find J, L, S for any atom/ion, apply Hund's rules in order:</p>
+    <div class="box box-key">
+      <div class="box-title">Hund's Three Rules</div>
+      <strong>Rule 1:</strong> Maximise S (total spin) consistent with Pauli exclusion. (Parallel spins avoid each other due to antisymmetric spatial wavefunction → lower repulsion energy.)<br><br>
+      <strong>Rule 2:</strong> Maximise L (total orbital angular momentum) consistent with rule 1. (Higher L → electrons orbit same way → avoid each other → lower energy.)<br><br>
+      <strong>Rule 3:</strong> J = |L−S| if shell less than half-filled; J = L+S if more than half-filled. (From spin-orbit coupling: ζ(L·S), ζ &gt; 0 for less than half-filled → aligned L and S costs energy; ζ &lt; 0 for more than half-filled.)
+    </div>
+
+    <h4>Example: Fe²⁺ (3d⁶)</h4>
+    <p>3d shell: l=2, m<sub>l</sub> = 2, 1, 0, −1, −2. Fill 6 electrons:</p>
+    <div class="eq-block">↑ ↑ ↑ ↑ ↑ ↓ &nbsp; (m<sub>l</sub> = 2,1,0,−1,−2)</div>
+    <p>Σm<sub>s</sub> = S = 2, Σm<sub>l</sub> = L = 2, J = L+S = 4 (more than half-filled).<br>Spectroscopic term: <strong>⁵D₄</strong>. g-factor: g<sub>J</sub> = 1 + [J(J+1)+S(S+1)−L(L+1)]/[2J(J+1)] = 3/2.</p>
+
+    <h4>Example: Cr²⁺ (3d⁴)</h4>
+    <p>↑ ↑ ↑ ↑ &nbsp; S = 2, L = 2, less than half-filled → J = |L−S| = 0 → <strong>diamagnetic!</strong> despite being a transition metal.</p>
+
+    <h3>Quantum Brillouin Function</h3>
+    <p>With space quantisation, m<sub>J</sub> takes (2J+1) discrete values. The partition function is a finite sum (not an integral as in the classical theory). The result is the <strong>Brillouin function</strong>:</p>
+    <div class="eq-block">M = ng J μ<sub>B</sub> B<sub>J</sub>(a) &nbsp;&nbsp;&nbsp; where &nbsp;&nbsp;&nbsp; a = gJμ<sub>B</sub>H/k<sub>B</sub>T</div>
+    <div class="eq-block">B<sub>J</sub>(a) = [(2J+1)/2J]coth[(2J+1)a/2J] − (1/2J)coth(a/2J)<span class="eq-label">Brillouin Function</span></div>
+
+    <p>Limits: For J → ∞, B<sub>J</sub>(a) → L(a) (Langevin). For J = 1/2, B<sub>1/2</sub>(a) = tanh(a). At small a (ordinary T):</p>
+    <div class="eq-block">χ = M/H = ng²J(J+1)μ<sub>B</sub>² / 3k<sub>B</sub>T = nμ<sub>B</sub>²P<sub>eff</sub>²/3k<sub>B</sub>T</div>
+    <p>where P<sub>eff</sub> = g√[J(J+1)] is the <strong>effective Bohr magneton number</strong>.</p>
+
+    <h3>Crystal Field (Orbital) Quenching</h3>
+    <div class="box box-warn">
+      <div class="box-title">Why iron group ions don't follow gJ√[J(J+1)]</div>
+      Transition metal ions (3d, 4d, 5d) in crystals experience a strong <strong>crystal electric field</strong> from neighbouring ligands. This field acts on the orbital motion but not on the spin. If the crystal field energy ≫ spin-orbit energy, the orbital angular momentum is "quenched" — it gets locked to the lattice and cannot precess freely around B. The orbital contribution to the magnetic moment is destroyed, leaving only spin.<br><br>
+      Result: for iron group ions, the effective moment is ≈ g<sub>s</sub>√[S(S+1)] μ<sub>B</sub> (with g<sub>s</sub> ≈ 2, L effectively = 0). This matches experiment.<br><br>
+      Rare earth ions (4f): the 4f shell is shielded by outer 5s²5p⁶ shell → crystal field is weak → L-S coupling works → P<sub>eff</sub> = g√[J(J+1)] matches experiment beautifully.
+    </div>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     LECTURE 11 — FERROMAGNETISM
+═══════════════════════════════════════════════════════ -->
+<section class="lec" id="lec11">
+  <div class="lec-header">
+    <div class="lec-num">L<br>11</div>
+    <div class="lec-title-block">
+      <h2>Ferromagnetism &amp; the Weiss Molecular Field Theory</h2>
+      <div class="lec-date">03 / 05 / 2026 (Online)</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>What is Ferromagnetism?</h3>
+    <p>Ferromagnets exhibit <strong>spontaneous magnetisation</strong> — they remain magnetised even after the external field is removed. Below the <strong>Curie temperature T<sub>C</sub></strong>, ferromagnets are permanently magnetised; above T<sub>C</sub>, thermal fluctuations destroy the order and the material becomes paramagnetic.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Material</th><th>T<sub>C</sub> (K)</th><th>Saturation M (10³ A/m)</th></tr></thead>
+        <tbody>
+          <tr><td>Fe</td><td>1043</td><td>1707</td></tr>
+          <tr><td>Ni</td><td>631</td><td>510</td></tr>
+          <tr><td>Co</td><td>1388</td><td>1440</td></tr>
+          <tr><td>Gd</td><td>292</td><td>2010</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Weiss Molecular Field Theory</h3>
+    <p>Weiss (1907) postulated that there exists an internal "molecular field" H<sub>eff</sub> proportional to the magnetisation:</p>
+    <div class="eq-block">H<sub>eff</sub> = H<sub>ext</sub> + λM &nbsp;&nbsp;&nbsp; (λ = Weiss constant)</div>
+    <p>This field aligns the moments cooperatively. The magnetisation is then found self-consistently using the Brillouin function:</p>
+    <div class="eq-block">M = M<sub>s</sub>B<sub>J</sub>(a) &nbsp;&nbsp;&nbsp; where &nbsp;&nbsp;&nbsp; a = gJμ<sub>B</sub>H<sub>eff</sub>/k<sub>B</sub>T</div>
+    <p>These two equations must be solved simultaneously for M — this is done graphically by finding the intersection of the Brillouin curve with a straight line.</p>
+
+    <h3>Finding T<sub>C</sub></h3>
+    <p>For H<sub>ext</sub> = 0, spontaneous solutions for M exist when the slope of M(a) at a=0 exceeds the slope of the straight line (equation 1). This gives:</p>
+    <div class="eq-block">T<sub>C</sub> = nλg²J(J+1)μ<sub>B</sub>² / (3k<sub>B</sub>) = nλμ² / (3k<sub>B</sub>)</div>
+    <p>where μ = gμ<sub>B</sub>√[J(J+1)] is the total magnetic moment per atom.</p>
+    <div class="eq-block">θ<sub>f</sub> ∝ λ &nbsp;&nbsp;&nbsp; (Curie temperature proportional to Weiss constant)</div>
+
+    <h3>Curie–Weiss Law (Above T<sub>C</sub>)</h3>
+    <p>For T &gt; T<sub>C</sub>, the system is paramagnetic with an applied field H. Expanding for small a:</p>
+    <div class="eq-block" style="font-size:1.15rem;">χ = M/H = C/(T − θ<sub>f</sub>) &nbsp;&nbsp;&nbsp; (Curie–Weiss Law)<span class="eq-label">χ diverges at T→θ<sub>f</sub> from above</span></div>
+    <p>Experimental: plot 1/χ vs T → straight line with x-intercept at T = θ<sub>f</sub> (Weiss temperature). Note: experimentally θ<sub>f</sub> slightly less than T<sub>C</sub> (because of spin fluctuations near the transition that are not in mean-field theory).</p>
+
+    <h3>Origin of the Molecular Field: Exchange Interaction</h3>
+    <div class="box box-concept">
+      <div class="box-title">Why is the Weiss field so large?</div>
+      From k<sub>B</sub>T<sub>C</sub> ≈ μ<sub>B</sub>H<sub>mol</sub>: T<sub>C</sub> ~ 1000 K → μ<sub>B</sub>H<sub>mol</sub> ~ 0.1 eV → H<sub>mol</sub> ~ 10⁷ Gauss! But dipole-dipole interaction between neighbouring moments gives only μ₀/a³ ~ 10³ Gauss — far too small. The Weiss field cannot be magnetic in origin.<br><br>
+      It is the quantum mechanical <strong>exchange interaction</strong>, arising from the Pauli exclusion principle and Coulomb repulsion. The Heisenberg exchange Hamiltonian H = −2J<sub>ex</sub>S<sub>i</sub>·S<sub>j</sub>: if J<sub>ex</sub> &gt; 0, parallel spins (ferromagnet) are favoured; if J<sub>ex</sub> &lt; 0, antiparallel spins (antiferromagnet). Exchange energies are electrostatic (Coulomb) in origin, scaled by ~0.1–1 eV — exactly right for T<sub>C</sub> ~ 1000 K.
+    </div>
+
+    <h3>Slater's Band Model for Fe, Co, Ni</h3>
+    <p>For 3d transition metals, the tight-binding 3d band overlaps with the broad 4s band. Slater proposed that the 3d and 4s electrons share the Fermi level. For Ni (3d⁸4s²: 10 electrons total):</p>
+    <div class="eq-block">9.4 electrons in 3d band + 0.6 electrons in 4s band</div>
+    <p>In the 3d band with 5 spin-up slots: 5 − 4.4 = 0.6 μ<sub>B</sub> net moment per atom (experiment: 0.54 μ<sub>B</sub>). For Fe: 5 − 2.8 = 2.2 μ<sub>B</sub> (experiment: 2.22 μ<sub>B</sub>). The agreement is remarkable.</p>
+
+    <h3>Heisenberg/Heitler–London Exchange</h3>
+    <p>For two interacting electrons (Heitler–London theory), the energy eigenvalues split into singlet and triplet:</p>
+    <div class="eq-block">E = C ± J<sub>ex</sub></div>
+    <p>where C is the Coulomb integral and J<sub>ex</sub> is the exchange integral. When J<sub>ex</sub> &gt; 0 (triplet lower): ferromagnetism. The condition J<sub>ex</sub> &gt; 0 is met when the Slater integral has the right sign — related to the ratio of interatomic distance to d-orbital radius (Bethe–Slater curve).</p>
+
+  </div>
+</section>
+<hr class="sec-div">
+
+<!-- ══════════════════════════════════════════════════════
+     IMPORTANT QUESTIONS
+═══════════════════════════════════════════════════════ -->
+<section id="iq">
+  <div class="iq-section">
+    <div class="iq-title">Important Questions &amp; Answers</div>
+    <div class="iq-sub">★ High-weightage topics · Detailed answers · Exam-ready</div>
+
+    <div class="qa-block">
+      <h4>Free Electron Theory &amp; Drude Model</h4>
+
+      <details class="qa">
+        <summary>Derive the Drude expression for electrical conductivity and state its successes and failures.</summary>
+        <div class="qa-ans">
+          <strong>Derivation:</strong> The Drude model treats conduction electrons as a classical ideal gas. An electron of charge e (magnitude) in electric field E experiences force F = eE. Including a phenomenological resistive damping term due to collisions:
+          <div class="eq-block">m(dv/dt) = eE − (m/τ)v</div>
+          where τ is the mean relaxation time between collisions. At steady state (dv/dt = 0): drift velocity v<sub>d</sub> = eEτ/m. Current density j = nev<sub>d</sub> = (ne²τ/m)E = σE, giving:
+          <div class="eq-block">σ = ne²τ/m</div>
+          <strong>Successes:</strong> (1) Correctly predicts conductivity magnitude σ ~ 10⁶ Ω⁻¹cm⁻¹ for metals at room T. (2) Correctly predicts Wiedemann–Franz law κ/σT = L₀ (Lorenz number). (3) Hall effect for monovalent metals: R<sub>H</sub> = −1/ne agrees for Cu, Ag, Au.<br><br>
+          <strong>Failures:</strong> (1) Electronic specific heat: predicts C<sub>v</sub><sup>e</sup> = (3/2)Nk<sub>B</sub>, but experiment gives ~100× smaller value. (2) Positive Hall coefficient in divalent metals (Be, Zn) — implies positive carriers, which classical theory can't explain. (3) Temperature dependence of resistivity at low T: Drude predicts τ → 0, but mean free path becomes very large at low T. (4) Cannot explain insulators — all materials should conduct equally if all valence electrons are free.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What is the Hall effect? Derive the Hall coefficient from the Drude model and explain the sign anomaly.</summary>
+        <div class="qa-ans">
+          <strong>Setup:</strong> Current J flows in ŷ direction, magnetic field B in ẑ direction. The Lorentz force −e(v×B) = evB x̂ pushes electrons in x̂. Positive ions are left behind → an electric field E<sub>x</sub> (Hall field) builds up until it balances the Lorentz force.<br><br>
+          <strong>Drude derivation:</strong> In steady state of the Drude equation dp/dt = F − p/τ with F = e[E + v×B]:
+          <div class="eq-block">E<sub>x</sub> = −(1/ne)J<sub>y</sub>B<sub>z</sub> = ρ<sub>H</sub>J<sub>y</sub> &nbsp;→&nbsp; R<sub>H</sub> = ρ<sub>H</sub>/B = −1/ne</div>
+          <strong>Sign anomaly:</strong> For Cu, Ag (monovalent) R<sub>H</sub> ≈ −1.5/ne — close to −1/ne, consistent with electron carriers. But for Be, Zn, Al, R<sub>H</sub> is <em>positive</em> — suggesting the dominant carriers are positively charged. This cannot be explained by the Drude model.<br><br>
+          <strong>Band theory explanation:</strong> In divalent/trivalent metals, the valence band is nearly full. The dominant current carriers are <em>holes</em> (missing electrons near the top of the valence band). Holes have positive charge and positive effective mass → positive Hall coefficient. The existence of holes is a purely quantum mechanical (band theory) effect.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Explain the Wiedemann–Franz Law and derive the Lorenz number.</summary>
+        <div class="qa-ans">
+          The Wiedemann–Franz Law states that for metals, the ratio of thermal conductivity κ to electrical conductivity σ is proportional to temperature:
+          <div class="eq-block">κ/σT = L₀ &nbsp;&nbsp;&nbsp; (L₀ = Lorenz number ~ 2.45 × 10⁻⁸ W·Ω/K²)</div>
+          <strong>Drude derivation:</strong> κ = (1/3)n⟨v²⟩τ·(dE/dT). Using classical equipartition ⟨v²⟩ = 3k<sub>B</sub>T/m and C<sub>v</sub><sup>e</sup> = (3/2)nk<sub>B</sub>:
+          <div class="eq-block">κ = (4/π)(k<sub>B</sub>/e)²σT &nbsp;→&nbsp; L₀<sup>Drude</sup> = 4k<sub>B</sub>²/(πe²)</div>
+          The Drude value overestimates L₀ because C<sub>v</sub><sup>e</sup> is overestimated (classical value) while ⟨v²⟩ is underestimated. The two errors partly cancel, giving a result of the right order.<br><br>
+          <strong>Sommerfeld result:</strong> Using quantum statistics, the correct derivation gives L₀ = π²k<sub>B</sub>²/(3e²) = 2.45 × 10⁻⁸ W·Ω/K² — in excellent agreement with experiment for most metals.<br><br>
+          <strong>Physical significance:</strong> Both κ and σ are carried by the same electrons (conduction electrons), so their ratio is a universal constant independent of material-specific parameters like n and τ.
+        </div>
+      </details>
+    </div>
+
+    <div class="qa-block">
+      <h4>Sommerfeld &amp; Fermi Gas</h4>
+
+      <details class="qa">
+        <summary>Derive the Fermi energy E<sub>F₀</sub> at T=0 and show that the average energy is (3/5)E<sub>F₀</sub>.</summary>
+        <div class="qa-ans">
+          <strong>Derivation of E<sub>F₀</sub>:</strong> The 3D density of states (DOS) for a free electron gas:
+          <div class="eq-block">D(E) = (V/2π²)(2m/ℏ²)<sup>3/2</sup>√E = C√E</div>
+          At T=0, all states below E<sub>F₀</sub> are filled (f(E) = step function). Total electron number:
+          <div class="eq-block">N = ∫₀<sup>E<sub>F₀</sub></sup>D(E)dE = (2/3)CE<sub>F₀</sub><sup>3/2</sup></div>
+          Solving: <div class="eq-block">E<sub>F₀</sub> = (ℏ²/2m)(3π²N/V)<sup>2/3</sup> = (ℏ²/2m)(3π²n)<sup>2/3</sup></div>
+          For Cu: n = 8.5 × 10²² cm⁻³ → E<sub>F₀</sub> ≈ 7 eV.<br><br>
+          <strong>Average energy:</strong>
+          <div class="eq-block">Ū = (1/N)∫₀<sup>E<sub>F₀</sub></sup>E·D(E)dE = (1/N)·C·(2/5)E<sub>F₀</sub><sup>5/2</sup> = (3/5)E<sub>F₀</sub></div>
+          using N = (2/3)CE<sub>F₀</sub><sup>3/2</sup>. For Cu, Ū ~ 4.2 eV — far larger than the classical k<sub>B</sub>T ~ 0.026 eV. This enormous "quantum pressure" (Pauli pressure or degeneracy pressure) is what holds up white dwarf stars!
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Derive the electronic specific heat using Sommerfeld theory. Why is it much smaller than the Drude prediction?</summary>
+        <div class="qa-ans">
+          <strong>Physical argument:</strong> In the Drude model, all N electrons can be thermally excited → C<sub>v</sub><sup>e</sup> = (3/2)Nk<sub>B</sub>. In Sommerfeld, only electrons within ~k<sub>B</sub>T of E<sub>F</sub> can be excited (those above can reach empty states, those far below E<sub>F</sub> have no empty states to go to). The fraction of "active" electrons ≈ k<sub>B</sub>T/E<sub>F</sub> ~ 1/100 at room T.<br><br>
+          <strong>Quantitative derivation:</strong> At finite T, E<sub>F</sub>(T) ≈ E<sub>F₀</sub>[1 − (π²/12)(k<sub>B</sub>T/E<sub>F₀</sub>)²]. The total internal energy:
+          <div class="eq-block">U(T) = U₀·[1 + (5π²/12)(k<sub>B</sub>T/E<sub>F</sub>)²]</div>
+          Differentiating (with U₀ = (3/5)NE<sub>F₀</sub>):
+          <div class="eq-block">C<sub>v</sub><sup>e</sup>/vol = (π²/2)nk<sub>B</sub>(k<sub>B</sub>T/E<sub>F</sub>) = γT</div>
+          γ = π²nk<sub>B</sub>²/(2E<sub>F</sub>) is the Sommerfeld constant. For Cu, γ ~ 0.7 mJ/mol·K² (theory predicts 0.50, experiment gives 0.695 — the small discrepancy is due to the effective mass m*). The key point: C<sub>v</sub><sup>e</sup> ∝ T, not constant as in Drude.
+        </div>
+      </details>
+    </div>
+
+    <div class="qa-block">
+      <h4>Band Theory &amp; Kronig–Penney</h4>
+
+      <details class="qa">
+        <summary>State and derive Bloch's theorem. What does it physically mean?</summary>
+        <div class="qa-ans">
+          <strong>Statement:</strong> For a Hamiltonian H = −ℏ²∇²/2m + V(r) where V(r) = V(r+R) for all lattice vectors R, the eigenfunctions can be chosen of the form:
+          <div class="eq-block">ψ<sub>nk</sub>(r) = e<sup>ik·r</sup>u<sub>nk</sub>(r) &nbsp;&nbsp;&nbsp; where u<sub>nk</sub>(r+R) = u<sub>nk</sub>(r)</div>
+          <strong>Proof sketch:</strong> Define the translation operator T<sub>R</sub>: T<sub>R</sub>ψ(r) = ψ(r+R). Since [H, T<sub>R</sub>] = 0 (H is periodic), H and T<sub>R</sub> share eigenstates. The eigenvalue of T<sub>R</sub> must be of modulus 1 (probability conserved): T<sub>R</sub>ψ = e<sup>ik·R</sup>ψ. Writing ψ = e<sup>ik·r</sup>u(r): T<sub>R</sub>ψ = e<sup>ik·(r+R)</sup>u(r+R) = e<sup>ik·r</sup>·e<sup>ik·R</sup>·u(r+R). For this to equal e<sup>ik·R</sup>ψ = e<sup>ik·R</sup>e<sup>ik·r</sup>u(r), we need u(r+R) = u(r). ∎<br><br>
+          <strong>Physical meaning:</strong> (1) Electrons propagate through a perfect crystal without scattering — Bloch states are exact stationary states. (2) The crystal momentum ℏk is conserved. (3) Only deviations from perfect periodicity (phonons, defects) scatter electrons and cause resistance. (4) The electron "sees" all ion cores simultaneously, moving as a renormalised free particle with effective mass m*.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Derive the KP model dispersion relation and explain the appearance of energy gaps.</summary>
+        <div class="qa-ans">
+          Starting from the Dirac comb form, the central result is:
+          <div class="eq-block">(P/αa)sin(αa) + cos(αa) = cos(ka) &nbsp;&nbsp;&nbsp; α² = 2mE/ℏ²</div>
+          <strong>Why gaps appear:</strong> The left-hand side (LHS) is bounded only by |LHS| ≤ 1 for solutions to exist in terms of a real crystal momentum k. When the LHS exceeds ±1, there are no real k solutions → these are forbidden energies → <strong>energy gaps</strong>.<br><br>
+          <strong>Location of gaps:</strong> Gaps occur at αa = nπ, i.e., k = nπ/a — the Brillouin zone boundaries. At these points, the electron wavelength λ = 2π/k = 2a/n satisfies the Bragg condition for reflection from the lattice: 2a sin θ = nλ with θ = 90° gives 2a = nλ. The Bragg-reflected waves combine to form two standing waves ψ₊ ∝ cos(nπx/a) (maximum probability at ion sites, lower PE, lower energy) and ψ₋ ∝ sin(nπx/a) (maximum probability between ions, higher PE, higher energy). The energy difference between these two standing waves is the gap.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What is effective mass? Derive the expression and explain negative effective mass and holes.</summary>
+        <div class="qa-ans">
+          <strong>Derivation:</strong> Group velocity of a Bloch electron: v = (1/ℏ)(dE/dk). In applied field E: F = ℏ(dk/dt). Acceleration:
+          <div class="eq-block">a = dv/dt = (1/ℏ)(d²E/dk²)(dk/dt) = (1/ℏ²)(d²E/dk²)F</div>
+          Comparing F = m*a: <div class="eq-block">m* = ℏ²/(d²E/dk²)</div>
+          <strong>Near band bottom (k ≈ 0):</strong> E ≈ E₀ + ℏ²k²/2m* with m* &gt; 0. Electron accelerates normally.<br><br>
+          <strong>Near band top (k ≈ π/a):</strong> Band curves downward → d²E/dk² &lt; 0 → m* &lt; 0. In a field, these electrons accelerate opposite to the force — they decelerate! This violates classical intuition and is a pure quantum effect.<br><br>
+          <strong>Holes:</strong> A nearly-full band (e.g., valence band of a semiconductor with one electron removed) is more usefully described by the hole — the missing electron. The hole has: charge +e, mass m<sub>h</sub>* = −m<sub>e</sub>* &gt; 0, wavevector k<sub>h</sub> = −k<sub>e</sub>. The hole behaves as a real positive carrier in transport and Hall experiments. It is the quantum mechanical origin of p-type semiconductors and the positive Hall coefficient in divalent metals.
+        </div>
+      </details>
+    </div>
+
+    <div class="qa-block">
+      <h4>Magnetism</h4>
+
+      <details class="qa">
+        <summary>Derive the Langevin theory of paramagnetism and obtain the Curie law.</summary>
+        <div class="qa-ans">
+          <strong>Setup:</strong> n dipoles per unit volume, each with moment μ. In field H, potential energy E = −μH cos θ. The number of dipoles in solid angle dΩ = 2π sin θ dθ:
+          <div class="eq-block">dn = k·e<sup>μH cosθ/k<sub>B</sub>T</sup>·2π sinθ dθ</div>
+          <strong>Magnetisation M = ∫μ cosθ dn / ∫dn</strong>. Let a = μH/k<sub>B</sub>T, x = cosθ:
+          <div class="eq-block">M = nμ·L(a) &nbsp;&nbsp; where &nbsp;&nbsp; L(a) = coth(a) − 1/a &nbsp; (Langevin function)</div>
+          <strong>Curie Law (small a, ordinary T):</strong> Expand L(a) ≈ a/3 for a ≪ 1:
+          <div class="eq-block">M ≈ nμ·(a/3) = nμ²H/(3k<sub>B</sub>T) &nbsp;→&nbsp; χ = M/H = nμ²/(3k<sub>B</sub>T) = C/T</div>
+          <strong>Saturation (large a, low T/high H):</strong> L(a) → 1, M → nμ = M<sub>s</sub>. All moments perfectly aligned.<br><br>
+          <strong>Limitation:</strong> The classical theory assumes continuous orientation. Quantum theory uses discrete m<sub>J</sub> values → Brillouin function. For J = 1/2 (pure spin): B<sub>1/2</sub>(a) = tanh(a). The quantum result generally matches experiment better.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Derive the Curie–Weiss law using the Weiss molecular field theory and find an expression for T<sub>C</sub>.</summary>
+        <div class="qa-ans">
+          <strong>Weiss hypothesis:</strong> In addition to the external field H, each atom feels an effective internal field H<sub>eff</sub> = H + λM, where λ is the Weiss constant (dimensionless parameter representing the strength of the exchange interaction).<br><br>
+          <strong>For T &gt; T<sub>C</sub></strong> (paramagnetic region, small M): Using the classical Curie result M = C·H<sub>eff</sub>/T = C(H + λM)/T:
+          <div class="eq-block">M(T − Cλ) = CH &nbsp;→&nbsp; χ = M/H = C/(T − Cλ) = C/(T − θ<sub>f</sub>)</div>
+          where θ<sub>f</sub> = Cλ is the paramagnetic Curie temperature. This is the <strong>Curie–Weiss Law</strong>. χ → ∞ as T → θ<sub>f</sub> from above — the susceptibility diverges at the ordering transition.<br><br>
+          <strong>Finding T<sub>C</sub>:</strong> Below T<sub>C</sub>, spontaneous M exists for H=0. From M = M<sub>s</sub>B<sub>J</sub>(gJμ<sub>B</sub>λM/k<sub>B</sub>T) and the small-a expansion of B<sub>J</sub>: the condition for a non-trivial solution is:
+          <div class="eq-block">k<sub>B</sub>T<sub>C</sub> = nλg²J(J+1)μ<sub>B</sub>²/3 = nλμ²/3 &nbsp;→&nbsp; θ<sub>f</sub> = T<sub>C</sub></div>
+          In practice, experimentally θ<sub>f</sub> &lt; T<sub>C</sub> because mean-field theory overestimates the stability of the ordered state (short-range correlations above T<sub>C</sub> that are ignored in Weiss theory).
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Why do iron group transition metals not obey the gJ formula for magnetic moment? Explain orbital quenching.</summary>
+        <div class="qa-ans">
+          <strong>The problem:</strong> Rare earth ions follow P<sub>eff</sub> = g<sub>J</sub>√[J(J+1)] beautifully. But iron group (3d) ions are well described by P<sub>eff</sub> = 2√[S(S+1)] (spin only), i.e., as if L = 0.<br><br>
+          <strong>Why?</strong> In a crystal, the ion is surrounded by ligand atoms or anions (crystal field). The <em>non-uniform</em> electric field of these ligands breaks spherical symmetry. The orbital angular momentum states (d-orbitals) are no longer degenerate — they split and hybridise with the lattice. The orbital angular momentum L can no longer precess freely about the magnetic field direction: it is "locked in" to the crystal axes. Quantum mechanically, the expectation value ⟨L⟩ = 0 in the eigenstates of the crystal-field Hamiltonian (which is real → ψ* = ψ → only real combinations of Ylm survive → ⟨L⟩ = Im⟨r×p⟩ = 0). This phenomenon is called <strong>orbital quenching</strong>.<br><br>
+          <strong>Why rare earths don't quench:</strong> The 4f shell is deep inside the atom, shielded by the outer 5s²5p⁶ electrons. The crystal field reaches the 4f shell only weakly — much weaker than the spin-orbit coupling. Hence L-S coupling (Hund's rules + J = L+S coupling) remains valid, and the Landé g formula works.
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What is the exchange interaction? Why can't dipole-dipole interaction explain ferromagnetism?</summary>
+        <div class="qa-ans">
+          <strong>Dipole-dipole failure:</strong> The energy of two magnetic dipoles separated by distance a is E<sub>dip</sub> ~ μ₀μ²/a³. For μ ~ μ<sub>B</sub> = 10⁻²³ J/T and a ~ 2 Å: E<sub>dip</sub> ~ 10⁻²³ T·m³/A × (9.27×10⁻²⁴)²/(10⁻³⁰) ~ 10⁻²⁵ J ~ 10⁻⁶ eV. This corresponds to a temperature of only ~10⁻³ K — far below T<sub>C</sub> ~ 1000 K for Fe. The dipolar interaction is ~10⁶ times too small.<br><br>
+          <strong>Exchange interaction:</strong> Arises from two quantum mechanical effects combined: (1) Coulomb repulsion between electrons (energy scale ~ eV), and (2) the Pauli exclusion principle (antisymmetry of the two-electron wavefunction). When two atoms come close, their electron wavefunctions overlap. The Heitler-London calculation gives:
+          <div class="eq-block">H<sub>ex</sub> = −2J<sub>ex</sub>S<sub>1</sub>·S<sub>2</sub></div>
+          where J<sub>ex</sub> = ∫ψ<sub>a</sub>*(1)ψ<sub>b</sub>*(2)(e²/r₁₂)ψ<sub>a</sub>(2)ψ<sub>b</sub>(1)dV is the exchange integral. If J<sub>ex</sub> &gt; 0: triplet (parallel spins) lower in energy → ferromagnetism. This is an electrostatic energy (~0.1 eV) which correctly gives T<sub>C</sub> ~ 1000 K. The "exchange field" felt by a spin is the many-body effect of all its neighbours — this is the Weiss molecular field.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-row">
+    <span>RR Ma'am · Solid State Physics · 2026</span>
+  </div>
+  <div class="footer-row" style="margin-top:.9rem;">
+    <span>Notes: Anuska Dey</span>
+    <span>Webpage: Arya Naiya</span>
+  </div>
+  <div class="footer-row" style="margin-top:.4rem;">
+    <span>Ref: Kittel · Dekker · Ashcroft &amp; Mermin · R.L. Singhal</span>
+  </div>
+</footer>
+
+<script>
+  const burgerBtn   = document.getElementById('burgerBtn');
+  const navDropdown = document.getElementById('navDropdown');
+
+  burgerBtn.addEventListener('click', function () {
+    const isOpen = navDropdown.classList.toggle('open');
+    burgerBtn.classList.toggle('open', isOpen);
+    burgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  function closeMenu() {
+    navDropdown.classList.remove('open');
+    burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('#navBurger') && !e.target.closest('#navDropdown')) {
+      closeMenu();
+    }
+  });
+</script>
+</body>
+</html>
