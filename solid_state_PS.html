@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solid State Physics — PS Sir Class Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #080810;
+  --bg-card:   #0f0f1c;
+  --bg-lift:   #14142a;
+  --bg-deep:   #1a1a32;
+  --border:    #2a2a4a;
+  --border-hi: #3d3d6a;
+  --text:      #dcdcf0;
+  --text-dim:  #8888b0;
+  --text-mute: #55557a;
+  --gold:      #f0b347;
+  --gold-dim:  #7a5c20;
+  --teal:      #3dd6c4;
+  --teal-dim:  #1a5c56;
+  --rose:      #f05c7a;
+  --rose-dim:  #6a1a28;
+  --indigo:    #7a8cff;
+  --indigo-dim:#2a2e6a;
+  --sage:      #7adf90;
+  --sage-dim:  #1a4a26;
+  --radius:    8px;
+  --font-body: 'Outfit', sans-serif;
+  --font-serif:'EB Garamond', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;min-height:100vh;}
+
+/* HERO */
+#hero{background:linear-gradient(135deg,#060612 0%,#0c0c24 50%,#0a0a1e 100%);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 30% 50%,rgba(122,140,255,.07) 0%,transparent 70%),radial-gradient(ellipse 50% 35% at 70% 40%,rgba(61,214,196,.05) 0%,transparent 70%);pointer-events:none;}
+.hero-tag{display:inline-block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);background:rgba(61,214,196,.08);border:1px solid rgba(61,214,196,.2);padding:.25rem .75rem;border-radius:2rem;margin-bottom:1rem;}
+#hero h1{font-family:var(--font-serif);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:500;color:#fff;letter-spacing:-.01em;line-height:1.2;}
+#hero h1 span{color:var(--gold);}
+.hero-sub{font-size:.95rem;color:var(--text-dim);margin-top:.5rem;font-style:italic;font-family:var(--font-serif);}
+.hero-meta{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;}
+.hero-meta span{font-family:var(--font-mono);font-size:.72rem;color:var(--text-mute);letter-spacing:.08em;text-transform:uppercase;}
+.hero-meta span b{color:var(--text-dim);}
+
+/* STICKY NAV */
+#sticky-nav{position:sticky;top:0;z-index:100;background:rgba(8,8,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.6rem 1.2rem;display:flex;gap:.25rem;flex-wrap:wrap;justify-content:center;}
+#sticky-nav a{font-family:var(--font-mono);font-size:.7rem;color:var(--text-mute);text-decoration:none;padding:.3rem .6rem;border-radius:4px;letter-spacing:.04em;white-space:nowrap;transition:background .15s,color .15s;}
+#sticky-nav a:hover{background:var(--bg-deep);color:var(--teal);}
+
+/* LAYOUT */
+main{max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 4rem;}
+
+/* LECTURE BLOCK */
+.lec{margin:2.5rem 0;position:relative;}
+.lec-header{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;}
+.lec-num{flex-shrink:0;width:2.8rem;height:2.8rem;background:var(--bg-deep);border:1px solid var(--border-hi);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.8rem;font-weight:500;color:var(--indigo);line-height:1;text-align:center;}
+.lec-title-block{flex:1;}
+.lec-title-block h2{font-family:var(--font-serif);font-size:1.55rem;font-weight:500;color:#fff;line-height:1.2;}
+.lec-date{font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.1em;margin-top:.2rem;}
+.lec-body{padding-left:3.8rem;}
+
+hr.sec-div{border:none;border-top:1px solid var(--border);margin:2rem 0;}
+
+/* HEADINGS */
+h3{font-family:var(--font-serif);font-size:1.2rem;color:var(--gold);margin:1.8rem 0 .7rem;font-weight:400;}
+h4{font-size:.95rem;font-weight:600;color:var(--text);margin:1.2rem 0 .4rem;letter-spacing:.02em;}
+p{margin:.5rem 0;}
+
+/* BOXES */
+.box{border-radius:var(--radius);padding:1rem 1.1rem;margin:1rem 0;border-left:3px solid transparent;font-size:.93rem;}
+.box-key{background:rgba(240,179,71,.06);border-color:var(--gold);}
+.box-key .box-title{color:var(--gold);}
+.box-concept{background:rgba(122,140,255,.06);border-color:var(--indigo);}
+.box-concept .box-title{color:var(--indigo);}
+.box-warn{background:rgba(240,92,122,.06);border-color:var(--rose);}
+.box-warn .box-title{color:var(--rose);}
+.box-sage{background:rgba(122,223,144,.05);border-color:var(--sage);}
+.box-sage .box-title{color:var(--sage);}
+.box-teal{background:rgba(61,214,196,.05);border-color:var(--teal);}
+.box-teal .box-title{color:var(--teal);}
+.box-title{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:.5rem;}
+
+/* EQUATIONS */
+.eq-block{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1.2rem;margin:.8rem 0;font-family:var(--font-serif);font-size:1.05rem;text-align:center;line-height:1.9;overflow-x:auto;}
+.eq-block .eq-label{font-family:var(--font-mono);font-size:.65rem;color:var(--text-mute);display:block;text-align:right;margin-top:.3rem;letter-spacing:.06em;}
+.eq-inline{font-family:var(--font-serif);font-size:1.05em;background:rgba(255,255,255,.04);border:1px solid var(--border);padding:.05em .3em;border-radius:4px;}
+
+/* STEPS */
+.steps{counter-reset:step;margin:.8rem 0;}
+.step{display:flex;gap:.9rem;margin:.5rem 0;align-items:flex-start;}
+.step::before{counter-increment:step;content:counter(step);flex-shrink:0;width:1.5rem;height:1.5rem;background:var(--bg-deep);border:1px solid var(--border-hi);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.65rem;color:var(--indigo);margin-top:.15rem;}
+
+/* DERIVATION */
+details.deriv{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);margin:1rem 0;overflow:hidden;}
+details.deriv > summary{cursor:pointer;padding:.8rem 1rem;display:flex;align-items:center;gap:.7rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.05em;color:var(--teal);user-select:none;list-style:none;background:var(--bg-lift);border-bottom:1px solid transparent;transition:background .15s;}
+details.deriv > summary:hover{background:var(--bg-deep);}
+details.deriv[open] > summary{border-bottom-color:var(--border);color:var(--text);}
+details.deriv > summary::before{content:'▶';font-size:.6rem;color:var(--teal);transition:transform .2s;}
+details.deriv[open] > summary::before{transform:rotate(90deg);}
+details.deriv .deriv-body{padding:1rem 1.2rem;}
+
+/* Q&A */
+.qa-block{margin:1.5rem 0;}
+.qa-block h4{color:var(--text-dim);font-size:.82rem;font-family:var(--font-mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.7rem;}
+details.qa{border:1px solid var(--border);border-radius:var(--radius);margin:.5rem 0;overflow:hidden;}
+details.qa > summary{cursor:pointer;padding:.75rem 1rem;background:var(--bg-card);font-size:.9rem;color:var(--text);list-style:none;display:flex;align-items:flex-start;gap:.7rem;transition:background .15s;}
+details.qa > summary:hover{background:var(--bg-lift);}
+details.qa > summary::before{content:'▶';font-size:.6rem;color:var(--gold);flex-shrink:0;margin-top:.3rem;transition:transform .2s;}
+details.qa[open] > summary::before{transform:rotate(90deg);}
+details.qa .qa-ans{padding:.9rem 1.1rem;border-top:1px solid var(--border);font-size:.9rem;color:var(--text-dim);line-height:1.75;}
+
+/* DIAGRAM */
+.diagram{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin:1rem 0;text-align:center;}
+.diagram figcaption{font-size:.78rem;color:var(--text-mute);font-style:italic;margin-top:.5rem;font-family:var(--font-serif);line-height:1.4;}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;margin:1rem 0;}
+table{width:100%;border-collapse:collapse;font-size:.85rem;}
+th{background:var(--bg-deep);color:var(--text);font-weight:600;padding:.5rem .8rem;text-align:left;border-bottom:2px solid var(--border-hi);font-family:var(--font-mono);font-size:.75rem;letter-spacing:.05em;}
+td{padding:.45rem .8rem;border-bottom:1px solid var(--border);color:var(--text-dim);}
+tr:hover td{background:rgba(255,255,255,.02);}
+
+/* FOOTER */
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-family:var(--font-mono);font-size:.68rem;color:var(--text-mute);letter-spacing:.08em;}
+footer span{color:var(--text-dim);}
+.footer-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.2rem;}
+.footer-row span,.footer-row a{white-space:nowrap;}
+
+/* UTIL */
+.tag{display:inline-block;font-family:var(--font-mono);font-size:.65rem;padding:.1rem .45rem;border-radius:3px;letter-spacing:.05em;}
+.tag-ref{background:rgba(122,140,255,.12);color:var(--indigo);}
+.tag-exam{background:rgba(240,92,122,.1);color:var(--rose);}
+sub,sup{font-size:.7em;}
+em{font-style:italic;color:var(--text);}
+strong{font-weight:600;color:var(--text);}
+
+/* HAMBURGER NAV */
+.nav-burger{display:none;position:sticky;top:0;z-index:101;background:rgba(8,8,16,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.55rem 1.2rem;justify-content:space-between;align-items:center;}
+.nav-burger-label{font-family:var(--font-mono);font-size:.72rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;}
+.burger-btn{background:none;border:none;cursor:pointer;padding:.3rem;display:flex;flex-direction:column;gap:4px;}
+.burger-btn span{display:block;width:20px;height:1.5px;background:var(--text-dim);transition:transform .2s,opacity .2s;}
+.burger-btn.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg);}
+.burger-btn.open span:nth-child(2){opacity:0;}
+.burger-btn.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);}
+.nav-dropdown{position:sticky;top:2.45rem;z-index:100;display:none;background:rgba(8,8,16,.99);border-bottom:1px solid var(--border);padding:.3rem 0;max-height:70vh;overflow-y:auto;}
+.nav-dropdown.open{display:block;}
+.nav-dropdown a{display:block;font-family:var(--font-mono);font-size:.8rem;color:var(--text-mute);text-decoration:none;padding:.7rem 1.4rem;letter-spacing:.04em;border-left:2px solid transparent;transition:color .15s,border-color .15s,background .15s;}
+.nav-dropdown a:hover,.nav-dropdown a:active{color:var(--teal);border-left-color:var(--teal);background:rgba(61,214,196,.05);}
+
+@media(max-width:680px){
+  #sticky-nav{display:none !important;}
+  .nav-burger{display:flex;}
+}
+@media(max-width:600px){
+  .lec-body{padding-left:0;}
+  .lec-header{flex-direction:column;gap:.5rem;}
+  .step{display:block;}
+  .step::before{display:inline-flex;margin-right:.5rem;margin-bottom:.25rem;vertical-align:middle;}
+  .eq-block{font-size:.88rem;text-align:left;padding:.75rem .9rem;word-break:break-word;}
+  .hero-meta{gap:.6rem;}
+  .hero-meta span{font-size:.68rem;}
+  .tbl-wrap{-webkit-overflow-scrolling:touch;}
+}
+
+/* SECTION divider */
+section{margin:3.5rem 0;}
+section > h2.sec-head{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mute);margin-bottom:1.5rem;padding:.4rem 0;border-bottom:1px solid var(--border);}
+
+/* grid for crystal systems table */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.8rem 0;}
+@media(max-width:500px){.grid-2{grid-template-columns:1fr;}}
+.grid-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:.7rem .9rem;font-size:.85rem;}
+.grid-item .gi-title{font-family:var(--font-mono);font-size:.7rem;color:var(--indigo);letter-spacing:.06em;margin-bottom:.3rem;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header id="hero">
+  <div class="hero-tag">PS Sir · Solid State Physics · 2026</div>
+  <h1>Solid State Physics<br><span>— Crystal Structure, Phonons &amp; Debye Model</span></h1>
+  <p class="hero-sub">Crystallography · Miller Indices · X-ray Diffraction · Lattice Vibrations · Specific Heat — Complete Notes with Expanded Derivations</p>
+  <div class="hero-meta">
+    <span><b>Ref:</b> Verma Srivastav · Walv · Dakker · Arun Kumar</span>
+    <span><b>Level:</b> Advanced Undergraduate</span>
+    <span><b>Topics:</b> Crystal · Symmetry · Phonons · Debye</span>
+  </div>
+</header>
+
+<!-- STICKY NAV (desktop) -->
+<nav id="sticky-nav">
+  <a href="#lec1">L1 · Crystal Structure</a>
+  <a href="#lec2">L2 · Symmetry</a>
+  <a href="#lec3">L3 · Crystal Systems</a>
+  <a href="#lec4">L4 · Miller Indices</a>
+  <a href="#lec5">L5 · Packing</a>
+  <a href="#lec6">L6 · X-ray Diffraction</a>
+  <a href="#lec7">L7 · Reciprocal Lattice</a>
+  <a href="#lec8">L8 · Ionic Bonding</a>
+  <a href="#lec9">L9 · 1D Monatomic</a>
+  <a href="#lec10">L10 · Diatomic Chain</a>
+  <a href="#lec11">L11 · Debye Model</a>
+  <a href="#iq">IQ · Important Questions</a>
+</nav>
+
+<!-- HAMBURGER NAV (mobile) -->
+<div class="nav-burger" id="navBurger">
+  <span class="nav-burger-label">PS Sir · Solid State</span>
+  <button class="burger-btn" id="burgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+<nav class="nav-dropdown" id="navDropdown">
+  <a href="#lec1" onclick="closeMenu()">L1 · Crystal Structure</a>
+  <a href="#lec2" onclick="closeMenu()">L2 · Symmetry Elements</a>
+  <a href="#lec3" onclick="closeMenu()">L3 · Crystal Systems &amp; Bravais Lattices</a>
+  <a href="#lec4" onclick="closeMenu()">L4 · Miller Indices</a>
+  <a href="#lec5" onclick="closeMenu()">L5 · Packing Fraction</a>
+  <a href="#lec6" onclick="closeMenu()">L6 · X-ray Diffraction</a>
+  <a href="#lec7" onclick="closeMenu()">L7 · Reciprocal Lattice</a>
+  <a href="#lec8" onclick="closeMenu()">L8 · Ionic Bonding</a>
+  <a href="#lec9" onclick="closeMenu()">L9 · 1D Monatomic Lattice</a>
+  <a href="#lec10" onclick="closeMenu()">L10 · Diatomic Chain</a>
+  <a href="#lec11" onclick="closeMenu()">L11 · Debye Model</a>
+  <a href="#iq" onclick="closeMenu()">IQ · Important Questions</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════ L1 ══ -->
+<div class="lec" id="lec1">
+  <div class="lec-header">
+    <div class="lec-num">L<br>01</div>
+    <div class="lec-title-block">
+      <h2>Crystal Structure — Lattice, Basis &amp; Unit Cell</h2>
+      <div class="lec-date">Topics · Crystal, Amorphous, Lattice, Basis, Unit Cell, Primitive vs Non-Primitive</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-key">
+      <div class="box-title">📌 What is a Crystal?</div>
+      A crystal is a <strong>regular, periodic arrangement of atoms in 3 dimensions</strong>. Periodicity means every property (band theory, electron movement) that depends on the spatial arrangement repeats exactly after a translation by a lattice vector. In contrast, an <em>amorphous</em> solid has no long-range order — atoms are randomly positioned (e.g. glass).
+    </div>
+
+    <h3>Lattice, Basis and Crystal</h3>
+    <p>A crystal is conceptually separated into two ideas:</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Core Concept</div>
+      <strong>Crystal = Lattice + Basis</strong><br>
+      The <em>lattice</em> is a mathematical set of points with perfect translational symmetry. The <em>basis</em> is the group of atoms (or molecules) placed identically at every lattice point. Together, they generate the full crystal structure.
+    </div>
+
+    <p><strong>Lattice:</strong> A collection of abstract points with the property that the environment of every point looks identical. Each point is called a <em>lattice point</em>. The lattice has translational periodicity — if you shift the whole lattice by a lattice translation vector <em>T</em> = n₁<b>a</b> + n₂<b>b</b> + n₃<b>c</b> (integers n₁, n₂, n₃), the lattice maps onto itself.</p>
+
+    <p><strong>Basis:</strong> The set of atoms occupying the neighborhood of each lattice point. The basis is the "decoration" placed at each lattice point. Even a single atom can be a basis.</p>
+
+    <h3>Unit Cell</h3>
+    <p>The <strong>unit cell</strong> is the minimum-volume region of the crystal that, when repeated by translation, fills all space without gaps or overlaps. It is like a tile in 3D.</p>
+
+    <div class="box box-warn">
+      <div class="box-title">⚠ Choice of Unit Cell is Arbitrary</div>
+      There are infinitely many valid ways to choose a unit cell. The only constraint is: (i) repeating the chosen unit cell must tile all space, (ii) the cell must not leave vacant areas inside the crystal. Because of this freedom, we often choose the <em>conventional unit cell</em> (which best shows the symmetry) or the <em>primitive unit cell</em> (minimum volume).
+    </div>
+
+    <h4>Two Types of Unit Cell</h4>
+    <p><strong>1. Primitive unit cell:</strong> Contains exactly <em>one</em> lattice point. It has the minimum volume possible. In practice, it seldom shows the full symmetry of the crystal clearly, so it is not always used. However, the primitive cell's volume uniquely defines the "amount of space per lattice point."</p>
+    <p><strong>2. Non-primitive (conventional) unit cell:</strong> Contains more than one lattice point. Extra atoms appear at the body centre, face centres, or edge centres. Used when it better displays the symmetry of the structure (e.g. FCC and BCC conventional cells).</p>
+
+    <div class="box box-teal">
+      <div class="box-title">Example — Primitive Simple Cubic</div>
+      A simple cubic (SC) unit cell has 8 corner atoms, each shared by 8 unit cells. So atoms per cell = 8 × (1/8) = <strong>1</strong> → it is primitive. For FCC: 8 corners × 1/8 + 6 faces × 1/2 = 1 + 3 = 4 → non-primitive (4 lattice points per cell).
+    </div>
+
+    <h3>Coordination Number</h3>
+    <p>The coordination number is the <strong>number of nearest neighbours</strong> of a given atom. SC: 6, BCC: 8, FCC: 12. A higher coordination number generally implies more stable, denser packing.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;">
+        <!-- Simple cubic dots -->
+        <g fill="none">
+          <!-- Lattice points 3x3 grid -->
+          <circle cx="40" cy="80" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="100" cy="80" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="160" cy="80" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="40" cy="40" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="100" cy="40" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="160" cy="40" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="40" cy="120" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="100" cy="120" r="6" fill="#7a8cff" opacity=".9"/>
+          <circle cx="160" cy="120" r="6" fill="#7a8cff" opacity=".9"/>
+          <!-- Unit cell box -->
+          <rect x="70" y="55" width="60" height="50" fill="rgba(61,214,196,.05)" stroke="#3dd6c4" stroke-width="1.2" stroke-dasharray="4,3"/>
+          <!-- Labels -->
+          <text x="100" y="145" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">Lattice</text>
+
+          <!-- Basis atom in unit cell -->
+          <circle cx="100" cy="80" r="10" fill="rgba(240,179,71,.15)" stroke="#f0b347" stroke-width="1"/>
+          <text x="115" y="84" font-family="JetBrains Mono,monospace" font-size="8" fill="#f0b347">basis</text>
+        </g>
+        <!-- Second diagram: crystal = lattice + basis -->
+        <line x1="195" y1="80" x2="215" y2="80" stroke="#55557a" stroke-width="1.5"/>
+        <text x="200" y="76" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">→</text>
+        <!-- Crystal with basis -->
+        <g transform="translate(220,0)">
+          <circle cx="40" cy="80" r="6" fill="#7a8cff" opacity=".8"/>
+          <circle cx="100" cy="80" r="6" fill="#7a8cff" opacity=".8"/>
+          <circle cx="160" cy="80" r="6" fill="#7a8cff" opacity=".8"/>
+          <circle cx="40" cy="40" r="6" fill="#7a8cff" opacity=".8"/>
+          <circle cx="100" cy="40" r="6" fill="#7a8cff" opacity=".8"/>
+          <circle cx="160" cy="40" r="6" fill="#7a8cff" opacity=".8"/>
+          <!-- Basis pairs at each lattice pt -->
+          <circle cx="46" cy="76" r="3.5" fill="#f0b347" opacity=".85"/>
+          <circle cx="106" cy="76" r="3.5" fill="#f0b347" opacity=".85"/>
+          <circle cx="166" cy="76" r="3.5" fill="#f0b347" opacity=".85"/>
+          <circle cx="46" cy="36" r="3.5" fill="#f0b347" opacity=".85"/>
+          <circle cx="106" cy="36" r="3.5" fill="#f0b347" opacity=".85"/>
+          <circle cx="166" cy="36" r="3.5" fill="#f0b347" opacity=".85"/>
+          <text x="100" y="145" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">Crystal (lattice + basis)</text>
+        </g>
+      </svg>
+      <figcaption>A 2D crystal as the superposition of a lattice (blue dots) and a two-atom basis (gold circles). Each lattice point carries an identical copy of the basis.</figcaption>
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why is the choice of unit cell arbitrary, and what constraint must any valid unit cell satisfy?</summary>
+        <div class="qa-ans">
+          The unit cell is just a mathematical region used to tile space — the actual physics of the crystal doesn't depend on how we draw the box. Any region that (i) tiles all of space without gaps or overlaps by translation, and (ii) contains an amount of crystal representative of one lattice point (for a primitive cell) is valid.<br><br>
+          The practical constraints are: repeated translations of the cell must cover every lattice point exactly once (for a primitive cell), or an integer number of times (for non-primitive). The volume of any primitive cell equals |<b>a</b>·(<b>b</b>×<b>c</b>)|, regardless of shape. Common choices include the parallelepiped cell and the <em>Wigner-Seitz cell</em> (region closer to a given lattice point than to any other), the latter having the full point-group symmetry of the lattice.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What is the difference between a lattice point and an atom?</summary>
+        <div class="qa-ans">
+          A lattice point is a purely mathematical abstraction — it is a point in a regular array. An atom is a physical entity. A lattice point can represent a single atom, a group of atoms (the basis), or even a molecule. The lattice captures the geometry of periodicity; the basis describes the actual physical content at each lattice point.<br><br>
+          Example: NaCl crystal has an FCC Bravais lattice with a 2-atom basis (one Na⁺ and one Cl⁻). The lattice points form an FCC array, but each carries two atoms.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L2 ══ -->
+<div class="lec" id="lec2">
+  <div class="lec-header">
+    <div class="lec-num">L<br>02</div>
+    <div class="lec-title-block">
+      <h2>Symmetry Elements of a Crystal</h2>
+      <div class="lec-date">Topics · Translational, Rotational, Inversion Symmetry · Why n=5 is Forbidden</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Why Symmetry Matters</h3>
+    <p>The symmetry of a crystal determines its physical properties: electrical conductivity, optical response, piezoelectricity, etc. The full symmetry group of a crystal is called its <em>space group</em>. For the purpose of lattice classification, we focus on the <em>point group</em> (rotations, reflections, inversions).</p>
+
+    <h3>Translational Symmetry</h3>
+    <p>The most fundamental symmetry of a crystal is <strong>translational periodicity</strong>: shifting the crystal by any lattice vector <em>T</em> = n₁<b>a</b> + n₂<b>b</b> + n₃<b>c</b> leaves it invariant. This is actually <em>built in</em> to the definition of a crystal.</p>
+
+    <h3>Rotational Symmetry — n-fold Axes</h3>
+    <p>A crystal has <em>n-fold</em> rotational symmetry about an axis if rotation by φ = 360°/n maps the crystal onto itself. The allowed values of n are determined by a crucial compatibility condition with translational symmetry.</p>
+
+    <details class="deriv">
+      <summary>▶ Derivation — Why n = 5 and n ≥ 7 are forbidden in periodic lattices</summary>
+      <div class="deriv-body">
+        <p>Consider a 2D array of atoms with a periodic lattice (lattice constant <em>t</em>). Let there be an n-fold allowed rotation axis at lattice point ①.</p>
+        <p>By translational symmetry, there must be identical axes at adjacent lattice points ② at distance <em>t</em>.</p>
+        <div class="eq-block">
+          Rotate ② about ①: new point ③ at distance t from ①<br>
+          Rotate ① about ②: new point ④ at distance t from ②
+        </div>
+        <p>③ and ④ must also be lattice points (rotational symmetry maps lattice to lattice). The distance between ③ and ④ must be an integer multiple of <em>t</em>:</p>
+        <div class="eq-block">
+          Distance(③–④) = t + 2t·cos φ = m·t &nbsp;&nbsp; where m is an integer
+        </div>
+        <p>Therefore: <strong>1 + 2cos φ = m (integer)</strong>, which means cos φ = (m−1)/2.</p>
+        <p>Since |cos φ| ≤ 1 → −1 ≤ (m−1)/2 ≤ 1 → −1 ≤ m ≤ 3, so <em>m</em> ∈ {−1, 0, 1, 2, 3}.</p>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>m</th><th>cos φ</th><th>φ</th><th>n = 360°/φ</th><th>Symmetry type</th></tr>
+            <tr><td>−1</td><td>−1</td><td>180°</td><td>2</td><td>Linear (2-fold)</td></tr>
+            <tr><td>0</td><td>−½</td><td>120°</td><td>3</td><td>Equilateral triangle (3-fold)</td></tr>
+            <tr><td>1</td><td>0</td><td>90°</td><td>4</td><td>Square (4-fold)</td></tr>
+            <tr><td>2</td><td>½</td><td>60°</td><td>6</td><td>Hexagonal (6-fold)</td></tr>
+            <tr><td>3</td><td>1</td><td>0°</td><td>1</td><td>Identity (1-fold)</td></tr>
+          </table>
+        </div>
+        <p><strong>Conclusion:</strong> Only n = 1, 2, 3, 4, 6 are compatible with translational periodicity in a 2D/3D lattice. n = 5 requires φ = 72°, giving cos φ = (√5−1)/4 ≈ 0.309 — not of the form (m−1)/2 for integer m.</p>
+        <p><strong>Physical picture for n=5:</strong> Pentagons cannot tile a plane without leaving gaps (unlike squares, triangles, hexagons). The resulting empty space would violate translational periodicity.</p>
+      </div>
+    </details>
+
+    <div class="box box-warn">
+      <div class="box-title">⚠ Important Exception — Quasicrystals</div>
+      In a <em>quasicrystal</em> (e.g. Al–Mn alloy, Shechtman 1984, Nobel Prize 2011), 5-fold and icosahedral diffraction patterns are observed. This is possible because quasicrystals are <em>not periodically translating</em> — they have long-range order but no translational symmetry. They are "almost periodic" (quasiperiodic). In your exam context, when asked about periodic lattices, n=5 remains forbidden.
+    </div>
+
+    <h3>Types of Rotation</h3>
+    <p><strong>Proper rotation:</strong> Pure rotation by 360°/n (n-fold axis). Denoted C<sub>n</sub> in Schoenflies notation.</p>
+    <p><strong>Improper rotation:</strong> An n-fold rotation followed by inversion through a point. Includes mirror planes (n=2 improper axis ⟹ mirror), and the inversion centre.</p>
+
+    <h3>Reflection Symmetry</h3>
+    <p>Two points are related by reflection if they are mirror images of each other through a plane. The plane of symmetry is called a <em>mirror plane</em>.</p>
+
+    <h3>Inversion Symmetry</h3>
+    <p>A crystal has inversion symmetry if, for every atom at position <b>r</b>, there is an identical atom at −<b>r</b>. Points ① and ④ in PS Sir's notation are related by inversion through the centre; point ② is not (it has a rotation axis, not inversion).</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Order of Symmetry Operations</div>
+      When building up the full symmetry group: (1) Translational periodicity is always present — "built in." (2) Going to lower symmetry (from hexagonal to monoclinic) corresponds to removing symmetry operations. (3) Each Bravais lattice has a characteristic minimum symmetry that defines its crystal system.
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why can a quasicrystal have 5-fold symmetry in its diffraction pattern even though no periodic lattice can have 5-fold rotational symmetry?</summary>
+        <div class="qa-ans">
+          The restriction n = 1, 2, 3, 4, 6 applies only to <em>periodically translating</em> lattices. The derivation relies on the requirement that rotating a lattice point about another lattice point produces yet another lattice point (at an integer multiple of the lattice spacing).<br><br>
+          A quasicrystal breaks this requirement — it is ordered but <em>not periodic</em>. Its structure can be described as a projection of a higher-dimensional periodic lattice onto 3D space. The resulting "quasiperiodic" order allows n=5 (and icosahedral) point symmetries in diffraction patterns, because the sharp diffraction peaks do not require translational periodicity — they only require long-range positional correlations (which quasicrystals have).
+        </div>
+      </details>
+      <details class="qa">
+        <summary>If a crystal has 4-fold rotational symmetry, must it also have mirror symmetry?</summary>
+        <div class="qa-ans">
+          Not necessarily. The point group C<sub>4</sub> (pure 4-fold rotation, no reflection, no inversion) is a valid symmetry group without mirror planes. However, many physical crystals with 4-fold rotation also have mirror planes (e.g. tetragonal system with group D<sub>4h</sub>), because additional symmetries are present. The question is whether those additional symmetries are present in a specific crystal — they are not required by the n=4 rotation alone.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L3 ══ -->
+<div class="lec" id="lec3">
+  <div class="lec-header">
+    <div class="lec-num">L<br>03</div>
+    <div class="lec-title-block">
+      <h2>Seven Crystal Systems &amp; Fourteen Bravais Lattices</h2>
+      <div class="lec-date">Topics · Triclinic → Hexagonal · Primitive and Centred Lattices · Why 14 not 21</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>By combining the allowed rotation axes with the restriction on lattice parameters, all possible crystal structures fall into exactly <strong>7 crystal systems</strong> and <strong>14 Bravais lattice types</strong>.</p>
+
+    <div class="box box-key">
+      <div class="box-title">3 Defining Parameters of a Crystal System</div>
+      Each system is defined by: (i) restrictions on <em>cell edge lengths</em> a, b, c, (ii) restrictions on <em>inter-axial angles</em> α, β, γ, and (iii) the <em>characteristic point symmetry</em> (minimum required rotational symmetry).
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>#</th><th>System</th><th>Lengths</th><th>Angles</th><th>Characteristic Symmetry</th><th>Bravais Lattices</th></tr>
+        <tr><td>1</td><td>Triclinic</td><td>a≠b≠c</td><td>α≠β≠γ≠90°</td><td>None (1-fold only)</td><td>P — 1 type</td></tr>
+        <tr><td>2</td><td>Monoclinic</td><td>a≠b≠c</td><td>α=γ=90°, β&lt;120°</td><td>One 2-fold axis</td><td>P, C — 2 types</td></tr>
+        <tr><td>3</td><td>Orthorhombic</td><td>a≠b≠c</td><td>α=β=γ=90°</td><td>Three 2-fold axes</td><td>P, C, I, F — 4 types</td></tr>
+        <tr><td>4</td><td>Tetragonal</td><td>a=b≠c</td><td>α=β=γ=90°</td><td>One 4-fold axis</td><td>P, I — 2 types</td></tr>
+        <tr><td>5</td><td>Rhombohedral/Trigonal</td><td>a=b=c</td><td>α=β=γ≠90°</td><td>One 3-fold axis</td><td>P (R) — 1 type</td></tr>
+        <tr><td>6</td><td>Hexagonal</td><td>a=b≠c</td><td>α=β=90°, γ=120°</td><td>One 6-fold axis</td><td>P — 1 type</td></tr>
+        <tr><td>7</td><td>Cubic</td><td>a=b=c</td><td>α=β=γ=90°</td><td>Four 3-fold axes</td><td>P, I, F — 3 types</td></tr>
+      </table>
+    </div>
+
+    <p>Total Bravais lattices: 1+2+4+2+1+1+3 = <strong>14</strong>.</p>
+
+    <h3>Why Not 21 Bravais Lattices?</h3>
+    <p>One might expect 7 systems × 3 centring types (P, I, F) = 21 possible combinations. But many combinations are either equivalent or violate the symmetry requirement of that system. PS Sir discusses one important example:</p>
+
+    <details class="deriv">
+      <summary>▶ Proof — Base-Centred Cubic (C-face centred cubic) reduces to Primitive Tetragonal</summary>
+      <div class="deriv-body">
+        <p>Suppose we construct a "base-centred cubic" lattice: atoms at all 8 corners of a cube of side <em>a</em>, plus atoms at the centres of the top and bottom faces.</p>
+        <p>Now choose a new, smaller unit cell by connecting the body-centred face atoms. The new cell has basis vectors:</p>
+        <div class="eq-block">
+          <b>a'</b> = a/√2 along the face diagonal (x direction)<br>
+          <b>b'</b> = a/√2 along the other face diagonal (y direction)<br>
+          <b>c'</b> = a along the z direction (unchanged)
+        </div>
+        <p>So the new cell has a' = b' = a/√2 ≠ c' = a, with all angles 90°. This is exactly a <strong>primitive tetragonal</strong> lattice (a=b≠c, α=β=γ=90°). No new lattice type is needed — base-centred cubic is just tetragonal primitive in disguise.</p>
+        <p>This is why symmetry must be checked after centring: centring can sometimes reduce the effective symmetry and land in a different, already-catalogued lattice type.</p>
+      </div>
+    </details>
+
+    <h3>Cubic System in Detail</h3>
+    <p>The cubic system is the most important for exam purposes. Its three Bravais lattices are:</p>
+    <div class="grid-2">
+      <div class="grid-item">
+        <div class="gi-title">Simple Cubic (SC / P)</div>
+        Atoms at cube corners only. Coordination number: <strong>6</strong>. Atoms/cell: 1. Lattice parameter a. Only element: Polonium (Po).
+      </div>
+      <div class="grid-item">
+        <div class="gi-title">Body-Centred Cubic (BCC / I)</div>
+        Corners + 1 body-centre atom. Coord. no.: <strong>8</strong>. Atoms/cell: 2. Body diagonal = a√3 = 4r → r = a√3/4. Examples: Fe, W, Na, K.
+      </div>
+      <div class="grid-item">
+        <div class="gi-title">Face-Centred Cubic (FCC / F)</div>
+        Corners + face-centre atoms. Coord. no.: <strong>12</strong>. Atoms/cell: 4. Face diagonal = a√2 = 4r → r = a√2/4. Examples: Cu, Al, Ni, Pb.
+      </div>
+      <div class="grid-item">
+        <div class="gi-title">HCP (Hexagonal)</div>
+        Not cubic — hexagonal system. Coord. no.: <strong>12</strong>. Atoms/cell: 6. c/a = √(8/3) ≈ 1.633 ideally. Examples: Mg, Zn, Ti.
+      </div>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 380 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:460px;">
+        <!-- SC cube -->
+        <g transform="translate(20,20)">
+          <rect x="5" y="5" width="60" height="60" fill="none" stroke="#2a2a4a" stroke-width="1"/>
+          <!-- back face -->
+          <line x1="20" y1="5" x2="80" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="80" y1="5" x2="80" y2="65" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="20" y1="5" x2="20" y2="65" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <!-- edges to back -->
+          <line x1="5" y1="5" x2="20" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="65" y1="5" x2="80" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="65" y1="65" x2="80" y2="65" stroke="#2a2a4a" stroke-width="1"/>
+          <line x1="5" y1="65" x2="20" y2="65" stroke="#2a2a4a" stroke-width="1"/>
+          <!-- 8 corner atoms -->
+          <circle cx="5" cy="5" r="5" fill="#7a8cff"/>
+          <circle cx="65" cy="5" r="5" fill="#7a8cff"/>
+          <circle cx="5" cy="65" r="5" fill="#7a8cff"/>
+          <circle cx="65" cy="65" r="5" fill="#7a8cff"/>
+          <circle cx="20" cy="5" r="5" fill="#3a3a6a"/>
+          <circle cx="80" cy="5" r="5" fill="#3a3a6a"/>
+          <circle cx="20" cy="65" r="5" fill="#3a3a6a"/>
+          <circle cx="80" cy="65" r="5" fill="#3a3a6a"/>
+          <text x="42" y="95" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#8888b0">SC</text>
+          <text x="42" y="107" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">n=1, CN=6</text>
+        </g>
+        <!-- BCC cube -->
+        <g transform="translate(140,20)">
+          <rect x="5" y="5" width="60" height="60" fill="none" stroke="#2a2a4a" stroke-width="1"/>
+          <line x1="20" y1="5" x2="80" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="80" y1="5" x2="80" y2="65" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="20" y1="5" x2="20" y2="65" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="5" y1="5" x2="20" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="65" y1="5" x2="80" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="65" y1="65" x2="80" y2="65" stroke="#2a2a4a" stroke-width="1"/>
+          <line x1="5" y1="65" x2="20" y2="65" stroke="#2a2a4a" stroke-width="1"/>
+          <circle cx="5" cy="5" r="5" fill="#7a8cff"/>
+          <circle cx="65" cy="5" r="5" fill="#7a8cff"/>
+          <circle cx="5" cy="65" r="5" fill="#7a8cff"/>
+          <circle cx="65" cy="65" r="5" fill="#7a8cff"/>
+          <circle cx="20" cy="5" r="5" fill="#3a3a6a"/>
+          <circle cx="80" cy="5" r="5" fill="#3a3a6a"/>
+          <circle cx="20" cy="65" r="5" fill="#3a3a6a"/>
+          <circle cx="80" cy="65" r="5" fill="#3a3a6a"/>
+          <!-- body centre -->
+          <circle cx="42" cy="35" r="7" fill="#f0b347"/>
+          <text x="42" y="95" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#8888b0">BCC</text>
+          <text x="42" y="107" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">n=2, CN=8</text>
+        </g>
+        <!-- FCC cube -->
+        <g transform="translate(260,20)">
+          <rect x="5" y="5" width="60" height="60" fill="none" stroke="#2a2a4a" stroke-width="1"/>
+          <line x1="20" y1="5" x2="80" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="80" y1="5" x2="80" y2="65" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="20" y1="5" x2="20" y2="65" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="5" y1="5" x2="20" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="65" y1="5" x2="80" y2="5" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="65" y1="65" x2="80" y2="65" stroke="#2a2a4a" stroke-width="1"/>
+          <line x1="5" y1="65" x2="20" y2="65" stroke="#2a2a4a" stroke-width="1"/>
+          <circle cx="5" cy="5" r="5" fill="#7a8cff"/>
+          <circle cx="65" cy="5" r="5" fill="#7a8cff"/>
+          <circle cx="5" cy="65" r="5" fill="#7a8cff"/>
+          <circle cx="65" cy="65" r="5" fill="#7a8cff"/>
+          <circle cx="20" cy="5" r="5" fill="#3a3a6a"/>
+          <circle cx="80" cy="5" r="5" fill="#3a3a6a"/>
+          <circle cx="20" cy="65" r="5" fill="#3a3a6a"/>
+          <circle cx="80" cy="65" r="5" fill="#3a3a6a"/>
+          <!-- face centres -->
+          <circle cx="35" cy="5" r="6" fill="#3dd6c4"/>
+          <circle cx="5" cy="35" r="6" fill="#3dd6c4"/>
+          <circle cx="65" cy="35" r="6" fill="#3dd6c4"/>
+          <circle cx="35" cy="65" r="6" fill="#3dd6c4"/>
+          <circle cx="50" cy="35" r="6" fill="#3a5a58"/>
+          <text x="42" y="95" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#8888b0">FCC</text>
+          <text x="42" y="107" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">n=4, CN=12</text>
+        </g>
+      </svg>
+      <figcaption>SC (n=1), BCC (n=2, gold body-centre), FCC (n=4, teal face-centres). Darker atoms are at the back face.</figcaption>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L4 ══ -->
+<div class="lec" id="lec4">
+  <div class="lec-header">
+    <div class="lec-num">L<br>04</div>
+    <div class="lec-title-block">
+      <h2>Miller Indices — Directions &amp; Planes</h2>
+      <div class="lec-date">Topics · Direction indices [hkl] · Plane indices (hkl) · Interplanar spacing · Miller-Bravais</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>Miller indices are a compact notation for specifying directions and planes in a crystal, using the crystallographic axes as the reference frame.</p>
+
+    <h3>Indices of Directions</h3>
+    <p>The direction vector from the origin to a lattice point at (u, v, w) (in units of a, b, c) is written as <strong>[uvw]</strong>. The procedure:</p>
+    <div class="steps">
+      <div class="step">Identify a line through the origin (or parallel to one that passes through the origin) in the desired direction.</div>
+      <div class="step">Find the coordinates of any lattice point on that line (in units of the lattice constants a, b, c).</div>
+      <div class="step">Reduce to smallest integers. A negative component is written with a bar: [1̄00] means [−100].</div>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Families of Directions</div>
+      Directions related by the crystal's symmetry form a <em>family</em>, denoted by angle brackets: ⟨uvw⟩. In a cubic crystal, ⟨100⟩ = {[100], [010], [001], [1̄00], [01̄0], [001̄]} — all equivalent by symmetry. In a tetragonal crystal (a=b≠c), [100] and [001] are NOT equivalent, so they belong to different families.
+    </div>
+
+    <h3>Indices of Planes (Miller Indices)</h3>
+    <p>Miller indices (hkl) describe a plane (or the set of parallel planes) in a crystal. Key insight: we use <em>reciprocals</em> of intercepts to avoid infinity when a plane is parallel to an axis.</p>
+
+    <div class="steps">
+      <div class="step">Identify where the plane intersects the three crystallographic axes. Express intercepts in units of a, b, c. E.g. intercepts at 2a, 3b, 6c → intercepts are (2, 3, 6).</div>
+      <div class="step">Take reciprocals: (1/2, 1/3, 1/6).</div>
+      <div class="step">Clear fractions by multiplying by the LCM (here 6): → (3, 2, 1).</div>
+      <div class="step">These are the Miller indices: (321). Negative intercepts → negative index, written with a bar: (h̄kl).</div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-title">⚠ Why Reciprocals?</div>
+      If a plane is parallel to the y-axis, it never intercepts it → intercept = ∞. Taking the reciprocal gives 1/∞ = 0, so the Miller index for that axis is 0. This is more convenient than using ∞ directly. Also: reciprocals ensure that the Miller indices (hkl) are directly proportional to the components of the normal vector to the plane (in an orthogonal system).
+    </div>
+
+    <h4>Interplanar Spacing d<sub>hkl</sub></h4>
+    <p>For a crystal, the perpendicular distance between adjacent parallel (hkl) planes:</p>
+    <div class="eq-block">
+      <strong>Cubic:</strong> d<sub>hkl</sub> = a / √(h² + k² + l²)<br><br>
+      <strong>Tetragonal (a=b≠c):</strong> 1/d² = (h²+k²)/a² + l²/c²<br><br>
+      <strong>General orthorhombic:</strong> 1/d² = h²/a² + k²/b² + l²/c²
+    </div>
+
+    <p>The derivation uses direction cosines of the plane's normal to find the perpendicular distance between planes.</p>
+
+    <details class="deriv">
+      <summary>▶ Derivation — Interplanar spacing for cubic crystal</summary>
+      <div class="deriv-body">
+        <p>A plane (hkl) in a cubic crystal has intercepts at a/h, a/k, a/l on the x, y, z axes respectively.</p>
+        <p>The equation of such a plane is: hx/a + ky/a + lz/a = 1, or hx + ky + lz = a.</p>
+        <p>The perpendicular distance from the origin (0,0,0) to this plane is:</p>
+        <div class="eq-block">
+          d = |a| / √(h² + k² + l²)
+        </div>
+        <p>This is the distance from the origin to the nearest plane of the (hkl) family. Adjacent planes have equations hx + ky + lz = na for integer n, separated by:</p>
+        <div class="eq-block">
+          d<sub>hkl</sub> = a / √(h² + k² + l²)
+        </div>
+        <p>For the general case (using direction cosines α, β, γ of the normal): cos²α + cos²β + cos²γ = 1, and d = (a/h)cosα = (a/k)cosβ = (a/l)cosγ, leading to the same result.</p>
+      </div>
+    </details>
+
+    <h3>Miller–Bravais Indices for Hexagonal Crystals</h3>
+    <p>The hexagonal system has 3 in-plane axes a₁, a₂, a₃ (at 120° to each other) and a c-axis perpendicular to them. Using 3 indices, (100) and (110) are not obviously equivalent — but they describe the same family of prismatic planes. To resolve this, a 4th index <em>i</em> = −(h+k) is introduced:</p>
+    <div class="eq-block">
+      (hkl) → (hkil) where i = −(h+k)
+    </div>
+    <p>For example: (100) → (101̄0) and (110) → (11̄00) — these clearly belong to the same {101̄0} family.</p>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>The plane (321) in an orthorhombic crystal (a=1.21Å, b=1.84Å, c=1.97Å) cuts the x-axis at 1.21Å. Find the intercepts along y and z.</summary>
+        <div class="qa-ans">
+          Miller indices (h,k,l) = (3,2,1). The intercepts in units of a, b, c are p = 1/h = 1/3, q = 1/k = 1/2, r = 1/l = 1.<br><br>
+          Actual intercepts: ℓ₁ = pa = 1.21/3 = <strong>0.403 Å</strong>... Wait, actually the problem says x-intercept = 1.21Å = pa → p = 1.21/1.21 = 1, meaning h=1. Let me re-read: the plane is (2 3 1̄) with x-intercept 1.21Å.<br><br>
+          h:k:l = 2:3:1̄, so p:q:r = 1/2 : 1/3 : −1 → actual intercepts: ℓ₁:ℓ₂:ℓ₃ = pa : qb : rc.<br>
+          Given ℓ₁ = p·a = 1.21Å → p = 1.21/1.21 = 1... but h=2 means p=1/2·(something). <br><br>
+          Standard approach: intercepts (in units of a,b,c) = (1/h, 1/k, 1/l) = (1/2, 1/3, -1). Actual intercepts = (a/h, b/k, c/l) = (1.21/2, 1.84/3, 1.97/(-1)) = <strong>0.605 Å, 0.613 Å, −1.97 Å</strong>.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why are Miller indices always integers, even though physical intercepts can be fractions of the lattice parameter?</summary>
+        <div class="qa-ans">
+          Miller indices are defined as the reciprocals of intercepts (in units of the lattice parameters), cleared of fractions. Since the crystal has translational symmetry, any plane of the family (hkl) passes through lattice points; the smallest intercept along any axis is always a rational fraction of the lattice parameter — specifically a/h for a cubic crystal. Taking the reciprocal (and clearing fractions) always gives integers.<br><br>
+          Physically, any plane that contains at least 3 non-collinear lattice points has integer Miller indices. Planes with non-integer Miller indices do not contain lattice points and are therefore not "crystallographic planes" in the strict sense.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L5 ══ -->
+<div class="lec" id="lec5">
+  <div class="lec-header">
+    <div class="lec-num">L<br>05</div>
+    <div class="lec-title-block">
+      <h2>Packing Fraction &amp; Crystal Plane Density</h2>
+      <div class="lec-date">Topics · SC · BCC · FCC · HCP packing fractions · 2D plane density</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-key">
+      <div class="box-title">📌 Definition</div>
+      The <strong>packing fraction (PF)</strong> = volume occupied by atoms / total volume of unit cell = n × (4/3)πr³ / V<sub>cell</sub>, where n = number of atoms per unit cell, r = atomic radius, V<sub>cell</sub> = a³ (for cubic). Atoms are treated as hard spheres that just touch along the closest-packed direction.
+    </div>
+
+    <h3>Simple Cubic (SC)</h3>
+    <p>Atoms touch along cube edge: 2r = a → r = a/2. Atoms/cell: n = 1.</p>
+    <div class="eq-block">
+      PF<sub>SC</sub> = 1 × (4/3)π(a/2)³ / a³ = π/6 ≈ <strong>0.52 (52%)</strong>
+    </div>
+    <p>48% of the volume is empty. This is the lowest packing density of any Bravais lattice. Only Po (polonium) adopts this structure.</p>
+
+    <h3>Body-Centred Cubic (BCC)</h3>
+    <p>Atoms touch along the body diagonal: 4r = a√3 → r = a√3/4. Atoms/cell: n = 2.</p>
+    <div class="eq-block">
+      PF<sub>BCC</sub> = 2 × (4/3)π(a√3/4)³ / a³ = π√3/8 ≈ <strong>0.68 (68%)</strong>
+    </div>
+
+    <h3>Face-Centred Cubic (FCC)</h3>
+    <p>Atoms touch along the face diagonal: 4r = a√2 → r = a√2/4. Atoms/cell: n = 4.</p>
+    <div class="eq-block">
+      PF<sub>FCC</sub> = 4 × (4/3)π(a√2/4)³ / a³ = π/(3√2) ≈ <strong>0.74 (74%)</strong>
+    </div>
+    <p>This is the maximum possible packing for identical spheres (Kepler conjecture, proved by Hales 2005).</p>
+
+    <h3>Hexagonal Close Packed (HCP)</h3>
+    <p>HCP achieves the same packing fraction (74%) as FCC, but with a different stacking sequence of close-packed layers: ABABAB... (FCC is ABCABC...).</p>
+    <p>For ideal HCP: c/a = √(8/3) ≈ 1.633. Atoms/cell: n = 6 (12 corners × 1/6 + 2 face centres × 1/2 + 3 interior atoms).</p>
+    <div class="eq-block">
+      PF<sub>HCP</sub> = π/(3√2) ≈ <strong>0.74 (74%)</strong> — same as FCC
+    </div>
+
+    <h3>Density of Atoms in a Crystal Plane</h3>
+    <p>The <strong>2D planar density</strong> = number of atoms <em>centred in the plane</em> / area of the plane.</p>
+
+    <details class="deriv">
+      <summary>▶ Calculation — (110) Plane in BCC</summary>
+      <div class="deriv-body">
+        <p>For a BCC crystal, the (110) plane is a rectangle with dimensions a√2 × a (face diagonal × cube edge).</p>
+        <p>Atoms in the plane: 4 corner atoms, each shared by 4 cells → 4 × 1/4 = 1 atom. Plus 1 centre atom at the body-centre (lies in the (110) plane of BCC since the (110) plane passes through the body centre in BCC). Actually, more carefully: in BCC, the (110) plane contains atoms at the corners of the rectangle and the body-centre. Counting: 2 corner atoms (at ends of face diagonal, each shared by 2 planes of the stack): 2 × 1/2 = 1, plus 2 more corners × 1/2... let's use the standard result:</p>
+        <div class="eq-block">
+          δ<sub>110(BCC)</sub> = 2 / (a√2 × a) = 2/(a²√2) = √2/a² — highest for BCC
+        </div>
+        <p>This is the highest packing density plane in BCC, which is why BCC metals slip preferentially along {110} planes.</p>
+      </div>
+    </details>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Structure</th><th>n (atoms/cell)</th><th>Touching direction</th><th>r in terms of a</th><th>PF</th></tr>
+        <tr><td>SC</td><td>1</td><td>Edge</td><td>a/2</td><td>0.52</td></tr>
+        <tr><td>BCC</td><td>2</td><td>Body diagonal</td><td>a√3/4</td><td>0.68</td></tr>
+        <tr><td>FCC</td><td>4</td><td>Face diagonal</td><td>a√2/4</td><td>0.74</td></tr>
+        <tr><td>HCP</td><td>6</td><td>Basal plane</td><td>a/2</td><td>0.74</td></tr>
+      </table>
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why do FCC and HCP have the same packing fraction even though their structures are different?</summary>
+        <div class="qa-ans">
+          Both FCC and HCP are <em>close-packed structures</em> — they are built by stacking close-packed hexagonal layers. The difference is in the stacking sequence: ABCABC (FCC) vs ABABAB (HCP). Since within each layer the atoms are identically arranged (hexagonal close-packing), and between layers the atoms fit into the same tetrahedral/octahedral holes, the fraction of space filled is identical: π/(3√2) ≈ 74%.<br><br>
+          The distinction only matters for properties that depend on the 3D arrangement of atoms (e.g. slip systems in plasticity, the (111) vs (001) X-ray diffraction pattern).
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L6 ══ -->
+<div class="lec" id="lec6">
+  <div class="lec-header">
+    <div class="lec-num">L<br>06</div>
+    <div class="lec-title-block">
+      <h2>X-ray Diffraction — Bragg's Law &amp; Laue Equations</h2>
+      <div class="lec-date">Topics · Why X-rays? · Bragg's law · Limitations · Laue equations · Equivalence · Ewald sphere</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Why X-rays?</h3>
+    <p>Crystal interplanar spacings are of order 1–3 Å. For diffraction to occur, the wavelength must be comparable to the scatterer spacing. X-rays have λ ~ 1 Å (= 10⁻¹⁰ m). Visible light (λ ~ 5000 Å) cannot probe atomic arrangements — the crystal is transparent to it. Gamma rays (λ ~ 10⁻³ Å) have wavelengths too small.</p>
+
+    <p>Physically: an X-ray photon hits an atom, excites an electron, which oscillates and re-radiates spherical wavefronts. Many atoms re-radiate — these wavefronts interfere. Constructive interference is diffraction; this follows the same principle as Young's double slit but in 3D.</p>
+
+    <h3>Bragg's Law</h3>
+    <p>Bragg used a reflection analogy: X-rays reflect from successive crystal planes, and the condition for constructive interference is that the path difference equals an integer number of wavelengths.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:460px;">
+        <!-- Crystal planes -->
+        <line x1="20" y1="70" x2="360" y2="70" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="20" y1="110" x2="360" y2="110" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- spacing label -->
+        <line x1="30" y1="72" x2="30" y2="108" stroke="#55557a" stroke-width="1" marker-start="url(#arr)" marker-end="url(#arr)"/>
+        <text x="35" y="95" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">d</text>
+        <!-- Incident ray 1 -->
+        <line x1="70" y1="20" x2="160" y2="70" stroke="#3dd6c4" stroke-width="1.5"/>
+        <!-- Reflected ray 1 -->
+        <line x1="160" y1="70" x2="250" y2="20" stroke="#3dd6c4" stroke-width="1.5"/>
+        <!-- Incident ray 2 (penetrates to 2nd plane) -->
+        <line x1="100" y1="20" x2="180" y2="110" stroke="#7a8cff" stroke-width="1.5"/>
+        <line x1="180" y1="110" x2="260" y2="20" stroke="#7a8cff" stroke-width="1.5"/>
+        <!-- Angle annotations -->
+        <text x="140" y="58" font-family="JetBrains Mono,monospace" font-size="10" fill="#f0b347">θ</text>
+        <text x="170" y="58" font-family="JetBrains Mono,monospace" font-size="10" fill="#f0b347">θ</text>
+        <!-- B and C points -->
+        <circle cx="160" cy="70" r="3" fill="#3dd6c4"/>
+        <circle cx="180" cy="110" r="3" fill="#7a8cff"/>
+        <!-- path difference label -->
+        <text x="155" y="95" font-family="JetBrains Mono,monospace" font-size="9" fill="#8888b0">BC+CD=2d sinθ</text>
+        <!-- labels -->
+        <text x="65" y="15" font-family="JetBrains Mono,monospace" font-size="9" fill="#3dd6c4">Ray 1</text>
+        <text x="95" y="15" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a8cff">Ray 2</text>
+        <text x="190" y="140" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">Path diff = 2d sinθ = nλ</text>
+      </svg>
+      <figcaption>Bragg reflection: Ray 2 travels an extra path BC + CD = 2d sin θ compared to Ray 1. Constructive interference requires 2d sin θ = nλ.</figcaption>
+    </div>
+
+    <div class="eq-block">
+      <strong>Bragg's Law:</strong> &nbsp; 2d<sub>hkl</sub> sin θ = nλ
+      <span class="eq-label">n = order of diffraction (integer)</span>
+    </div>
+
+    <h3>Interpretations and Limitations</h3>
+    <div class="box box-concept">
+      <div class="box-title">Key Points</div>
+      <strong>1.</strong> θ is continuous? — <em>No</em>. Since d<sub>hkl</sub> = a/√(h²+k²+l²) and n, h, k, l are all integers, the allowed Bragg angles θ<sub>hkl</sub> are discrete.<br><br>
+      <strong>2.</strong> Maximum constraint: sin θ ≤ 1 → 2d sin θ ≤ 2d → so λ ≤ 2d. If λ > 2d, no diffraction occurs (Bragg condition can never be satisfied). This is why visible light (λ ≫ d) doesn't diffract from atomic planes.<br><br>
+      <strong>3.</strong> Bragg's law gives the <em>position</em> of diffraction peaks but <em>not their intensity</em>. The intensity depends on the structure factor (which atoms are in the unit cell and where).
+    </div>
+
+    <h3>Laue Equations</h3>
+    <p>The Laue approach is more general: it treats each atom as a scatterer and requires constructive interference along all three axes simultaneously. For a 3D lattice with vectors a, b, c:</p>
+    <div class="eq-block">
+      a(cos α − cos α₀) = hλ<br>
+      b(cos β − cos β₀) = kλ<br>
+      c(cos γ − cos γ₀) = lλ
+    </div>
+    <p>Here α₀, β₀, γ₀ are angles of the incident ray with axes; α, β, γ for the diffracted ray. All three must be satisfied simultaneously. This is the "cone intersection" condition — diffraction occurs only where three cones of allowed directions intersect (forming isolated spots).</p>
+
+    <h3>Equivalence of Bragg and Laue</h3>
+    <p>They describe the same physics. For a simplified cubic lattice a=b=c=a, setting e=nh, f=nk, g=nl and using direction cosine identities:</p>
+    <div class="eq-block">
+      cos²α₀ + cos²β₀ + cos²γ₀ = 1 (incident), cos²α + cos²β + cos²γ = 1 (diffracted)<br>
+      → 2a² sin²θ = (e²+f²+g²)λ² → sin θ = (nλ/2a)√(h²+k²+l²) = nλ/2d<sub>hkl</sub>
+    </div>
+    <p>This is exactly Bragg's law. Laue and Bragg equations are equivalent; they just partition the geometry differently.</p>
+
+    <h3>Ewald Sphere Construction</h3>
+    <p>The Ewald sphere is a geometric construction in reciprocal space that makes it easy to see which (hkl) planes diffract for a given λ.</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:400px;">
+        <!-- Ewald sphere -->
+        <circle cx="170" cy="120" r="90" fill="none" stroke="#3d3d6a" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <!-- Centre C, crystal position, origin O -->
+        <circle cx="80" cy="120" r="3" fill="#3dd6c4"/>
+        <text x="63" y="115" font-family="JetBrains Mono,monospace" font-size="9" fill="#3dd6c4">C</text>
+        <circle cx="170" cy="120" r="3" fill="#8888b0"/>
+        <text x="175" y="115" font-family="JetBrains Mono,monospace" font-size="9" fill="#8888b0">crystal</text>
+        <!-- Direct beam direction -->
+        <line x1="80" y1="120" x2="260" y2="120" stroke="#3dd6c4" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <!-- O = exit point -->
+        <circle cx="260" cy="120" r="3" fill="#3dd6c4"/>
+        <text x="263" y="115" font-family="JetBrains Mono,monospace" font-size="9" fill="#3dd6c4">O</text>
+        <!-- RL point P touching sphere -->
+        <circle cx="125" cy="42" r="4" fill="#f0b347"/>
+        <text x="130" y="38" font-family="JetBrains Mono,monospace" font-size="9" fill="#f0b347">P (hkl RL point)</text>
+        <!-- Diffracted ray -->
+        <line x1="170" y1="120" x2="125" y2="42" stroke="#7a8cff" stroke-width="1.5"/>
+        <text x="130" y="90" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a8cff" transform="rotate(-60,130,90)">diffracted</text>
+        <!-- OP vector -->
+        <line x1="260" y1="120" x2="125" y2="42" stroke="#f05c7a" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="210" y="70" font-family="JetBrains Mono,monospace" font-size="9" fill="#f05c7a">G<tspan font-size="7">hkl</tspan></text>
+        <!-- 2θ angle -->
+        <text x="235" y="135" font-family="JetBrains Mono,monospace" font-size="9" fill="#f0b347">2θ</text>
+        <!-- radius label -->
+        <text x="110" y="145" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">radius = 1/λ</text>
+        <!-- caption note -->
+        <text x="170" y="225" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">OP = G_hkl = reciprocal lattice vector</text>
+      </svg>
+      <figcaption>Ewald sphere (radius 1/λ in reciprocal space). Diffraction from (hkl) occurs when the reciprocal lattice point P<sub>hkl</sub> lies exactly on the sphere surface. The diffracted beam exits along C→P direction.</figcaption>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Ewald Sphere — Key Idea</div>
+      Draw a sphere of radius 1/λ centred at the crystal position, with the incident beam direction from C to the sphere surface at O. Whenever a reciprocal lattice point P<sub>hkl</sub> lies on the sphere, the condition OP = G<sub>hkl</sub> = 1/d<sub>hkl</sub> is satisfied, which is Bragg's law. Rotating the crystal rotates the reciprocal lattice; each time a RL point touches the sphere, a diffraction spot appears.
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does Bragg's law give only the positions of maxima, not their intensities?</summary>
+        <div class="qa-ans">
+          Bragg's law is a purely geometric condition — it tells you <em>which angles</em> allow constructive interference between reflections from parallel planes. It treats each plane as a featureless reflector and does not care about what's inside the unit cell.<br><br>
+          The intensity depends on the <strong>structure factor</strong> F<sub>hkl</sub> = Σ<sub>j</sub> f<sub>j</sub> exp(2πi(hx<sub>j</sub>+ky<sub>j</sub>+lz<sub>j</sub>)), where f<sub>j</sub> is the atomic scattering factor of atom j at fractional coordinates (x<sub>j</sub>,y<sub>j</sub>,z<sub>j</sub>). If F<sub>hkl</sub> = 0 (systematic absence), the diffraction peak vanishes even though the Bragg condition is satisfied. Example: BCC has systematic absences for (h+k+l) = odd.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L7 ══ -->
+<div class="lec" id="lec7">
+  <div class="lec-header">
+    <div class="lec-num">L<br>07</div>
+    <div class="lec-title-block">
+      <h2>Reciprocal Lattice</h2>
+      <div class="lec-date">Topics · Construction · Properties · Real vs Reciprocal · Uses in diffraction · FCC↔BCC duality</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>The reciprocal lattice is a mathematical construct in momentum (k) space that is the natural language for describing diffraction, electronic band structure, and phonons.</p>
+
+    <div class="box box-key">
+      <div class="box-title">📌 Why Reciprocal Lattice?</div>
+      When we solve Schrödinger's equation for an electron in a periodic potential V(<b>r</b>) = V(<b>r</b>+<b>T</b>), the natural basis for expansion is plane waves e<sup>i<b>G</b>·<b>r</b></sup> where <b>G</b> is a reciprocal lattice vector. Similarly, diffraction by a crystal involves the momentum transfer equalling a reciprocal lattice vector. The reciprocal lattice is thus the Fourier transform partner of the real lattice.
+    </div>
+
+    <h3>Construction of the Reciprocal Lattice</h3>
+    <p>For a real lattice with primitive vectors <b>a</b>, <b>b</b>, <b>c</b>, the reciprocal lattice vectors are:</p>
+    <div class="eq-block">
+      <b>a*</b> = 2π(<b>b</b>×<b>c</b>) / (<b>a</b>·<b>b</b>×<b>c</b>) &nbsp;&nbsp; <b>b*</b> = 2π(<b>c</b>×<b>a</b>) / (<b>a</b>·<b>b</b>×<b>c</b>) &nbsp;&nbsp; <b>c*</b> = 2π(<b>a</b>×<b>b</b>) / (<b>a</b>·<b>b</b>×<b>c</b>)
+    </div>
+    <p>Key properties:</p>
+    <div class="box box-teal">
+      <div class="box-title">Fundamental Properties</div>
+      (i) <b>a</b>·<b>a*</b> = 2π, <b>a</b>·<b>b*</b> = 0, etc. (orthogonality between real and reciprocal vectors)<br>
+      (ii) <b>a*</b> ⊥ bc-plane, <b>b*</b> ⊥ ac-plane, <b>c*</b> ⊥ ab-plane<br>
+      (iii) |<b>a*</b>| = 2π/a for orthogonal lattice (a, b, c mutually perpendicular)<br>
+      (iv) A general reciprocal lattice vector: <b>G</b><sub>hkl</sub> = h<b>a*</b> + k<b>b*</b> + l<b>c*</b>, and |<b>G</b><sub>hkl</sub>| = 2π/d<sub>hkl</sub>
+    </div>
+
+    <h3>Construction Procedure (PS Sir's method)</h3>
+    <div class="steps">
+      <div class="step">Select an origin common to both real and reciprocal lattice.</div>
+      <div class="step">From that origin, draw perpendiculars to all crystal planes (hkl).</div>
+      <div class="step">Truncate each perpendicular at a distance proportional to 1/d<sub>hkl</sub> from the origin.</div>
+      <div class="step">The resulting array of points is the reciprocal lattice. Its Wigner-Seitz cell is the First Brillouin Zone.</div>
+    </div>
+
+    <h3>FCC–BCC Duality</h3>
+    <p>A beautiful result: the reciprocal lattice of FCC is BCC (and vice versa). This is why the first Brillouin zone of an FCC crystal is a truncated octahedron (the Wigner-Seitz cell of BCC in reciprocal space), while the first BZ of a BCC crystal is a regular rhombic dodecahedron.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Real lattice</th><th>Reciprocal lattice</th></tr>
+        <tr><td>Simple cubic (SC)</td><td>Simple cubic (SC)</td></tr>
+        <tr><td>FCC</td><td>BCC</td></tr>
+        <tr><td>BCC</td><td>FCC</td></tr>
+        <tr><td>2D orthogonal (a≠b)</td><td>2D orthogonal (a*=2π/a ≠ b*=2π/b), rotated 90°</td></tr>
+      </table>
+    </div>
+
+    <h3>Uses of the Reciprocal Lattice</h3>
+    <p>PS Sir mentions three main uses: (1) explaining X-ray diffraction — the Bragg condition sin θ = λ/2d<sub>hkl</sub> becomes the simple geometric statement that a RL point lies on the Ewald sphere; (2) lattice vibrations — phonon wavevectors k live in the first Brillouin zone; (3) band structure calculations — electronic wavevectors are also in the first BZ, and energy bands are labelled by k within the BZ.</p>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L8 ══ -->
+<div class="lec" id="lec8">
+  <div class="lec-header">
+    <div class="lec-num">L<br>08</div>
+    <div class="lec-title-block">
+      <h2>Atomic Binding in Ionic Crystals — Madelung Constant &amp; Lattice Energy</h2>
+      <div class="lec-date">Topics · Interatomic potential · Equilibrium condition · Madelung constant · NaCl cohesive energy</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <h3>Interatomic Potential in Ionic Crystals</h3>
+    <p>In an ionic crystal (e.g. NaCl), two types of force act: long-range Coulomb attraction between opposite ions, and short-range repulsion due to overlapping electron clouds.</p>
+
+    <div class="eq-block">
+      u(R) = −A/R<sup>n</sup> + B/R<sup>m</sup>
+    </div>
+    <p>Here R = interionic separation, A and B are material-dependent constants, n and m are exponents (n &lt; m — the repulsive term falls off faster). The <em>negative</em> term is attractive (Coulomb), the <em>positive</em> is repulsive.</p>
+
+    <h3>Equilibrium Separation and Binding Energy</h3>
+
+    <details class="deriv">
+      <summary>▶ Derivation — Equilibrium separation R<sub>e</sub> and binding energy U<sub>e</sub></summary>
+      <div class="deriv-body">
+        <p><strong>Step 1:</strong> At equilibrium, net force = 0: F = −du/dR = 0</p>
+        <div class="eq-block">
+          nA/R<sup>n+1</sup> − mB/R<sup>m+1</sup> = 0 → B/R<sup>m</sup> = (n/m)(A/R<sup>n</sup>)
+          <span class="eq-label">Equilibrium condition</span>
+        </div>
+        <p><strong>Step 2:</strong> From step 1: B/R<sub>e</sub><sup>m</sup> = (n/m) A/R<sub>e</sub><sup>n</sup>, so B = (n/m) A R<sub>e</sub><sup>m−n</sup></p>
+        <p><strong>Step 3:</strong> Equilibrium separation: from force balance,</p>
+        <div class="eq-block">
+          R<sub>e</sub> = (mB/nA)<sup>1/(m−n)</sup>
+        </div>
+        <p><strong>Step 4:</strong> Potential energy at equilibrium U<sub>e</sub> = u(R<sub>e</sub>):</p>
+        <div class="eq-block">
+          U<sub>e</sub> = −A/R<sub>e</sub><sup>n</sup> + B/R<sub>e</sub><sup>m</sup> = −A/R<sub>e</sub><sup>n</sup> + (n/m)(A/R<sub>e</sub><sup>n</sup>) = −(A/R<sub>e</sub><sup>n</sup>)(1 − n/m)
+        </div>
+        <p>The <em>dissociation energy</em> D = −U<sub>e</sub> = (A/R<sub>e</sub><sup>n</sup>)(1 − n/m). Since m ≫ n (repulsion is very short-range), D ≈ A/R<sub>e</sub><sup>n</sup>.</p>
+        <p><strong>Physical significance:</strong> The equilibrium potential energy is negative (bound state). As R → R<sub>e</sub> from either side, we need energy D to separate the ions to infinity. This is the <em>binding energy</em> per ion pair.</p>
+      </div>
+    </details>
+
+    <h3>Lattice Energy of NaCl — Madelung Constant</h3>
+    <p>In a real crystal, each ion interacts with ALL other ions (Coulomb force is long-range). The total Coulomb energy of one ion in the field of all others:</p>
+
+    <div class="eq-block">
+      E<sub>Coulomb</sub>(one Na⁺) = −(e²/4πε₀) × [6/r − 12/r√2 + 8/r√3 − 6/r√4 + ...] = −(Ae²/4πε₀r)
+    </div>
+
+    <p>where the series accounts for: 6 nearest Cl⁻ at distance r (attractive), 12 next-nearest Na⁺ at r√2 (repulsive), 8 next-next-nearest Cl⁻ at r√3 (attractive), etc. The dimensionless sum</p>
+
+    <div class="eq-block">
+      A = 6/√1 − 12/√2 + 8/√3 − 6/√4 + 24/√5 − ... = <strong>1.7476</strong>
+    </div>
+
+    <p>is the <strong>Madelung constant</strong> for NaCl. It depends only on the crystal geometry, not on the specific ions. Different crystal structures have different A values (e.g. CsCl: A=1.7627, zincblende: A=1.638).</p>
+
+    <h3>Total Lattice Energy</h3>
+    <p>For N ion pairs (total 2N ions) in NaCl:</p>
+    <div class="eq-block">
+      E<sub>total</sub> = N[−Ae²/4πε₀r<sub>0</sub> + B/r<sub>0</sub><sup>n</sup>]
+    </div>
+    <p>At equilibrium r = r₀ (the lattice parameter a₀):</p>
+    <div class="eq-block">
+      E<sub>min</sub> = E(a₀) = −NAe²/(4πε₀a₀) × (1 − 1/n)
+      <span class="eq-label">Born-Landé equation; n ≈ 8–12 for alkali halides</span>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Problem from PS Sir's Notes</div>
+      <em>Calculate the Madelung constant for an infinite linear chain of alternating ±e charges at separation r<sub>e</sub>.</em><br><br>
+      The energy series for one ion: E = −(e²/r)[2(1 − 1/2 + 1/3 − 1/4 + ...)] = −(e²/r) × 2 ln 2<br>
+      Therefore: <strong>A = 2 ln 2 ≈ 1.386</strong> for a 1D ionic chain.
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why is the dissociation energy U<sub>e</sub> negative if the crystal is stable?</summary>
+        <div class="qa-ans">
+          U<sub>e</sub> is the potential energy <em>at the equilibrium position relative to the energy of completely separated ions at rest at infinity</em>. U<sub>e</sub> being negative means the crystal is at a lower energy than the separated ions — that's exactly what makes it stable! Energy must be <em>supplied</em> to break the crystal apart (dissociation energy D = −U<sub>e</sub> > 0).<br><br>
+          The sign convention: U(∞) = 0 (reference); U(R<sub>e</sub>) < 0 means the bound state is energetically favourable.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L9 ══ -->
+<div class="lec" id="lec9">
+  <div class="lec-header">
+    <div class="lec-num">L<br>09</div>
+    <div class="lec-title-block">
+      <h2>Lattice Vibrations I — 1D Monatomic Chain</h2>
+      <div class="lec-date">Topics · Acoustic waves · Phonons · Equation of motion · Dispersion relation · Brillouin zone · Phase &amp; group velocity</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-key">
+      <div class="box-title">📌 From Continuum to Discrete</div>
+      At long wavelengths (λ ≫ a), a crystal behaves like a continuous elastic medium: ω = v<sub>s</sub>k (acoustic wave). At short wavelengths (λ ~ a), discrete atomic structure matters. The dispersion relation becomes <em>non-linear</em>, and there is a maximum frequency beyond which no propagating modes exist. This is the origin of the Brillouin zone.
+    </div>
+
+    <h3>Model: 1D Monatomic Chain</h3>
+    <p>Consider a 1D chain of identical atoms, each of mass M, coupled to nearest neighbours by springs of stiffness K (Hooke's law, harmonic approximation). Lattice parameter = a (equilibrium spacing).</p>
+
+    <div class="diagram">
+      <svg viewBox="0 0 420 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;">
+        <!-- Springs and atoms -->
+        <g>
+          <!-- Atoms -->
+          <circle cx="50" cy="40" r="12" fill="#14142a" stroke="#7a8cff" stroke-width="1.5"/>
+          <text x="50" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a8cff">n-1</text>
+          <circle cx="160" cy="40" r="12" fill="#14142a" stroke="#7a8cff" stroke-width="1.5"/>
+          <text x="160" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a8cff">n</text>
+          <circle cx="270" cy="40" r="12" fill="#14142a" stroke="#7a8cff" stroke-width="1.5"/>
+          <text x="270" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a8cff">n+1</text>
+          <circle cx="380" cy="40" r="12" fill="#14142a" stroke="#7a8cff" stroke-width="1.5"/>
+          <text x="380" y="44" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#7a8cff">n+2</text>
+          <!-- Springs (zigzag lines) -->
+          <polyline points="62,40 80,30 90,50 100,30 110,50 120,30 130,50 148,40" fill="none" stroke="#3dd6c4" stroke-width="1.5"/>
+          <polyline points="172,40 190,30 200,50 210,30 220,50 230,30 240,50 258,40" fill="none" stroke="#3dd6c4" stroke-width="1.5"/>
+          <polyline points="282,40 300,30 310,50 320,30 330,50 340,30 350,50 368,40" fill="none" stroke="#3dd6c4" stroke-width="1.5"/>
+          <!-- K label -->
+          <text x="105" y="20" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#3dd6c4">K</text>
+          <!-- a label -->
+          <line x1="50" y1="65" x2="160" y2="65" stroke="#55557a" stroke-width="1"/>
+          <text x="105" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">a</text>
+          <!-- displacement u_n -->
+          <text x="160" y="15" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#f0b347">u_n</text>
+        </g>
+      </svg>
+      <figcaption>1D monatomic chain. Each atom of mass M is coupled to nearest neighbours by springs of constant K. u<sub>n</sub> is the displacement of atom n from its equilibrium position.</figcaption>
+    </div>
+
+    <details class="deriv">
+      <summary>▶ Full Derivation — Dispersion Relation for 1D Monatomic Chain</summary>
+      <div class="deriv-body">
+        <p><strong>Step 1: Equation of motion.</strong> Forces on atom n from its neighbours:</p>
+        <div class="eq-block">
+          M (d²u<sub>n</sub>/dt²) = K(u<sub>n+1</sub> − u<sub>n</sub>) + K(u<sub>n−1</sub> − u<sub>n</sub>) = K(u<sub>n+1</sub> + u<sub>n−1</sub> − 2u<sub>n</sub>) &nbsp; ①
+        </div>
+
+        <p><strong>Step 2: Trial solution.</strong> Assume a travelling wave (all atoms vibrate at same frequency ω with phase varying along the chain):</p>
+        <div class="eq-block">
+          u<sub>n</sub> = A exp[i(nka − ωt)]
+        </div>
+        <p>Here k is the wave vector; the equilibrium position of atom n is x₀ = na.</p>
+
+        <p><strong>Step 3: Substitute into ①:</strong></p>
+        <div class="eq-block">
+          −Mω² A exp[i(nka)] = KA exp[i(nka)] × [exp(ika) + exp(−ika) − 2]<br>
+          −Mω² = K[2cos(ka) − 2] = −2K[1 − cos(ka)]
+        </div>
+
+        <p><strong>Step 4: Use identity</strong> 1 − cos(θ) = 2sin²(θ/2):</p>
+        <div class="eq-block">
+          Mω² = 4K sin²(ka/2)
+          <span class="eq-label">→ Dispersion relation</span>
+        </div>
+
+        <p><strong>Step 5: Final form:</strong></p>
+        <div class="eq-block">
+          ω = 2√(K/M) |sin(ka/2)|
+          <span class="eq-label">Dispersion relation for 1D monatomic chain</span>
+        </div>
+        <p>Maximum frequency: ω<sub>max</sub> = 2√(K/M) at k = π/a (BZ boundary).</p>
+      </div>
+    </details>
+
+    <h3>Features of the Dispersion Relation</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;">
+        <!-- Axes -->
+        <line x1="40" y1="150" x2="280" y2="150" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="160" y1="20" x2="160" y2="155" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- BZ boundaries -->
+        <line x1="80" y1="25" x2="80" y2="150" stroke="#55557a" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="240" y1="25" x2="240" y2="150" stroke="#55557a" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Dispersion curve: ω = ωmax|sin(ka/2)| using path -->
+        <path d="M80,150 Q120,90 160,30 Q200,90 240,150" fill="none" stroke="#3dd6c4" stroke-width="2"/>
+        <!-- ωmax label -->
+        <text x="255" y="33" font-family="JetBrains Mono,monospace" font-size="9" fill="#3dd6c4">ω<tspan font-size="7">max</tspan></text>
+        <line x1="50" y1="30" x2="250" y2="30" stroke="#3dd6c4" stroke-width="0.7" stroke-dasharray="3,2" opacity=".5"/>
+        <!-- k axis labels -->
+        <text x="76" y="163" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">-π/a</text>
+        <text x="157" y="163" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">0</text>
+        <text x="238" y="163" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">+π/a</text>
+        <!-- ω axis label -->
+        <text x="163" y="17" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">ω</text>
+        <text x="275" y="155" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">k</text>
+        <!-- Linear regime label -->
+        <text x="170" y="60" font-family="JetBrains Mono,monospace" font-size="8" fill="#f0b347">ω≈vk (linear)</text>
+        <!-- BZ label -->
+        <text x="160" y="175" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">← 1st Brillouin Zone →</text>
+      </svg>
+      <figcaption>Dispersion ω(k) for 1D monatomic chain. Linear at small k (acoustic wave), saturates at ω<sub>max</sub> = 2√(K/M) at BZ boundary k = ±π/a. The spectrum is periodic in k with period 2π/a.</figcaption>
+    </div>
+
+    <div class="box box-concept">
+      <div class="box-title">Key Features</div>
+      <strong>1. Long wavelength limit</strong> (k → 0): sin(ka/2) ≈ ka/2, so ω ≈ a√(K/M) · k = v<sub>s</sub>k — linear dispersion, like a continuous medium. Here v<sub>s</sub> = a√(K/M) is the speed of sound.<br><br>
+      <strong>2. Zone boundary</strong> (k = π/a): ω = ω<sub>max</sub> = 2√(K/M). This is a standing wave — atoms move in antiphase. Group velocity dω/dk = 0 → wave doesn't propagate (zero group velocity).<br><br>
+      <strong>3. First Brillouin Zone:</strong> −π/a ≤ k ≤ π/a. All physically distinct modes lie within this range. Values outside are physically identical (differ only in labelling). The periodicity is 2π/a.<br><br>
+      <strong>4. Low-pass filter:</strong> Frequencies ω &gt; ω<sub>max</sub> cannot propagate through the lattice — the monatomic chain acts as a low-pass filter.
+    </div>
+
+    <h3>Phase and Group Velocity</h3>
+    <div class="eq-block">
+      Phase velocity: v<sub>ph</sub> = ω/k = (2a/ka)√(K/M) · |sin(ka/2)| = v<sub>s</sub> · sin(ka/2) / (ka/2)<br><br>
+      Group velocity: v<sub>g</sub> = dω/dk = a√(K/M) · cos(ka/2)
+    </div>
+    <p>At k → 0: v<sub>ph</sub> = v<sub>g</sub> = v<sub>s</sub> (no dispersion for long waves). At k = π/a: v<sub>g</sub> = 0 (standing wave), v<sub>ph</sub> = 2v<sub>s</sub>/π.</p>
+
+    <h3>Phonons</h3>
+    <p>Each normal mode of the lattice with frequency ω is quantised. The quanta are called <strong>phonons</strong>: energy ℏω, momentum ℏk. Phonons are bosons — their number is not conserved (they can be created or absorbed by thermal fluctuations or scattering). The acoustic wave in the continuum limit corresponds to long-wavelength (k→0) acoustic phonons.</p>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>A wave propagating in a lattice with k between π/a and 2π/a is physically identical to a wave with k between −π/a and 0. Explain why.</summary>
+        <div class="qa-ans">
+          The dispersion relation ω(k) = 2√(K/M)|sin(ka/2)| has period 2π/a — it repeats identically as k changes by any multiple of 2π/a (a reciprocal lattice vector). This periodicity arises because the lattice itself has period a: adding 2π/a to k changes the trial solution u<sub>n</sub> = A exp[i(nka−ωt)] by a factor exp(in·2π) = 1. The atomic displacements are unchanged, so the mode is identical.<br><br>
+          Therefore, all physically distinct modes are already captured by one period: the first Brillouin zone [−π/a, π/a]. Modes with k outside this range are "aliases" — they correspond to exactly the same physical displacements as a mode within the zone.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why does a monatomic chain act as a low-pass frequency filter?</summary>
+        <div class="qa-ans">
+          The maximum frequency is ω<sub>max</sub> = 2√(K/M), corresponding to the wavelength λ = 2a (half the primitive cell repeat). For a mode to propagate, adjacent atoms must be able to respond in time; a spring of stiffness K and mass M has a natural response time ~√(M/K).<br><br>
+          For frequencies higher than ω<sub>max</sub>, the required wave number k would exceed π/a, meaning the "wavelength" would be shorter than 2a. But in a discrete lattice, there is no physical meaning to wavelengths shorter than 2a (Nyquist-type argument: you need at least 2 sample points per wavelength). So the lattice cannot sustain such modes — they decay exponentially rather than propagating. This is why ω<sub>max</sub> acts as a cutoff.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L10 ══ -->
+<div class="lec" id="lec10">
+  <div class="lec-header">
+    <div class="lec-num">L<br>10</div>
+    <div class="lec-title-block">
+      <h2>Lattice Vibrations II — Diatomic Chain &amp; Optical Modes</h2>
+      <div class="lec-date">Topics · Diatomic model · Two branches · Acoustic vs Optical · Frequency gap · Band-pass filter</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <p>When a unit cell contains more than one atom (different masses M, m), the dispersion relation splits into two branches: acoustic and optical. This is the 1D model for diatomic crystals like NaCl or GaAs.</p>
+
+    <h3>Model Setup</h3>
+    <p>Two alternating atoms of masses M (even positions 2n) and m (odd positions 2n±1), M &gt; m, lattice parameter a (= distance between like atoms).</p>
+
+    <details class="deriv">
+      <summary>▶ Full Derivation — Dispersion Relation for 1D Diatomic Chain</summary>
+      <div class="deriv-body">
+        <p><strong>Equations of motion</strong> (coupling constant K between unlike neighbours):</p>
+        <div class="eq-block">
+          M (d²u<sub>2n</sub>/dt²) = K[u<sub>2n+1</sub> + u<sub>2n-1</sub> − 2u<sub>2n</sub>] &nbsp; ①<br>
+          m (d²u<sub>2n-1</sub>/dt²) = K[u<sub>2n-2</sub> + u<sub>2n</sub> − 2u<sub>2n-1</sub>] &nbsp; ②
+        </div>
+
+        <p><strong>Trial solutions:</strong> Assume travelling waves, different amplitude A (mass M) and B (mass m):</p>
+        <div class="eq-block">
+          u<sub>2n</sub> = A exp[i(2nka − ωt)] &nbsp; ③<br>
+          u<sub>2n-1</sub> = B exp[i((2n-1)ka − ωt)] &nbsp; ④
+        </div>
+
+        <p><strong>Substitute ③, ④ into ①, ②:</strong></p>
+        <div class="eq-block">
+          (2K − ω²M)A − 2K cos(ka) B = 0 &nbsp; ⑤<br>
+          −2K cos(ka) A + (2K − ω²m)B = 0 &nbsp; ⑥
+        </div>
+
+        <p><strong>Non-trivial solution:</strong> determinant = 0:</p>
+        <div class="eq-block">
+          (2K − ω²M)(2K − ω²m) − 4K² cos²(ka) = 0
+        </div>
+        <div class="eq-block">
+          ω⁴ − 2K(1/M + 1/m)ω² + 4K²sin²(ka)/(Mm) = 0
+        </div>
+
+        <p><strong>Solving as quadratic in ω²:</strong></p>
+        <div class="eq-block">
+          ω² = K(1/M + 1/m) ± K√[(1/M + 1/m)² − 4sin²(ka)/(Mm)]
+          <span class="eq-label">Dispersion relation: two branches</span>
+        </div>
+      </div>
+    </details>
+
+    <h3>Acoustic and Optical Branches</h3>
+
+    <div class="diagram">
+      <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;">
+        <!-- Axes -->
+        <line x1="40" y1="170" x2="280" y2="170" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="160" y1="15" x2="160" y2="175" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- BZ boundaries -->
+        <line x1="80" y1="20" x2="80" y2="170" stroke="#55557a" stroke-width="1" stroke-dasharray="4,3"/>
+        <line x1="240" y1="20" x2="240" y2="170" stroke="#55557a" stroke-width="1" stroke-dasharray="4,3"/>
+        <!-- Optical branch: starts high, falls slightly -->
+        <path d="M80,40 Q120,42 160,48 Q200,42 240,40" fill="none" stroke="#f0b347" stroke-width="2"/>
+        <!-- Optical branch lower limit -->
+        <path d="M80,75 Q120,80 160,92 Q200,80 240,75" fill="none" stroke="#f0b347" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <!-- frequency gap fill -->
+        <path d="M80,75 Q120,80 160,92 Q200,80 240,75 L240,40 Q200,42 160,48 Q120,42 80,40 Z" fill="rgba(240,92,122,.07)"/>
+        <!-- Acoustic branch -->
+        <path d="M80,170 Q120,125 160,98 Q200,125 240,170" fill="none" stroke="#3dd6c4" stroke-width="2"/>
+        <!-- labels -->
+        <text x="248" y="36" font-family="JetBrains Mono,monospace" font-size="8" fill="#f0b347">Optical</text>
+        <text x="246" y="165" font-family="JetBrains Mono,monospace" font-size="8" fill="#3dd6c4">Acoustic</text>
+        <!-- Forbidden gap label -->
+        <text x="163" y="70" font-family="JetBrains Mono,monospace" font-size="8" fill="#f05c7a">Forbidden</text>
+        <text x="163" y="80" font-family="JetBrains Mono,monospace" font-size="8" fill="#f05c7a">gap</text>
+        <!-- freq labels -->
+        <text x="24" y="44" font-family="JetBrains Mono,monospace" font-size="8" fill="#f0b347">√(2K/m)</text>
+        <text x="22" y="78" font-family="JetBrains Mono,monospace" font-size="8" fill="#f0b347">√(2K/M)</text>
+        <!-- k axis -->
+        <text x="78" y="183" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">-π/2a</text>
+        <text x="157" y="183" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">0</text>
+        <text x="238" y="183" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#55557a">+π/2a</text>
+        <text x="275" y="173" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">k</text>
+        <text x="164" y="14" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">ω</text>
+      </svg>
+      <figcaption>Dispersion for 1D diatomic chain. Optical branch (gold) is at higher ω; acoustic branch (teal) starts from ω=0. A forbidden frequency gap exists between √(2K/M) and √(2K/m) at k=±π/2a.</figcaption>
+    </div>
+
+    <h4>Acoustic Branch (−ve sign in dispersion)</h4>
+    <p>At k=0: ω = 0. At zone boundary k=π/2a: ω<sub>max</sub> = √(2K/M).</p>
+    <p><em>Physical picture at k→0:</em> A and B are nearly equal — both species move in the <em>same</em> direction with approximately the same amplitude. The unit cell translates as a whole — this is a sound wave (acoustic). Long-wavelength acoustic phonons correspond to the collective translation of the crystal.</p>
+
+    <h4>Optical Branch (+ve sign)</h4>
+    <p>At k=0: ω = √[2K(1/M + 1/m)]. At zone boundary: ω = √(2K/m).</p>
+    <p><em>Physical picture at k→0:</em> A = −(m/M)B — the two species move in <em>opposite</em> directions, keeping the centre of mass fixed. In an ionic crystal, this relative motion creates an oscillating electric dipole moment → couples strongly to light (hence "optical"). The optical phonon frequency at k=0 is what couples to infrared radiation.</p>
+
+    <h3>The Frequency Gap</h3>
+    <p>Between ω = √(2K/M) and ω = √(2K/m), there are no propagating modes — this is a <strong>phononic band gap</strong>. Frequencies in this range decay exponentially and cannot propagate through the crystal. The crystal acts as a <em>band-pass filter</em>: it transmits ω &lt; √(2K/M) and ω &gt; √(2K/m), blocks the gap range.</p>
+    <p>The gap width increases with mass ratio M/m: the larger the ratio, the wider the gap. If M = m (monatomic limit), the gap vanishes and we recover the monatomic dispersion.</p>
+
+    <div class="box box-concept">
+      <div class="box-title">Summary Table</div>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th></th><th>Acoustic (−)</th><th>Optical (+)</th></tr>
+          <tr><td>ω at k=0</td><td>0</td><td>√[2K(1/M+1/m)]</td></tr>
+          <tr><td>ω at k=π/2a</td><td>√(2K/M)</td><td>√(2K/m)</td></tr>
+          <tr><td>Motion at k=0</td><td>Same direction (CM moves)</td><td>Opposite directions (CM fixed)</td></tr>
+          <tr><td>Couples to</td><td>Sound, ultrasound</td><td>Infrared light (ionic crystals)</td></tr>
+          <tr><td>Group velocity at k=0</td><td>v<sub>s</sub> (finite)</td><td>0</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>What happens to the optical branch as M → m (the mass ratio approaches 1)?</summary>
+        <div class="qa-ans">
+          The frequency gap = √(2K/m) − √(2K/M) = √(2K)[1/√m − 1/√M]. As M → m, this gap → 0. The acoustic and optical branches merge into a single branch (the monatomic chain dispersion), with the BZ boundary shifting from ±π/2a to ±π/a (since the primitive cell now has only one atom, lattice parameter = a/2 becomes the new a).<br><br>
+          Physically: if both atoms are identical, there is no distinction between "even" and "odd" atoms. The concept of relative motion of sublattices loses meaning, and there are no optical phonons — just acoustic ones.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>Why do optical phonons in ionic crystals (like NaCl) interact strongly with infrared light?</summary>
+        <div class="qa-ans">
+          In the optical branch at k ≈ 0, the two sublattices (Na⁺ and Cl⁻) oscillate out of phase. Since they carry opposite charges, this creates a time-varying electric dipole moment per unit cell: P(t) ∝ (u<sub>Na</sub> − u<sub>Cl</sub>) × e. This oscillating dipole couples directly to the oscillating electric field of an electromagnetic wave.<br><br>
+          For maximum coupling, the EM wave frequency must match the optical phonon frequency (resonance). This occurs in the infrared range (~10–100 µm), explaining why ionic crystals have strong IR absorption bands (Reststrahlen absorption). The optical phonon frequency ω<sub>TO</sub> (transverse optical) can be measured from this IR absorption, and ω<sub>LO</sub> (longitudinal optical) from Raman/Brillouin scattering.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ L11 ══ -->
+<div class="lec" id="lec11">
+  <div class="lec-header">
+    <div class="lec-num">L<br>11</div>
+    <div class="lec-title-block">
+      <h2>Debye Model of Lattice Specific Heat</h2>
+      <div class="lec-date">Topics · Einstein model failure · Density of states · Debye cutoff · Internal energy · T³ law · Dulong-Petit</div>
+    </div>
+  </div>
+  <div class="lec-body">
+
+    <div class="box box-key">
+      <div class="box-title">📌 Why Debye? — The Failure of Einstein's Model</div>
+      Einstein (1907) treated all atoms as independent oscillators at a single frequency ω<sub>E</sub>. This correctly gives C<sub>V</sub> → 3Nk (Dulong-Petit) at high T, but predicts C<sub>V</sub> ∝ exp(−θ<sub>E</sub>/T) at low T — exponentially fast falloff. Experiment shows C<sub>V</sub> ∝ T³ at low T. Debye (1912) fixed this by recognising that vibrations are coupled — the crystal supports a spectrum of frequencies from 0 up to a cutoff ω<sub>D</sub>.
+    </div>
+
+    <h3>Density of States g(ν): 1D Case</h3>
+    <p>For a 1D chain of length L with fixed ends, normal modes are standing waves with u(x,t) = A sin(nπx/L)cos(2πν<sub>n</sub>t), giving frequencies ν<sub>n</sub> = nv/2L (n = 1, 2, 3, ...).</p>
+    <div class="eq-block">
+      g(ν) dν = dn = (2L/v) dν
+    </div>
+    <p>This is uniform — equal number of modes per unit frequency interval (flat spectrum in 1D).</p>
+
+    <h3>Density of States: 3D Case</h3>
+    <p>In 3D, allowed wave vectors are k<sub>x</sub> = π n<sub>x</sub>/L, k<sub>y</sub> = π n<sub>y</sub>/L, k<sub>z</sub> = π n<sub>z</sub>/L (integers n<sub>x</sub>, n<sub>y</sub>, n<sub>z</sub> ≥ 1). These form a grid in k-space, each point occupying volume (π/L)³.</p>
+
+    <details class="deriv">
+      <summary>▶ Derivation — 3D Density of States g(ν) for Continuous Medium</summary>
+      <div class="deriv-body">
+        <p><strong>Step 1:</strong> Each allowed k-point (n<sub>x</sub>, n<sub>y</sub>, n<sub>z</sub>) lies in the positive octant of k-space. The total number of modes with wave number ≤ K:</p>
+        <div class="eq-block">
+          N(K) = (1/8) × (4π/3)K³ / (π/L)³ = VK³/(6π²)
+        </div>
+        <p>where V = L³ = volume of crystal.</p>
+
+        <p><strong>Step 2:</strong> For a given frequency ν, we have two wave numbers: K<sub>L</sub> = 2πν/v<sub>L</sub> (longitudinal) and K<sub>t</sub> = 2πν/v<sub>t</sub> (transverse, doubly degenerate).</p>
+
+        <p><strong>Step 3:</strong> Total modes up to frequency ν<sub>D</sub>:</p>
+        <div class="eq-block">
+          g(ν) dν = 4πV(1/v<sub>L</sub>³ + 2/v<sub>t</sub>³) ν² dν
+          <span class="eq-label">Number of modes in range dν</span>
+        </div>
+
+        <p><strong>Step 4:</strong> Using K = 2πν/v → K² dK = (2π/v)³ ν² dν and including polarisation factor (1 longitudinal + 2 transverse):</p>
+        <div class="eq-block">
+          g(ν) dν = 4πV(1/v<sub>L</sub>³ + 2/v<sub>t</sub>³) ν² dν &nbsp; ← parabolic in ν
+        </div>
+      </div>
+    </details>
+
+    <h3>Debye Cutoff Frequency ν<sub>D</sub></h3>
+    <p>A crystal with N atoms has exactly 3N normal modes (degrees of freedom). This provides the normalisation condition:</p>
+    <div class="eq-block">
+      ∫₀<sup>ν<sub>D</sub></sup> g(ν)dν = 3N
+    </div>
+    <div class="eq-block">
+      4πV(1/v<sub>L</sub>³ + 2/v<sub>t</sub>³) × ν<sub>D</sub>³/3 = 3N<br><br>
+      → ν<sub>D</sub>³ = 9N / [4πV(1/v<sub>L</sub>³ + 2/v<sub>t</sub>³)]
+      <span class="eq-label">Debye cutoff condition ⑱</span>
+    </div>
+    <p>Frequencies above ν<sub>D</sub> are <em>cut off</em> — this is the Debye approximation. It effectively replaces the true dispersion (which is non-linear) with a linear (acoustic) dispersion, but truncates it at ν<sub>D</sub> so the total mode count is correct.</p>
+
+    <h3>Internal Energy of Debye Solid</h3>
+    <p>Each mode of frequency ν contributes average energy ⟨ε⟩ = hν/(exp(hν/kT) − 1) (Planck/Bose-Einstein distribution for phonons). Zero-point energy is omitted here for clarity.</p>
+    <div class="eq-block">
+      E = ∫₀<sup>ν<sub>D</sub></sup> ε̄(ν) g(ν) dν = 4πV(1/v<sub>L</sub>³+2/v<sub>t</sub>³) ∫₀<sup>ν<sub>D</sub></sup> [hν/(e<sup>hν/kT</sup>−1)] ν² dν
+    </div>
+
+    <p>Using the normalisation condition (⑱) and substituting x = hν/kT, x<sub>D</sub> = hν<sub>D</sub>/kT = θ<sub>D</sub>/T:</p>
+    <div class="eq-block">
+      E = 9NkT (T/θ<sub>D</sub>)³ ∫₀<sup>x<sub>D</sub></sup> x³/(e<sup>x</sup>−1) dx
+      <span class="eq-label">Debye internal energy ②①</span>
+    </div>
+
+    <p>where the <strong>Debye temperature</strong> θ<sub>D</sub> = hν<sub>D</sub>/k.</p>
+
+    <h3>High-Temperature Limit (T ≫ θ<sub>D</sub>)</h3>
+    <p>When T ≫ θ<sub>D</sub>, we have x = hν/kT ≪ 1 everywhere in the integral, so e<sup>x</sup> ≈ 1+x:</p>
+    <div class="eq-block">
+      ∫₀<sup>x<sub>D</sub></sup> x³/(e<sup>x</sup>−1) dx ≈ ∫₀<sup>x<sub>D</sub></sup> x² dx = x<sub>D</sub>³/3 = (θ<sub>D</sub>/T)³/3
+    </div>
+    <div class="eq-block">
+      E = 9NkT (T/θ<sub>D</sub>)³ × (θ<sub>D</sub>/T)³/3 = 3NkT<br><br>
+      C<sub>V</sub> = (∂E/∂T)<sub>V</sub> = <strong>3Nk = 3R</strong> &nbsp; (for 1 mole)
+      <span class="eq-label">Dulong-Petit law recovered ✓</span>
+    </div>
+
+    <h3>Low-Temperature Limit (T ≪ θ<sub>D</sub>)</h3>
+    <p>When T ≪ θ<sub>D</sub>, x<sub>D</sub> → ∞, and the integral converges:</p>
+    <div class="eq-block">
+      ∫₀<sup>∞</sup> x³/(e<sup>x</sup>−1) dx = π⁴/15 &nbsp; (standard result)
+    </div>
+    <div class="eq-block">
+      E = 9NkT (T/θ<sub>D</sub>)³ × π⁴/15 = (3π⁴/5) Nk T⁴/θ<sub>D</sub>³<br><br>
+      C<sub>V</sub> = (12π⁴/5) Nk (T/θ<sub>D</sub>)³ ∝ T³
+      <span class="eq-label">Debye T³ law — matches experiment</span>
+    </div>
+
+    <div class="diagram">
+      <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;">
+        <!-- Axes -->
+        <line x1="40" y1="150" x2="280" y2="150" stroke="#3d3d6a" stroke-width="1.5"/>
+        <line x1="40" y1="20" x2="40" y2="155" stroke="#3d3d6a" stroke-width="1.5"/>
+        <!-- 3R asymptote -->
+        <line x1="50" y1="40" x2="270" y2="40" stroke="#f0b347" stroke-width="1" stroke-dasharray="5,3" opacity=".7"/>
+        <text x="238" y="35" font-family="JetBrains Mono,monospace" font-size="9" fill="#f0b347">3R</text>
+        <!-- Debye curve: T³ rise then flat -->
+        <path d="M40,150 C60,145 80,130 100,100 C120,80 140,55 160,44 C180,39 200,40 240,40 C260,40 265,40 270,40" fill="none" stroke="#3dd6c4" stroke-width="2"/>
+        <!-- Einstein curve (falls off faster) -->
+        <path d="M40,150 C60,148 80,143 100,130 C120,105 140,65 160,46 C175,39 190,38 220,39 C250,40 270,40 275,40" fill="none" stroke="#7a8cff" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
+        <!-- Labels -->
+        <text x="95" y="88" font-family="JetBrains Mono,monospace" font-size="8" fill="#3dd6c4">Debye (T³)</text>
+        <text x="102" y="120" font-family="JetBrains Mono,monospace" font-size="8" fill="#7a8cff">Einstein (exp)</text>
+        <!-- θD label -->
+        <line x1="155" y1="150" x2="155" y2="155" stroke="#55557a" stroke-width="1"/>
+        <text x="148" y="165" font-family="JetBrains Mono,monospace" font-size="8" fill="#55557a">θ_D</text>
+        <!-- axes labels -->
+        <text x="275" y="155" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">T</text>
+        <text x="43" y="17" font-family="JetBrains Mono,monospace" font-size="10" fill="#8888b0">C_V</text>
+      </svg>
+      <figcaption>Lattice specific heat C<sub>V</sub> vs T. Debye model (teal, T³ at low T) matches experiment better than Einstein model (indigo dashed, exponential falloff at low T). Both approach 3R at T ≫ θ<sub>D</sub>.</figcaption>
+    </div>
+
+    <div class="box box-teal">
+      <div class="box-title">Physical Interpretation of θ<sub>D</sub></div>
+      The Debye temperature θ<sub>D</sub> = hν<sub>D</sub>/k is the temperature at which the highest-frequency phonon mode (frequency ν<sub>D</sub>) is thermally excited. For T ≪ θ<sub>D</sub>: most modes are <em>frozen out</em> — only long-wavelength, low-frequency acoustic modes are excited. The number of excited modes ∝ T³ (sphere in k-space with radius ∝ k<sub>B</sub>T/ℏv). Hence C<sub>V</sub> ∝ T³.<br><br>
+      Typical values: Pb 88 K (soft metal, low θ<sub>D</sub>), Al 394 K, Fe 470 K, diamond 1860 K (very stiff, high θ<sub>D</sub>).
+    </div>
+
+    <div class="qa-block">
+      <h4>Conceptual Questions</h4>
+      <details class="qa">
+        <summary>Why does the Debye model predict C_V ∝ T³ at low T, while the Einstein model predicts exponential falloff?</summary>
+        <div class="qa-ans">
+          The key difference is the <em>density of states</em>.<br><br>
+          <strong>Einstein:</strong> Single frequency ω<sub>E</sub> → g(ω) = 3Nδ(ω−ω<sub>E</sub>). At low T, almost no thermal energy can excite these high-frequency oscillators (kT ≪ ℏω<sub>E</sub>), so C<sub>V</sub> ∝ (ℏω<sub>E</sub>/kT)² exp(−ℏω<sub>E</sub>/kT) — exponentially suppressed.<br><br>
+          <strong>Debye:</strong> g(ω) ∝ ω² (parabolic, from 3D acoustic modes). At low T, only modes with ℏω ≲ kT contribute. The density of these modes ∝ ω² and the energy per mode ∝ kT (when ℏω ≈ kT). Total energy ∝ ∫₀<sup>kT/ℏ</sup> ω³dω ∝ T⁴, so C<sub>V</sub> = dE/dT ∝ T³.<br><br>
+          The crucial point: Debye includes many low-frequency modes (long-wavelength acoustic phonons), which can be excited at arbitrarily low T. Einstein's model has no such low-frequency modes.
+        </div>
+      </details>
+      <details class="qa">
+        <summary>What is the physical meaning of the integral ∫₀<sup>∞</sup> x³/(eˣ−1)dx = π⁴/15?</summary>
+        <div class="qa-ans">
+          This is the Bose-Einstein integral Γ(4)ζ(4) = 6 × π⁴/90 = π⁴/15, where ζ is the Riemann zeta function. Physically, it represents the total energy carried by a Bose-Einstein distributed set of particles with density of states g ∝ ω² and no cutoff — the situation when T ≪ θ<sub>D</sub> (the cutoff x<sub>D</sub> → ∞ can be extended to ∞ because the integrand decays exponentially for large x).<br><br>
+          The same integral appears in the Stefan-Boltzmann law for blackbody radiation (photons, which are also bosons with g ∝ ω² in 3D). The T⁴ energy and T³ heat capacity of the phonon system at low T is the acoustic analogue of blackbody radiation, sometimes called the "phonon gas" approximation.
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+<hr class="sec-div">
+
+<!-- ═══════════════════════════════════════════════════ IQ ══ -->
+<section id="iq">
+  <h2 class="sec-head">Important Questions — High Weightage Topics <span class="tag tag-exam">EXAM</span></h2>
+
+  <div class="qa-block">
+    <h4>Crystal Structure &amp; Symmetry</h4>
+
+    <details class="qa">
+      <summary>Derive the restriction on rotational symmetry in a periodic lattice. Show that only n = 1, 2, 3, 4, 6 are allowed.</summary>
+      <div class="qa-ans">
+        See the full derivation in L2 above. Summary:<br><br>
+        Consider two lattice points separated by t. Rotate one about the other by angle φ (n-fold rotation, φ = 360°/n). The resulting point must also be a lattice point, requiring the distance between two rotated points to be an integer multiple of t:<br><br>
+        <strong>1 + 2cos φ = integer m</strong>, where m ∈ {−1, 0, 1, 2, 3}<br><br>
+        This gives only φ = 180°, 120°, 90°, 60°, 0° → n = 2, 3, 4, 6, 1.<br><br>
+        n = 5 would require cos 72° ≈ 0.309 = (m−1)/2 → m ≈ 1.618 (not an integer). Hence forbidden. Similarly n ≥ 7 gives |cosφ| &lt; 0.5, leading to non-integer m values.
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Explain with proof why there are exactly 14 Bravais lattices and not more. Give a specific example of a redundant type.</summary>
+      <div class="qa-ans">
+        Starting from 7 crystal systems and 4 possible centring types (P=primitive, C=base-centred, I=body-centred, F=face-centred), one might expect 28 combinations. These reduce to 14 because:<br><br>
+        (i) Not all centring types maintain the required minimum symmetry of a given system. (ii) Some combinations of centring + system reduce to a smaller, already-existing Bravais type.<br><br>
+        <strong>Example — Base-centred cubic → Primitive tetragonal:</strong> Adding atoms at top/bottom face centres of a cubic cell (keeping all angles 90°, all edges a) does not maintain cubic symmetry because the centred cell has a=b≠c when you choose the natural primitive vectors. It is equivalent to a primitive tetragonal lattice with a'=a/√2, c'=a. No new lattice type is needed.<br><br>
+        The 14 are: Triclinic (1P), Monoclinic (2: P, C), Orthorhombic (4: P, C, I, F), Tetragonal (2: P, I), Rhombohedral (1), Hexagonal (1), Cubic (3: P, I, F). Total = 14.
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Calculate the packing fraction of FCC and explain why it is the maximum for identical spheres.</summary>
+      <div class="qa-ans">
+        In FCC, atoms touch along the face diagonal: 4r = a√2 → r = a√2/4. Atoms per unit cell: n = 4.<br><br>
+        PF = n × (4/3)πr³ / a³ = 4 × (4/3)π(a√2/4)³ / a³<br>
+        = 4 × (4/3)π × (a³ × 2√2/64) / a³<br>
+        = 4 × (4π × 2√2)/(3 × 64) = 8π√2/48 = π√2/6 = π/(3√2) ≈ <strong>0.7405</strong><br><br>
+        This is the maximum because in FCC each atom has 12 nearest neighbours — no other arrangement of identical spheres can have more nearest contacts without overlapping. Each face diagonal carries 2 touching atoms, and there are 6 faces, giving 12 nearest neighbours per atom. This is the maximum possible coordination number for identical spheres (proven by Kepler's conjecture, formally proved by T. Hales in 1998).
+      </div>
+    </details>
+  </div>
+
+  <div class="qa-block">
+    <h4>X-ray Diffraction &amp; Reciprocal Lattice</h4>
+
+    <details class="qa">
+      <summary>Derive Bragg's law and state its limitations. What additional information does the Laue equation provide?</summary>
+      <div class="qa-ans">
+        <strong>Derivation:</strong> Consider X-rays of wavelength λ incident on crystal planes separated by d at glancing angle θ. Ray 2 (reflected from second plane) travels an extra path BC + CD = d sinθ + d sinθ = 2d sinθ relative to Ray 1. Constructive interference requires this path difference to be an integer multiple of λ:<br><br>
+        <strong>2d sinθ = nλ</strong> (Bragg's law)<br><br>
+        <strong>Limitations:</strong><br>
+        (i) Gives only position of maxima, not intensity. Intensity requires structure factor F<sub>hkl</sub>.<br>
+        (ii) Assumes perfect specular reflection — ignores absorption, thermal diffuse scattering, mosaic structure.<br>
+        (iii) Valid only for single-crystal or powder geometry; extended to polycrystalline powders via Debye-Scherrer method.<br>
+        (iv) For an FCC crystal, certain (hkl) reflections are systematically absent (when h, k, l are not all odd or all even) — Bragg's law alone doesn't predict this.<br><br>
+        <strong>Laue equations provide:</strong> They require constructive interference simultaneously along all three crystallographic axes, giving the precise 3D conditions. The three simultaneous conditions restrict diffraction to discrete spots — essentially the same as Bragg but derived without the "reflection" analogy. Laue naturally explains why diffraction produces sharp spots rather than continuous rings.
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Using the Ewald sphere construction, explain when diffraction occurs and how rotating the crystal changes which reflections are observed.</summary>
+      <div class="qa-ans">
+        <strong>Construction:</strong> In reciprocal space, draw a sphere of radius 1/λ (the Ewald sphere) centred at the crystal position C. The incident beam direction from C to origin O of the reciprocal lattice lies along the beam direction.<br><br>
+        <strong>Condition for diffraction:</strong> Diffraction from planes (hkl) occurs if and only if the reciprocal lattice point G<sub>hkl</sub> lies exactly on the surface of the Ewald sphere. Then OP = G<sub>hkl</sub> = 1/d<sub>hkl</sub>, and sin θ = OP/(2×1/λ) = λ/(2d<sub>hkl</sub>) → this is Bragg's law.<br><br>
+        <strong>Rotating the crystal:</strong> Rotating the crystal rotates the entire reciprocal lattice with it (they share the same orientation). As the RL rotates, different RL points sweep through the surface of the fixed Ewald sphere. Each time a RL point touches the sphere, a diffraction spot appears (flashes on the detector). Different orientations bring different families of planes into diffracting condition, producing a systematic sampling of the reciprocal lattice — this is the basis of single-crystal X-ray diffraction experiments (precession method, Weissenberg method, etc.).
+      </div>
+    </details>
+  </div>
+
+  <div class="qa-block">
+    <h4>Lattice Vibrations &amp; Phonons</h4>
+
+    <details class="qa">
+      <summary>Derive the dispersion relation for a 1D monatomic chain. Discuss acoustic wave limit, zone boundary, and the concept of the Brillouin zone.</summary>
+      <div class="qa-ans">
+        See full derivation in L9. Key result: <strong>ω = 2√(K/M) |sin(ka/2)|</strong><br><br>
+        <strong>Acoustic wave limit (k → 0):</strong> Using sin(ka/2) ≈ ka/2: ω ≈ a√(K/M) · k = v<sub>s</sub>k. Linear dispersion, identical to a continuous elastic medium with sound speed v<sub>s</sub> = a√(K/M).<br><br>
+        <strong>Zone boundary (k = π/a):</strong> ω = ω<sub>max</sub> = 2√(K/M). This is a standing wave: neighbouring atoms move exactly in antiphase (180° phase difference), no energy transport (group velocity = 0).<br><br>
+        <strong>Brillouin zone:</strong> The dispersion is periodic in k with period 2π/a. All physically distinct modes lie in one period. We choose the symmetric interval [−π/a, +π/a] = First Brillouin Zone. Values outside this interval are physically identical to values inside (adding a reciprocal lattice vector 2π/a to k gives the same displacement pattern). The BZ boundary at k = ±π/a is a standing wave — it's a Bragg reflection condition for phonons.
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Derive the dispersion relation for the diatomic chain. Explain the physical difference between acoustic and optical modes at k=0.</summary>
+      <div class="qa-ans">
+        Full derivation in L10. Result: ω² = K(1/M+1/m) ± K√[(1/M+1/m)² − 4sin²(ka)/Mm]<br><br>
+        <strong>Acoustic branch (−):</strong> At k=0, substituting back: (2K−ω²M)A = 2KB, so A/B = K/(K−ω²M/2). For ω → 0: A/B → 1. Both atoms move with equal amplitude in the same direction — the unit cell translates as a whole. This is a sound wave (long-wavelength acoustic phonon). Centre of mass moves.<br><br>
+        <strong>Optical branch (+):</strong> At k=0, ω² = 2K(1/M+1/m). From the equation of motion: A/B = −m/M. The heavy atom (M) moves with amplitude proportional to m; the light atom (m) moves with amplitude proportional to M, but in the opposite direction. Centre of mass is fixed. In an ionic crystal (M = Na⁺, m = Cl⁻), this relative oscillation creates an oscillating electric dipole — hence "optical" (couples to light in IR range).
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>Derive the Debye T³ law for lattice specific heat at low temperatures. Why is this better than Einstein's result?</summary>
+      <div class="qa-ans">
+        <strong>From Debye internal energy (low T, x<sub>D</sub> → ∞):</strong><br>
+        E = 9NkT(T/θ<sub>D</sub>)³ ∫₀<sup>∞</sup> x³/(e<sup>x</sup>−1)dx = 9NkT(T/θ<sub>D</sub>)³ × π⁴/15<br>
+        = (3π⁴/5) Nk × T⁴/θ<sub>D</sub>³<br><br>
+        C<sub>V</sub> = dE/dT = (12π⁴/5) Nk (T/θ<sub>D</sub>)³ <strong>∝ T³</strong><br><br>
+        <strong>Physical reason for T³:</strong> At low T, only long-wavelength acoustic phonons (ω ≈ v<sub>s</sub>k) are excited (those with ℏω ≲ k<sub>B</sub>T → k ≲ k<sub>B</sub>T/ℏv<sub>s</sub>). The number of such modes ∝ k³ ∝ T³ (sphere in k-space). Each carries ~k<sub>B</sub>T of energy. Total E ∝ T⁴, so C<sub>V</sub> ∝ T³.<br><br>
+        <strong>Better than Einstein because:</strong> Einstein uses a single frequency with no low-frequency modes. Phonons with ℏω ≫ k<sub>B</sub>T are frozen out and contribute exponentially small energy. Debye's parabolic g(ω) ∝ ω² provides many low-ω modes that can be excited at any T > 0, giving the observed power-law (not exponential) C<sub>V</sub> at low T.
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary>A crystal has Debye temperature θ<sub>D</sub> = 300 K. At what temperature does the T³ law for C_V break down, and what is the value of C_V at 600 K?</summary>
+      <div class="qa-ans">
+        <strong>T³ law regime:</strong> The T³ approximation is valid when T ≪ θ<sub>D</sub>, typically T ≲ θ<sub>D</sub>/10 = 30 K. Above this temperature, the upper limit of the Debye integral x<sub>D</sub> = θ<sub>D</sub>/T is no longer large, and the integral differs significantly from π⁴/15. The T³ law thus breaks down around T ~ 30–50 K for this crystal.<br><br>
+        <strong>C<sub>V</sub> at T = 600 K = 2θ<sub>D</sub>:</strong> Since T ≫ θ<sub>D</sub>, the high-T (Dulong-Petit) limit applies: C<sub>V</sub> = 3Nk = 3R ≈ 24.9 J/(mol·K) for one mole. (More precisely, the Debye correction at T/θ<sub>D</sub> = 2 gives C<sub>V</sub> ≈ 0.98 × 3R, so it is essentially the Dulong-Petit value.)
+      </div>
+    </details>
+  </div>
+
+  <div class="qa-block">
+    <h4>Ionic Bonding &amp; Madelung Constant</h4>
+
+    <details class="qa">
+      <summary>Derive the lattice energy (Born-Landé equation) for NaCl. What is the physical significance of the Madelung constant?</summary>
+      <div class="qa-ans">
+        <strong>Model:</strong> Each ion interacts with all other ions via Coulomb potential ±e²/4πε₀R<sub>ij</sub> (sign depends on same/opposite charge), plus a short-range repulsion B/R<sup>n</sup> with nearest neighbours only.<br><br>
+        <strong>Energy per ion:</strong> Summing Coulomb interactions for one Na⁺ in the NaCl structure:<br>
+        E<sub>Coulomb</sub>(one ion) = −(e²/4πε₀r) × A<br>
+        where A = Madelung constant = 6 − 12/√2 + 8/√3 − ... = 1.7476 for NaCl.<br><br>
+        <strong>Total energy per ion pair:</strong> E = −Ae²/4πε₀r + B/r<sup>n</sup><br>
+        At equilibrium: dE/dr = 0 → B = (Ae²/4πε₀) × r₀<sup>n−1</sup>/n<br><br>
+        <strong>Lattice energy (Born-Landé):</strong><br>
+        E(r₀) = −(NAe²/4πε₀r₀)(1 − 1/n)<br>
+        For NaCl: A = 1.748, r₀ = 2.81 Å, n ≈ 8 → E ≈ −756 kJ/mol.<br><br>
+        <strong>Physical significance of A:</strong> The Madelung constant encodes the geometry of the crystal structure — specifically, how the long-range Coulomb interactions from all neighbours sum up. It is dimensionless and depends only on the crystal structure type, not on the specific ions. A > 1 means the net effect of all neighbours is attractive (the crystal is stable). Structures with larger A have stronger Coulomb binding for the same nearest-neighbour distance.
+      </div>
+    </details>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-row">
+    <span>PS Sir · Solid State Physics · 2026</span>
+  </div>
+  <div class="footer-row" style="margin-top:.9rem;">
+    <span>Notes: PS Sir (Lecture Notes)</span>
+    <span>Web Page: Arya Naiya</span>
+  </div>
+  <div class="footer-row" style="margin-top:.5rem;font-size:.62rem;color:var(--text-mute);">
+    <span>Topics: Crystal Structure · Symmetry · Bravais Lattices · Miller Indices · Packing · X-ray Diffraction · Reciprocal Lattice · Ionic Bonding · Lattice Vibrations · Phonons · Debye Model</span>
+  </div>
+  <div class="footer-row" style="margin-top:.4rem;font-size:.62rem;color:var(--text-mute);">
+    <span>References: Verma–Srivastav (Crystallography) · Dakker &amp; Arun Kumar (Solid Properties) · Kittel (Introduction to Solid State Physics)</span>
+  </div>
+</footer>
+
+<script>
+  const burgerBtn   = document.getElementById('burgerBtn');
+  const navDropdown = document.getElementById('navDropdown');
+
+  function closeMenu() {
+    navDropdown.classList.remove('open');
+    burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  burgerBtn.addEventListener('click', function () {
+    const isOpen = navDropdown.classList.toggle('open');
+    burgerBtn.classList.toggle('open', isOpen);
+    burgerBtn.setAttribute('aria-expanded', isOpen);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('#navBurger') && !e.target.closest('#navDropdown')) {
+      closeMenu();
+    }
+  });
+</script>
+</body>
+</html>
